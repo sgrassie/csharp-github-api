@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="GitHubAuthenticator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Secrets.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\RestSharp\RestSharp\RestSharp.csproj">
