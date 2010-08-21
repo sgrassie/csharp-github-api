@@ -12,7 +12,7 @@ namespace csharp_github_api.IntegrationTests
         [SetUp]
         public void Setup()
         {
-            _secretsHandler = new SecretsHandler(@"C:\secretpasswordfile.xml");
+            _secretsHandler = new SecretsHandler(@"C:\development\secretpasswordfile.xml");
 
             _restRequest = new RestRequest
             {
@@ -28,6 +28,20 @@ namespace csharp_github_api.IntegrationTests
                                  BaseUrl = "http://github.com/api/v2/json",
                                  Authenticator = new GitHubAuthenticator(_secretsHandler.Username, _secretsHandler.Password, false)
                              };
+
+            var response = client.Execute(_restRequest);
+
+            Assert.That(response.Content, Is.StringContaining("total_private_repo_count"));
+        }
+
+        [Test]
+        public void MakeAuthenticatedRequestWithToken()
+        {
+            var client = new RestClient
+            {
+                BaseUrl = "http://github.com/api/v2/json",
+                Authenticator = new GitHubAuthenticator(_secretsHandler.Username, _secretsHandler.Password, true)
+            };
 
             var response = client.Execute(_restRequest);
 
