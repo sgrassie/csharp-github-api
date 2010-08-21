@@ -22,9 +22,21 @@ namespace csharp_github_api
         {
             if (!request.Parameters.Any(p => p.Name.Equals("Authorization", StringComparison.InvariantCultureIgnoreCase)))
             {
-                var token = _useApiKey 
-                                ? Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}/token:{1}", _username, _password))) 
-                                : Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _username, _password)));
+                string token;
+
+                if (_useApiKey)
+                {
+                    token =
+                        Convert.ToBase64String(
+                            Encoding.UTF8.GetBytes(string.Format("{0}/token:{1}", _username, _password)));
+                }
+                else
+                {
+                    token =
+                        Convert.ToBase64String(
+                            Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _username, _password)));
+                }
+
                 var authHeader = string.Format("Basic {0}", token);
                 request.AddParameter("Authorization", authHeader, ParameterType.HttpHeader);
             }
