@@ -7,11 +7,17 @@ namespace csharp_github_api.IntegrationTests
     public class GitHubAuthenticatorTests
     {
         private SecretsHandler _secretsHandler;
+        private RestRequest _restRequest;
 
         [SetUp]
         public void Setup()
         {
             _secretsHandler = new SecretsHandler(@"C:\secretpasswordfile.xml");
+
+            _restRequest = new RestRequest
+            {
+                Resource = "/user/show/sgrassie"
+            };
         }
 
         [Test]
@@ -23,12 +29,7 @@ namespace csharp_github_api.IntegrationTests
                                  Authenticator = new GitHubAuthenticator(_secretsHandler.Username, _secretsHandler.Password, false)
                              };
 
-            var request = new RestRequest
-                               {
-                                   Resource = "/user/show/sgrassie"
-                               };
-
-            var response = client.Execute(request);
+            var response = client.Execute(_restRequest);
 
             Assert.That(response.Content, Is.StringContaining("total_private_repo_count"));
         }
