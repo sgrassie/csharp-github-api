@@ -19,13 +19,16 @@
 namespace csharp_github_api
 {
     using RestSharp;
+using csharp_github_api.Models;
+    using csharp_github_api.API;
 
     /// <summary>
     /// Access the Github.com API.
     /// </summary>
     public class Github
     {
-        private IAuthenticator _gitHubAuthenticator;
+        public const string BaseUrl = @"http://github.com/api/v2/json";
+        private readonly IAuthenticator _gitHubAuthenticator;
 
         /// <summary>
         /// Instantiates a new instance of the <see cref="Github"/> class.
@@ -63,6 +66,20 @@ namespace csharp_github_api
         public Github(string username, string password, bool useApiKey)
         {
             _gitHubAuthenticator = new GitHubAuthenticator(username, password, useApiKey);
+        }
+
+        public User AuthenticatedUser
+        {
+            get
+            {
+                var userApi = new UserApi(BaseUrl, _gitHubAuthenticator);
+                return userApi.GetUser("sgrassie"); //TODO: Fix-up access to authenticating username.
+            }
+        }
+
+        public User GetUser(string username)
+        {
+            return new UserApi(BaseUrl, _gitHubAuthenticator).GetUser(username);
         }
     }
 }
