@@ -27,7 +27,6 @@ namespace csharp_github_api
     /// </summary>
     public class Github
     {
-        public const string BaseUrl = @"http://github.com/api/v2/json";
         private readonly IAuthenticator _gitHubAuthenticator;
 
         /// <summary>
@@ -66,6 +65,11 @@ namespace csharp_github_api
         public Github(string username, string password, bool useApiKey)
         {
             _gitHubAuthenticator = new GitHubAuthenticator(username, password, useApiKey);
+        }
+
+        public string BaseUrl
+        {
+            get; set;
         }
 
         public User AuthenticatedUser
