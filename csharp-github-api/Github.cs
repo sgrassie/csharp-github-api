@@ -19,8 +19,8 @@
 namespace csharp_github_api
 {
     using RestSharp;
-using csharp_github_api.Models;
-    using csharp_github_api.API;
+    using Models;
+    using API;
 
     /// <summary>
     /// Access the Github.com API.
