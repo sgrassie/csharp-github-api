@@ -44,5 +44,27 @@ namespace csharp_github_api.Models
         public virtual int PrivateGistCount { get; set;}
         public virtual Plan Plan { get; set;}
 
+        public override bool Equals(object obj)
+        {
+            if(obj is User)
+            {
+                var compareTo = (User) obj;
+
+                return compareTo.Id.Equals(Id);
+            }
+
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode() + Login.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 }
