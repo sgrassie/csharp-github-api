@@ -6,7 +6,7 @@ It does what it says on the tin*: A C# library for accessing [GitHub's API][4].
 
 Currently targets .NET 3.5
 
-Uses John Sheehan's excellent [RestSharp][4] [REST client][3] library for most of the heavy lifting.
+Uses John Sheehan's excellent [RestSharp][3] [REST client][2] library for most of the heavy lifting.
 
 ### *Status
 Very early stages of development. Only authentication is completed at this time.
