@@ -4,7 +4,7 @@ using RestSharp;
 namespace csharp_github_api.IntegrationTests
 {
     [TestFixture]
-    public class GitHubAuthenticatorTests
+    public class GitHubAuthenticatorTests : IntegrationTestBase
     {
         private SecretsHandler _secretsHandler;
         private RestRequest _restRequest;
@@ -46,6 +46,12 @@ namespace csharp_github_api.IntegrationTests
             var response = client.Execute(_restRequest);
 
             Assert.That(response.Content, Is.StringContaining("total_private_repo_count"));
+        }
+
+        [Test]
+        public void MakeAuthenticatedRequestWithFakeWebServer()
+        {
+            
         }
     }
 }
