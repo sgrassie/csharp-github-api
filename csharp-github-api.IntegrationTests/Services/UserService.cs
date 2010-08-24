@@ -30,15 +30,15 @@ namespace csharp_github_api.IntegrationTests.Services
         [Path("/user/show/{username}")]
         public void Show(string username)
         {
-            //if (Response.Headers["authenticated"].Equals("true"))
-            //{
+            if (Response.Headers["Authenticated"].Equals("true"))
+            {
                 if (username == "sgrassie" || username == "defunkt")
                 {
                     Response.Headers.Add("Content-Type", "application/json");
 
                     Response.Write(DefunktJson);
                 }
-            //}
+            }
         }
     }
 }
