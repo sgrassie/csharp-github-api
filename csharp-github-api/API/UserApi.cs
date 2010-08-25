@@ -30,17 +30,29 @@ namespace csharp_github_api.API
     public class UserApi
     {
         private readonly string _baseUrl;
-        private readonly IAuthenticator _authenticator;
+        private RestClient _client;
+        private IAuthenticator _authenticator;
 
-        public UserApi(string baseUrl, IAuthenticator authenticator)
+        public UserApi(string baseUrl)
         {
             _baseUrl = baseUrl;
+
+            _client = new RestClient(_baseUrl);
+        }
+
+        public UserApi Authenticated(IAuthenticator authenticator)
+        {
             _authenticator = authenticator;
+
+            _client = GetRestClient();
+            _client.Authenticator = authenticator;
+
+            return this;
         }
 
         public User GetUser(string username)
         {
-            var client = new RestClient(_baseUrl) {Authenticator = _authenticator};
+            if (_client == null) _client = GetRestClient();
 
             var request = new RestRequest
                               {
@@ -48,9 +60,14 @@ namespace csharp_github_api.API
                                   RootElement = "user"
             };
 
-            var response = client.Execute<User>(request);
+            var response = _client.Execute<User>(request);
 
             return response.Data;
+        }
+
+        private RestClient GetRestClient()
+        {
+            return new RestClient(_baseUrl);
         }
     }
 }

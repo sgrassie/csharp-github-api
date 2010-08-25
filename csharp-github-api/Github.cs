@@ -76,14 +76,14 @@ namespace csharp_github_api
         {
             get
             {
-                var userApi = new UserApi(BaseUrl, _gitHubAuthenticator);
-                return userApi.GetUser("sgrassie"); //TODO: Fix-up access to authenticating username.
+                var userApi = new UserApi(BaseUrl);
+                return userApi.Authenticated(_gitHubAuthenticator).GetUser("sgrassie"); //TODO: Fix-up access to authenticating username.
             }
         }
 
         public User GetUser(string username)
         {
-            return new UserApi(BaseUrl, _gitHubAuthenticator).GetUser(username);
+            return new UserApi(BaseUrl).Authenticated(_gitHubAuthenticator).GetUser(username);
         }
     }
 }
