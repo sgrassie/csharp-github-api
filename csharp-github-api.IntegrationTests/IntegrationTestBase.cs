@@ -32,11 +32,9 @@ namespace csharp_github_api.IntegrationTests
 
                 if (parts.Count() == 2)
                 {
-                    // Purely an aid to unit testing.
+                    /* On some requests, if you are authenticated, you get extra information back in the response,
+                     * or are allowed to modify/create things,so with this we can simulate that in the Services */
                     e.Invocation.Context.Response.Headers.Add("Authenticated", "true");
-
-                    // We don't want to write anything here because it will interfere with our json response from the Services
-                    //e.Invocation.Context.Response.Write(string.Join("|", parts));
                 }
             }
         }
