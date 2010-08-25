@@ -16,6 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using csharp_github_api.API;
 namespace csharp_github_api.Models
 {
     /// <summary>
@@ -43,6 +44,10 @@ namespace csharp_github_api.Models
         public virtual int OwnedPrivateRepoCount { get; set;}
         public virtual int PrivateGistCount { get; set;}
         public virtual Plan Plan { get; set;}
+
+        /* none github stuff */
+
+        public UserApi Api { get; set; }
 
         public override bool Equals(object obj)
         {
