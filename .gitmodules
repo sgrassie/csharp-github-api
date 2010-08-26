@@ -1,0 +1,3 @@
+[submodule "RestSharp"]
+	path = RestSharp
+	url = git@github.com:sgrassie/RestSharp.git
