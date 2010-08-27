@@ -39,4 +39,5 @@ gems/
 SolutionVersion.cs
 
 #Don't ignore
-!nant.exe
+!NAnt.exe
+!NAnt.exe.config
