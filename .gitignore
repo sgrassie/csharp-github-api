@@ -3,7 +3,7 @@
 Thumbs.db
 #Ignore files build by Visual Studio
 *.obj
-*.exe
+#*.exe
 *.pdb
 *.user
 *.aps
@@ -37,13 +37,3 @@ build_output/
 code_drop/
 gems/
 SolutionVersion.cs
-
-#Don't ignore
-!NAnt.exe
-!NAnt.exe.config
-!nunit.exe
-!nunit-x86.exe
-!nunit-console.exe
-!nunit-console.exe.config
-!nunit-console-x86.exe
-!nunit-console-x86.exe.config
