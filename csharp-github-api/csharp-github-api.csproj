@@ -60,9 +60,9 @@
     <Compile Include="Secrets.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RestSharp\RestSharp\RestSharp.csproj">
+    <ProjectReference Include="..\RestSharp\RestSharp\RestSharp.csproj">
       <Project>{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}</Project>
-      <Name>RestSharp %28RestSharp\RestSharp%29</Name>
+      <Name>RestSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -69,13 +69,13 @@
     <Compile Include="UserApiTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RestSharp\RestSharp\RestSharp.csproj">
-      <Project>{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}</Project>
-      <Name>RestSharp %28RestSharp\RestSharp%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\csharp-github-api\csharp-github-api.csproj">
       <Project>{AC8795CC-BDFF-4D37-85EE-E17A7D5A8A59}</Project>
       <Name>csharp-github-api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestSharp\RestSharp\RestSharp.csproj">
+      <Project>{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}</Project>
+      <Name>RestSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
