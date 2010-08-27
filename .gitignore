@@ -37,3 +37,6 @@ build_output/
 code_drop/
 gems/
 SolutionVersion.cs
+
+#Don't ignore
+!nant.exe
