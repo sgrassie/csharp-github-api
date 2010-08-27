@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionVersion.cs">
+      <Link>Properties\SolutionVersion.cs</Link>
+    </Compile>
     <Compile Include="API\UserApi.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="GitHubAuthenticator.cs" />
