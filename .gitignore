@@ -41,3 +41,4 @@ SolutionVersion.cs
 #Don't ignore
 !NAnt.exe
 !NAnt.exe.config
+!nunit*.exe.*
