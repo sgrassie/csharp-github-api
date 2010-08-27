@@ -27,4 +27,13 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
+
+#Ignore the nubular config store
 .nu
+
+#Ignore UppercuT output
+deployment/
+build_output/
+code_drop/
+gems/
+SolutionVersion.cs
