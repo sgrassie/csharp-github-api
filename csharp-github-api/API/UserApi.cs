@@ -16,10 +16,12 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+
 namespace csharp_github_api.API
 {
     using RestSharp;
     using Models;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Encapsulates access to the Github.com User API.
@@ -59,7 +61,7 @@ namespace csharp_github_api.API
                               {
                                   Resource = string.Format("/user/show/{0}", username),
                                   RootElement = "user"
-            };
+                              };
 
             var response = _client.Execute<User>(request);
 
@@ -67,6 +69,36 @@ namespace csharp_github_api.API
             user.Api = this;
 
             return user;
+        }
+
+        public IList<User> FindUser(string username)
+        {
+            if (_client == null) _client = GetRestClient();
+
+            var request = new RestRequest
+                              {
+                                  Resource = string.Format("/user/search/{0}", username),
+                                  RootElement = "users"
+                              };
+
+            var response = _client.Execute<List<User>>(request);
+
+            return response.Data;
+        }
+
+        public User FindUserByEmail(string email)
+        {
+            if (_client == null) _client = GetRestClient();
+
+            var request = new RestRequest
+            {
+                Resource = string.Format("/user/email/{0}", email),
+                RootElement = "users"
+            };
+
+            var response = _client.Execute<User>(request);
+
+            return response.Data;
         }
 
         private RestClient GetRestClient()
