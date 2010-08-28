@@ -40,5 +40,12 @@ namespace csharp_github_api.IntegrationTests.Services
                 }
             }
         }
+
+        [Path("/user/show/{username}/following")]
+        public void Following(string username)
+        {
+            Response.Headers.Add("Content-Type", "application/json");
+            Response.Write("{\"users\":[\"johnsheehan\",\"jagregory\",\"drusellers\",\"structuremap\"]}");
+        }
     }
 }

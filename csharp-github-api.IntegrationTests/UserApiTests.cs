@@ -27,9 +27,9 @@ namespace csharp_github_api.IntegrationTests
         [Test]
         public void GetFollowing_fromUser_shouldReturnSomeData()
         {
-            var github = new Github(@"C:\development\secretpasswordfile.xml")
+            var github = new Github("sgrassie", "notmyrealpassworddontbesilly", false)
             {
-                BaseUrl = "http://github.com/api/v2/json"
+                BaseUrl = "http://localhost:8080"
             };
 
             var user = github.GetUser("sgrassie");
@@ -42,7 +42,7 @@ namespace csharp_github_api.IntegrationTests
         [Test]
         public void GetUser_returns_validUserObject()
         {
-            var github = new Github(@"C:\development\secretpasswordfile.xml")
+            var github = new Github("sgrassie", "notmyrealpassworddontbesilly", false)
             {
                 BaseUrl = "http://localhost:8080"
             };

@@ -17,12 +17,12 @@ namespace csharp_github_api.API
             var request = new RestRequest
             {
                 Resource = string.Format("/user/show/{0}/following", user.Login),
-                //RootElement = "user"
+                RootElement = "users"
             };
 
-            var response = client.Execute(request);
-            var parsed = HttpUtility.ParseQueryString(response.Content);
-            return parsed.GetValues(0).ToList();
+            var response = client.Execute<List<string>>(request);
+
+            return response.Data;
         }
     }
 }
