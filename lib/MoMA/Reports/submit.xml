@@ -3,7 +3,7 @@
   <metadata>
     <definitions>Mono 2.6</definitions>
     <momaversion>2.0.0.0</momaversion>
-    <date>2010-08-27 12:09:26Z</date>
+    <date>2010-08-27 22:29:41Z</date>
     <name />
     <email />
     <homepage />
@@ -12,7 +12,7 @@
     <apptype />
   </metadata>
   <assemblies>
-    <assembly name="csharp-github-api.dll" version="0.0.0.1" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="csharp-github-api.dll" version="0.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
     <assembly name="Kayak.dll" version="1.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
     <assembly name="Kayak.Framework.dll" version="1.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
     <assembly name="Newtonsoft.Json.dll" version="3.5.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
@@ -23,17 +23,6 @@
         <method>ICredentials get_DefaultCredentials()</method>
         <raw>System.Net.ICredentials System.Net.CredentialCache::get_DefaultCredentials()</raw>
         <data>Need EnvironmentPermission implementation first</data>
-      </issue>
-    </assembly>
-    <assembly name="xunit.dll" version="1.6.0.1516" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="xunit.runner.tdnet.dll" version="1.6.0.1516" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="xunit.runner.utility.dll" version="1.6.0.1516" runtime="2.0" todo="1" niex="0" miss="0" pinv="0">
-      <issue type="todo">
-        <class>ExecutorWrapper</class>
-        <caller>AppDomain CreateAppDomain(string, string, bool)</caller>
-        <method>AppDomain CreateDomain(string, Evidence, AppDomainSetup)</method>
-        <raw>System.AppDomain System.AppDomain::CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup)</raw>
-        <data>Currently it does not allow the setup in the other domain</data>
       </issue>
     </assembly>
   </assemblies>
