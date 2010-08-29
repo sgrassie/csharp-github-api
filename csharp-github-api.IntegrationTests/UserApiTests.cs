@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using csharp_github_api.API;
+﻿using NUnit.Framework;
 
 namespace csharp_github_api.IntegrationTests
 {
@@ -14,12 +9,9 @@ namespace csharp_github_api.IntegrationTests
         [Ignore("Ignoring live request.")]
         public void GetUser_shouldReturnDeserialisedUserObject()
         {
-            var github = new Github(@"C:\development\secretpasswordfile.xml")
-                             {
-                                 BaseUrl = "http://github.com/api/v2/json"
-                             };
+            var github = new Github("http://github.com/api/v2/json", @"C:\development\secretpasswordfile.xml");
 
-            var user = github.GetUser("sgrassie");
+            var user = github.User.GetUser("sgrassie");
 
             Assert.That(user.Name, Is.StringMatching("Stuart Grassie"));
         }
@@ -27,14 +19,11 @@ namespace csharp_github_api.IntegrationTests
         [Test]
         public void GetFollowing_fromUser_shouldReturnSomeData()
         {
-            var github = new Github("sgrassie", "notmyrealpassworddontbesilly", false)
-            {
-                BaseUrl = "http://localhost:8080"
-            };
+            var github = new Github(BaseUrl, "sgrassie", "notmyrealpassworddontbesilly", false);
 
-            var user = github.GetUser("sgrassie");
+            var user = github.User.GetUser("sgrassie");
 
-            var following = user.GetFollowing();
+            var following = github.User.GetFollowing(user);
 
             Assert.That(following, Is.Not.Empty);
         }
@@ -42,12 +31,9 @@ namespace csharp_github_api.IntegrationTests
         [Test]
         public void GetUser_returns_validUserObject()
         {
-            var github = new Github("sgrassie", "notmyrealpassworddontbesilly", false)
-            {
-                BaseUrl = "http://localhost:8080"
-            };
+            var github = new Github(BaseUrl, "sgrassie", "notmyrealpassworddontbesilly", false);
 
-            var user = github.GetUser("defunkt");
+            var user = github.User.GetUser("defunkt");
 
             Assert.That(user.Name, Is.StringMatching("Kristopher Walken Wanstrath"));
         }

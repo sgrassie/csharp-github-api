@@ -55,7 +55,6 @@
       <Link>Properties\SolutionVersion.cs</Link>
     </Compile>
     <Compile Include="API\UserApi.cs" />
-    <Compile Include="API\UserApiExtensions.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="GitHubAuthenticator.cs" />
     <Compile Include="Models\Plan.cs" />
