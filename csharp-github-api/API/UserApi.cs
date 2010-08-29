@@ -29,7 +29,7 @@ namespace csharp_github_api.API
     /// <remarks>
     /// See http://develop.github.com/p/users.html for more details.
     /// </remarks>
-    public class UserApi
+    public class UserApi : Api
     {
         public readonly string BaseUrl;
 
@@ -181,6 +181,7 @@ namespace csharp_github_api.API
                               };
 
             var response = _client.Execute<List<string>>(request);
+            ThrowExceptionForBadResponseIfNeccessary(response);
 
             return response.Data;
         }
