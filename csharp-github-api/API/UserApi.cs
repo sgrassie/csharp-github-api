@@ -66,7 +66,6 @@ namespace csharp_github_api.API
             var response = _client.Execute<User>(request);
 
             var user = response.Data;
-            user.Api = this;
 
             return user;
         }
@@ -97,6 +96,21 @@ namespace csharp_github_api.API
             };
 
             var response = _client.Execute<User>(request);
+
+            return response.Data;
+        }
+
+        public IList<string> GetFollowing(User user)
+        {
+            if (_client == null) _client = GetRestClient();
+
+            var request = new RestRequest
+            {
+                Resource = string.Format("/user/show/{0}/following", user.Login),
+                RootElement = "users"
+            };
+
+            var response = _client.Execute<List<string>>(request);
 
             return response.Data;
         }
