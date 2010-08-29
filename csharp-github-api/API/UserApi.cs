@@ -155,6 +155,36 @@ namespace csharp_github_api.API
             return response.Data;
         }
 
+        /// <summary>
+        /// Gets a list of the users that the specified user is following.
+        /// </summary>
+        /// <param name="user">The <see cref="User"/> to get the list of followers for.</param>
+        /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
+        public IList<string> GetFollowers(User user)
+        {
+            return GetFollowers(user.Login);
+        }
+
+        /// <summary>
+        /// Gets a list of the users that the specified user is following.
+        /// </summary>
+        /// <param name="username">The user to get the list of followers for.</param>
+        /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
+        public IList<string> GetFollowers(string username)
+        {
+            if (_client == null) _client = GetRestClient();
+
+            var request = new RestRequest
+                              {
+                                  Resource = string.Format("/user/show/{0}/followers", username),
+                                  RootElement = "users"
+                              };
+
+            var response = _client.Execute<List<string>>(request);
+
+            return response.Data;
+        }
+
         private RestClient GetRestClient()
         {
             return new RestClient(BaseUrl);
