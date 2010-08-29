@@ -45,10 +45,6 @@ namespace csharp_github_api.Models
         public virtual int PrivateGistCount { get; set;}
         public virtual Plan Plan { get; set;}
 
-        /* none github stuff */
-
-        public UserApi Api { get; set; }
-
         public override bool Equals(object obj)
         {
             if(obj is User)
