@@ -42,7 +42,7 @@ namespace csharp_github_api.IntegrationTests
             var client = new RestClient
             {
                 BaseUrl = "http://github.com/api/v2/json",
-                Authenticator = new GitHubAuthenticator(_secretsHandler.Username, _secretsHandler.Password, true)
+                Authenticator = new GitHubAuthenticator(_secretsHandler.Username, _secretsHandler.Token, true)
             };
 
             var response = client.Execute(_restRequest);

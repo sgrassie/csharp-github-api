@@ -97,15 +97,6 @@ namespace csharp_github_api
             set { _baseUrl = value; }
         }
 
-        public User AuthenticatedUser
-        {
-            get
-            {
-                var userApi = new UserApi(BaseUrl);
-                return userApi.Authenticated(_gitHubAuthenticator).GetUser("sgrassie"); //TODO: Fix-up access to authenticating username.
-            }
-        }
-
         public UserApi User
         {
             get
