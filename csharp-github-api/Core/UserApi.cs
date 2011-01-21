@@ -31,19 +31,12 @@ namespace csharp_github_api.Core
     /// </remarks>
     public class UserApi : Api
     {
-        public readonly string BaseUrl;
-
-        private RestClient _client;
-        private readonly IAuthenticator _authenticator;
-
         /// <summary>
         /// Instantiattes a new instance of the <see cref="UserApi"/> class.
         /// </summary>
         /// <param name="baseUrl">The base url for GitHub's API.</param>
-        public UserApi(string baseUrl)
+        public UserApi(string baseUrl) : base(baseUrl)
         {
-            BaseUrl = baseUrl;
-            _client = new RestClient(BaseUrl);
         }
 
         /// <summary>
@@ -51,11 +44,8 @@ namespace csharp_github_api.Core
         /// </summary>
         /// <param name="baseUrl">The base url for GitHub's API.</param>
         /// <param name="authenticator">The <see cref="IAuthenticator"/> class to use to authenticate requests to the user api.</param>
-        public UserApi(string baseUrl, IAuthenticator authenticator)
+        public UserApi(string baseUrl, IAuthenticator authenticator) : base(baseUrl, authenticator)
         {
-            BaseUrl = baseUrl;
-            _authenticator = authenticator;
-            _client = new RestClient(BaseUrl);
         }
 
         /// <summary>
@@ -65,10 +55,10 @@ namespace csharp_github_api.Core
         /// <returns>An authenticated instance of the <see cref="UserApi"/> class.</returns>
         public UserApi Authenticated()
         {
-            if (_authenticator != null)
+            if (Authenticator != null)
             {
-                _client = GetRestClient();
-                _client.Authenticator = _authenticator;
+                Client = GetRestClient();
+                Client.Authenticator = Authenticator;
             }
 
             return this;
@@ -81,7 +71,7 @@ namespace csharp_github_api.Core
         /// <returns>A <see cref="User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
         public User GetUser(string username)
         {
-            if (_client == null) _client = GetRestClient();
+            if (Client == null) Client = GetRestClient();
 
             var request = new RestRequest
                               {
@@ -89,7 +79,7 @@ namespace csharp_github_api.Core
                                   RootElement = "user"
                               };
 
-            var response = _client.Execute<User>(request);
+            var response = Client.Execute<User>(request);
 
             var user = response.Data;
 
@@ -103,7 +93,7 @@ namespace csharp_github_api.Core
         /// <returns>Returns a lise of <see cref="User"/> instances of GitHub users who may match the search.</returns>
         public IList<User> SearchUser(string username)
         {
-            if (_client == null) _client = GetRestClient();
+            if (Client == null) Client = GetRestClient();
 
             var request = new RestRequest
                               {
@@ -111,7 +101,7 @@ namespace csharp_github_api.Core
                                   RootElement = "users"
                               };
 
-            var response = _client.Execute<List<User>>(request);
+            var response = Client.Execute<List<User>>(request);
 
             return response.Data;
         }
@@ -124,7 +114,7 @@ namespace csharp_github_api.Core
         /// <returns>A <see cref="User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
         public User FindUserByEmail(string email)
         {
-            if (_client == null) _client = GetRestClient();
+            if (Client == null) Client = GetRestClient();
 
             var request = new RestRequest
             {
@@ -132,7 +122,7 @@ namespace csharp_github_api.Core
                 RootElement = "users"
             };
 
-            var response = _client.Execute<User>(request);
+            var response = Client.Execute<User>(request);
 
             return response.Data;
         }
@@ -154,7 +144,7 @@ namespace csharp_github_api.Core
         /// <returns>A list of the users (username only) that the specified user is following.</returns>
         public IList<string> GetFollowing(string username)
         {
-            if (_client == null) _client = GetRestClient();
+            if (Client == null) Client = GetRestClient();
 
             var request = new RestRequest
             {
@@ -162,7 +152,7 @@ namespace csharp_github_api.Core
                 RootElement = "users"
             };
 
-            var response = _client.Execute<List<string>>(request);
+            var response = Client.Execute<List<string>>(request);
 
             return response.Data;
         }
@@ -184,7 +174,7 @@ namespace csharp_github_api.Core
         /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
         public IList<string> GetFollowers(string username)
         {
-            if (_client == null) _client = GetRestClient();
+            if (Client == null) Client = GetRestClient();
 
             var request = new RestRequest
                               {
@@ -192,15 +182,10 @@ namespace csharp_github_api.Core
                                   RootElement = "users"
                               };
 
-            var response = _client.Execute<List<string>>(request);
+            var response = Client.Execute<List<string>>(request);
             ThrowExceptionForBadResponseIfNeccessary(response);
 
             return response.Data;
-        }
-
-        private RestClient GetRestClient()
-        {
-            return new RestClient(BaseUrl);
         }
     }
 }
