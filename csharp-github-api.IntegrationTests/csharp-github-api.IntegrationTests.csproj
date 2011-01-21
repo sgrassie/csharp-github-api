@@ -39,10 +39,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kayak, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\kayak-0.5\Kayak.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\nunit\net-2.0\nunit.framework.dll</HintPath>
@@ -63,10 +59,7 @@
   <ItemGroup>
     <Compile Include="ApiTests.cs" />
     <Compile Include="GitHubAuthenticatorTests.cs" />
-    <Compile Include="IntegrationTestBase.cs" />
-    <Compile Include="KayakTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\UserService.cs" />
     <Compile Include="UserApiTests.cs" />
   </ItemGroup>
   <ItemGroup>

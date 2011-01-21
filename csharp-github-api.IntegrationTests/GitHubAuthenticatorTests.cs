@@ -6,7 +6,7 @@ using System.Linq;
 namespace csharp_github_api.IntegrationTests
 {
     [TestFixture]
-    public class GitHubAuthenticatorTests : IntegrationTestBase
+    public class GitHubAuthenticatorTests
     {
         private SecretsHandler _secretsHandler;
         private RestRequest _restRequest;
@@ -23,7 +23,6 @@ namespace csharp_github_api.IntegrationTests
         }
 
         [Test]
-        [Ignore("Ignore live request.")]
         public void MakeAuthenticatedRequest()
         {
             var client = new RestClient
@@ -38,7 +37,6 @@ namespace csharp_github_api.IntegrationTests
         }
 
         [Test]
-        [Ignore("Ignore live request.")]
         public void MakeAuthenticatedRequestWithToken()
         {
             var client = new RestClient
@@ -50,43 +48,6 @@ namespace csharp_github_api.IntegrationTests
             var response = client.Execute(_restRequest);
 
             Assert.That(response.Content, Is.StringContaining("total_private_repo_count"));
-        }
-
-        [Test]
-        public void MakeUnAuthenticatedRequestWithFakeWebServer()
-        {
-            var client = new RestClient("http://localhost:8080");
-
-            var request = new RestRequest
-                              {
-                                  Resource = "/user/show/defunkt"
-                              };
-
-            var response = client.Execute(request);
-
-            var count = response.Headers.Count(s => s.Name == "Authorization");
-
-            Assert.That(count, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void MakeAuthenticatedRequestWithFakeWebServer()
-        {
-            var client = new RestClient("http://localhost:8080")
-                             {
-                                 Authenticator = new GitHubAuthenticator("fakeuser", "fakepassword", false)
-                             };
-
-            var request = new RestRequest
-            {
-                Resource = "/user/show/defunkt"
-            };
-
-            var response = client.Execute(request);
-
-            var count = response.Headers.Count(s => s.Name == "Authenticated");
-
-            Assert.That(count, Is.EqualTo(1));
         }
     }
 }

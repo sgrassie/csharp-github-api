@@ -3,15 +3,20 @@
 namespace csharp_github_api.IntegrationTests
 {
     [TestFixture]
-    public class UserApiTests : IntegrationTestBase
+    public class UserApiTests
     {
+        private Github _github;
+
+        [TestFixtureSetUp]
+        public void Setup()
+        {
+            _github = new Github("http://github.com/api/v2/json", @"C:\development\secretpasswordfile.xml");
+        }
+
         [Test]
-        [Ignore("Ignoring live request.")]
         public void GetUser_shouldReturnDeserialisedUserObject()
         {
-            var github = new Github("http://github.com/api/v2/json", @"C:\development\secretpasswordfile.xml");
-
-            var user = github.User.GetUser("sgrassie");
+            var user = _github.User.GetUser("sgrassie");
 
             Assert.That(user.Name, Is.StringMatching("Stuart Grassie"));
         }
@@ -19,11 +24,9 @@ namespace csharp_github_api.IntegrationTests
         [Test]
         public void GetFollowing_fromUser_shouldReturnSomeData()
         {
-            var github = new Github(BaseUrl, "sgrassie", "notmyrealpassworddontbesilly", false);
+            var user = _github.User.GetUser("sgrassie");
 
-            var user = github.User.GetUser("sgrassie");
-
-            var following = github.User.GetFollowing(user);
+            var following = _github.User.GetFollowing(user);
 
             Assert.That(following, Is.Not.Empty);
         }
@@ -31,11 +34,9 @@ namespace csharp_github_api.IntegrationTests
         [Test]
         public void GetUser_returns_validUserObject()
         {
-            var github = new Github(BaseUrl, "sgrassie", "notmyrealpassworddontbesilly", false);
+            var user = _github.User.GetUser("defunkt");
 
-            var user = github.User.GetUser("defunkt");
-
-            Assert.That(user.Name, Is.StringMatching("Kristopher Walken Wanstrath"));
+            Assert.That(user.Name, Is.StringMatching("Chris Wanstrath"));
         }
     }
 }
