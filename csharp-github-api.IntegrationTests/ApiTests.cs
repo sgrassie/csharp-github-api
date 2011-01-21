@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using csharp_github_api.Core;
 using NUnit.Framework;
-using csharp_github_api.API;
 
 namespace csharp_github_api.IntegrationTests
 {

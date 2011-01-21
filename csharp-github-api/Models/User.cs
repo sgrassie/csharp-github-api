@@ -16,7 +16,6 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using csharp_github_api.API;
 namespace csharp_github_api.Models
 {
     /// <summary>

@@ -16,11 +16,12 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using csharp_github_api.Core;
+
 namespace csharp_github_api
 {
     using RestSharp;
     using Models;
-    using API;
 
     /// <summary>
     /// Access the Github.com API.
