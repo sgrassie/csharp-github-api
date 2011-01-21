@@ -101,7 +101,7 @@ namespace csharp_github_api
         {
             get
             {
-                return _userApi.Authenticated(_gitHubAuthenticator);
+                return _userApi.Authenticated();
             }
         }
     }

@@ -34,7 +34,7 @@ namespace csharp_github_api.API
         public readonly string BaseUrl;
 
         private RestClient _client;
-        private IAuthenticator _authenticator;
+        private readonly IAuthenticator _authenticator;
 
         /// <summary>
         /// Instantiattes a new instance of the <see cref="UserApi"/> class.
@@ -43,21 +43,33 @@ namespace csharp_github_api.API
         public UserApi(string baseUrl)
         {
             BaseUrl = baseUrl;
-
             _client = new RestClient(BaseUrl);
         }
 
         /// <summary>
-        /// Fluently returns an authenticated instance of the <see cref="UserApi"/> class.
+        /// Instantiattes a new instance of the <see cref="UserApi"/> class.
         /// </summary>
+        /// <param name="baseUrl">The base url for GitHub's API.</param>
         /// <param name="authenticator">The <see cref="IAuthenticator"/> class to use to authenticate requests to the user api.</param>
-        /// <returns>An authenticated instance of the <see cref="UserApi"/> class.</returns>
-        public UserApi Authenticated(IAuthenticator authenticator)
+        public UserApi(string baseUrl, IAuthenticator authenticator)
         {
+            BaseUrl = baseUrl;
             _authenticator = authenticator;
+            _client = new RestClient(BaseUrl);
+        }
 
-            _client = GetRestClient();
-            _client.Authenticator = authenticator;
+        /// <summary>
+        /// If the user is authenticated, authenticated instance of the <see cref="UserApi"/> class. 
+        /// If the user is not authenticated then an unauthenticated instance is returned.
+        /// </summary>
+        /// <returns>An authenticated instance of the <see cref="UserApi"/> class.</returns>
+        public UserApi Authenticated()
+        {
+            if (_authenticator != null)
+            {
+                _client = GetRestClient();
+                _client.Authenticator = _authenticator;
+            }
 
             return this;
         }
