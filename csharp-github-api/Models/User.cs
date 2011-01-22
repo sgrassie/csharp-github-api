@@ -16,6 +16,8 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using csharp_github_api.Core;
+using System.Collections.Generic;
 namespace csharp_github_api.Models
 {
     /// <summary>
@@ -23,6 +25,8 @@ namespace csharp_github_api.Models
     /// </summary>
     public class User
     {
+        internal UserApi UserApi;
+
         /* public, authentication not required */
         public virtual int Id { get; set; }
         public virtual string Login { get; set; }
@@ -44,13 +48,50 @@ namespace csharp_github_api.Models
         public virtual int PrivateGistCount { get; set;}
         public virtual Plan Plan { get; set;}
 
+        public User Authenticated
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+        public IEnumerable<string> Following
+        {
+            get
+            {
+                return UserApi.GetFollowing(this);
+            }
+        }
+
+        /// <summary>
+        /// Gets an <see cref="IEnumerable{T}"/> of the usernames of the followers of this user.
+        /// </summary>
+        public IEnumerable<string> Followers
+        {
+            get
+            {
+                return UserApi.GetFollowers(this);
+            }
+        }
+
+        /// <summary>
+        /// Follow the specified user. Must be authenticated.
+        /// </summary>
+        /// <param name="username">The user name of the user on github to follow.</param>
+        /// <returns></returns>
+        public bool Follow(string username)
+        {
+            return UserApi.Authenticated().Follow(username);
+        }
+
         public override bool Equals(object obj)
         {
             if(obj is User)
             {
                 var compareTo = (User) obj;
 
-                return compareTo.Id.Equals(Id);
+                return compareTo.Id.Equals(Id) && compareTo.Name.Equals(Name) && compareTo.Email.Equals(Email);
             }
 
             return base.Equals(obj);
