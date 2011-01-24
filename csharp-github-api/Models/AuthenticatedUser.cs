@@ -10,6 +10,8 @@ namespace csharp_github_api.Models
     {
         internal UserApi _userApi;
 
+        internal AuthenticatedUser(){ }
+
         /// <summary>
         /// Follow the specified user. Must be authenticated.
         /// </summary>
@@ -18,6 +20,11 @@ namespace csharp_github_api.Models
         public bool Follow(string username)
         {
             return _userApi.Authenticated().Follow(username);
+        }
+
+        public bool UnFollow(string username)
+        {
+            return _userApi.Authenticated().UnFollow(username);
         }
     }
 }

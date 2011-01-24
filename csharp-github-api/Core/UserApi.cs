@@ -189,5 +189,10 @@ namespace csharp_github_api.Core
         {
             throw new NotImplementedException();
         }
+
+        public bool UnFollow(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
