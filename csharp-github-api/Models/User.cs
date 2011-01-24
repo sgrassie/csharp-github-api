@@ -48,14 +48,6 @@ namespace csharp_github_api.Models
         public virtual int PrivateGistCount { get; set;}
         public virtual Plan Plan { get; set;}
 
-        public User Authenticated
-        {
-            get
-            {
-                return this;
-            }
-        }
-
         public IEnumerable<string> Following
         {
             get
@@ -75,14 +67,12 @@ namespace csharp_github_api.Models
             }
         }
 
-        /// <summary>
-        /// Follow the specified user. Must be authenticated.
-        /// </summary>
-        /// <param name="username">The user name of the user on github to follow.</param>
-        /// <returns></returns>
-        public bool Follow(string username)
+        public AuthenticatedUser Authenticated
         {
-            return UserApi.Authenticated().Follow(username);
+            get
+            {
+                return new AuthenticatedUser {_userApi = UserApi};
+            }
         }
 
         public override bool Equals(object obj)
