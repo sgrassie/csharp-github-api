@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="cs" company="TemporalCohesion.co.uk">
+// <copyright file="AuthenticatedUser.cs" company="TemporalCohesion.co.uk">
 //     Copyright [2010] [Stuart Grassie]
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +20,12 @@ namespace csharp_github_api.Models
 {
     using Core;
 
+    /// <summary>
+    /// Allows access to actions which the user must be authenticated for.
+    /// </summary>
+    /// <remarks>
+    /// If the user is not authenticatd, then the actions will fail.
+    /// </remarks>
     public class AuthenticatedUser
     {
         internal UserApi _userApi;
@@ -30,12 +36,19 @@ namespace csharp_github_api.Models
         /// Follow the specified user. Must be authenticated.
         /// </summary>
         /// <param name="username">The user name of the user on github to follow.</param>
-        /// <returns></returns>
+        /// TODO: Consider returning the follow list from the response
+        /// <returns><c>True</c> if the user was followed; otherwise <c>false</c>.</returns>
         public bool Follow(string username)
         {
             return _userApi.Authenticated().Follow(username);
         }
 
+        /// <summary>
+        /// Unfollow the specified user. Must be authenticated.
+        /// </summary>
+        /// <param name="username">The user name of the user on github to follow.</param>
+        /// TODO: Consider returning the follow list from the response
+        /// <returns><c>True</c> if the user was followed; otherwise <c>false</c>.</returns>
         public bool UnFollow(string username)
         {
             return _userApi.Authenticated().UnFollow(username);

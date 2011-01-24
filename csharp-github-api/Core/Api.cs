@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="cs" company="TemporalCohesion.co.uk">
+// <copyright file="Api.cs" company="TemporalCohesion.co.uk">
 //     Copyright [2010] [Stuart Grassie]
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
