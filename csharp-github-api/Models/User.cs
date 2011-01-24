@@ -49,6 +49,9 @@ namespace csharp_github_api.Models
         public virtual int PrivateGistCount { get; set;}
         public virtual Plan Plan { get; set;}
 
+        /// <summary>
+        /// Gets an <see cref="IEnumerable{T}"/> of the usernames of the followers of this user.
+        /// </summary>
         public IEnumerable<string> Following
         {
             get
@@ -68,6 +71,10 @@ namespace csharp_github_api.Models
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="AuthenticatedUser"/> object with which actions may be performed which required
+        /// the user to be authenticated.
+        /// </summary>
         public AuthenticatedUser Authenticated
         {
             get
@@ -76,6 +83,15 @@ namespace csharp_github_api.Models
             }
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+        /// </returns>
+        /// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>. 
+        ///                 </param><exception cref="T:System.NullReferenceException">The <paramref name="obj"/> parameter is null.
+        ///                 </exception><filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
             if(obj is User)
@@ -88,11 +104,25 @@ namespace csharp_github_api.Models
             return base.Equals(obj);
         }
 
+        /// <summary>
+        /// Serves as a hash function for a particular type. 
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current <see cref="T:System.Object"/>.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
         public override int GetHashCode()
         {
             return Id.GetHashCode() + Login.GetHashCode();
         }
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
             return Name;
