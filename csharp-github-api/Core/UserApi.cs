@@ -16,14 +16,14 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-
-using System;
-using RestSharp;
-using csharp_github_api.Models;
-using System.Collections.Generic;
-
 namespace csharp_github_api.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using Models;
+    using RestSharp;
+
     /// <summary>
     /// Encapsulates access to the Github.com User API.
     /// </summary>
@@ -187,12 +187,27 @@ namespace csharp_github_api.Core
 
         internal bool Follow(string username)
         {
-            throw new NotImplementedException();
+            if (Client == null) Client = GetRestClient();
+
+            var request = new RestRequest(Method.POST)
+                              {
+                                  Resource = string.Format("/user/follow/{0}", username)
+                              };
+            var response = Client.Execute(request);
+            return response.StatusCode == HttpStatusCode.OK;
         }
 
         public bool UnFollow(string username)
         {
-            throw new NotImplementedException();
+            if (Client == null) Client = GetRestClient();
+
+            var request = new RestRequest(Method.POST)
+                              {
+                                  Resource = String.Format("/user/unfollow/{0}", username)
+                              };
+
+            var response = Client.Execute(request);
+            return response.StatusCode == HttpStatusCode.OK;
         }
     }
 }

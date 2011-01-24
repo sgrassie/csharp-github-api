@@ -32,5 +32,23 @@ namespace csharp_github_api.IntegrationTests.Models
 
             Assert.That(result, Has.Count.GreaterThan(0));
         }
+
+        [Test]
+        public void Should_Follow_And_Unfollow_User()
+        {
+            var user =  _github.User.GetUser("sgrassie");
+            
+            user.Authenticated.Follow("mono");
+
+            var following = user.Following;
+
+            Assert.That(following, Contains.Item("mono"));
+
+            user.Authenticated.UnFollow("mono");
+
+            following = user.Following;
+
+            Assert.That(following, !Contains.Item("mono"));
+        }
     }
 }

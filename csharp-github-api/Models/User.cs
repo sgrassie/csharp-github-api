@@ -16,10 +16,11 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using csharp_github_api.Core;
-using System.Collections.Generic;
 namespace csharp_github_api.Models
 {
+    using System.Collections.Generic;
+    using Core;
+
     /// <summary>
     /// Represents a GitHub.com user account.
     /// </summary>

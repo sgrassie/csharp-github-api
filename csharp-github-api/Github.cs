@@ -40,7 +40,6 @@ namespace csharp_github_api
         public Github(string baseurl)
         {
             _baseUrl = baseurl;
-            Init();
         }
 
         /// <summary>
@@ -84,11 +83,6 @@ namespace csharp_github_api
             _gitHubAuthenticator = new GitHubAuthenticator(username, password, useApiKey);
         }
 
-        private void Init()
-        {
-            _userApi = new UserApi(BaseUrl);
-        }
-
         /// <summary>
         /// Gets or sets the base URL for accessing GitHub's API.
         /// </summary>
@@ -102,7 +96,7 @@ namespace csharp_github_api
         {
             get
             {
-                return _userApi;
+                return new UserApi(_baseUrl, _gitHubAuthenticator);
             }
         }
     }
