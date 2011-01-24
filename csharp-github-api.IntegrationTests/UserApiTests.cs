@@ -26,7 +26,7 @@ namespace csharp_github_api.IntegrationTests
         {
             var user = _github.User.GetUser("sgrassie");
 
-            var following = _github.User.GetFollowing(user);
+            var following = user.Following;
 
             Assert.That(following, Is.Not.Empty);
         }
