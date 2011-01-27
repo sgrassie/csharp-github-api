@@ -58,9 +58,7 @@
     <Compile Include="Core\GitHubResponseException.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Framework\GitHubApiSettings.cs" />
-    <Compile Include="Framework\GitHubApiSettingsProvider.cs" />
     <Compile Include="Framework\IGitHubApiSettings.cs" />
-    <Compile Include="Framework\ISettingsProvider.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="GitHubAuthenticator.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
