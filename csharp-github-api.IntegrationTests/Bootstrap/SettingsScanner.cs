@@ -19,8 +19,7 @@ namespace csharp_github_api.IntegrationTests.Bootstrap
             registry.For(type).EnrichWith(
                 (session, original) =>
                     session.GetInstance<GitHubApiSettingsProvider>()
-                    .PopulateSettings((IGitHubApiSettings) original)
-                );
+                    .PopulateSettings((IGitHubApiSettings) original)).Singleton();
         }
     }
 }

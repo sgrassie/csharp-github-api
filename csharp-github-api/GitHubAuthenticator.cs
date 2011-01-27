@@ -21,8 +21,8 @@ namespace csharp_github_api
     using System;
     using System.Linq;
     using System.Text;
+    using Framework;
     using RestSharp;
-using csharp_github_api.Framework;
 
     /// <summary>
     /// A custom implementation of a RestSharp <see cref="IAuthenticator"/>. It is basically the same as RestSharp's

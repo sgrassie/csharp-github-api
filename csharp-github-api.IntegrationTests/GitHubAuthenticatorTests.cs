@@ -10,13 +10,15 @@ namespace csharp_github_api.IntegrationTests
     [TestFixture]
     public class GitHubAuthenticatorTests
     {
-        private IGitHubApiSettings _gitHubApiSettings;
+        private IAuthenticator _authenticator;
         private RestRequest _restRequest;
 
         [TestFixtureSetUp]
         public void Setup()
         {
-            _gitHubApiSettings = ObjectFactory.GetInstance<GitHubApiSettings>();
+            Bootstrap.Bootstrapper.Bootstrap();
+            _authenticator = ObjectFactory.GetInstance<GitHubAuthenticator>();
+
             _restRequest = new RestRequest
             {
                 Resource = "/user/show/sgrassie"
@@ -29,6 +31,7 @@ namespace csharp_github_api.IntegrationTests
             var client = new RestClient
                              {
                                  BaseUrl = "http://github.com/api/v2/json",
+                                 Authenticator = _authenticator
                              };
 
             var response = client.Execute(_restRequest);
@@ -40,9 +43,10 @@ namespace csharp_github_api.IntegrationTests
         public void MakeAuthenticatedRequestWithToken()
         {
             var client = new RestClient
-            {
-                BaseUrl = "http://github.com/api/v2/json",
-            };
+                             {
+                                 BaseUrl = "http://github.com/api/v2/json",
+                                 Authenticator = _authenticator
+                             };
 
             var response = client.Execute(_restRequest);
 
