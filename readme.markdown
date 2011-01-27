@@ -6,12 +6,28 @@ It does what it says on the tin*: A C# library for accessing [GitHub's API][4].
 
 Currently targets .NET 3.5
 
-Uses John Sheehan's excellent [RestSharp][3] [REST client][2] library for most of the heavy lifting.
-
-Uses the [Kayak C# web server][5] for integration testing of the API.
+Uses Github's JSON API, and uses John Sheehan's excellent [RestSharp][3] [REST client][2] library for most of the heavy lifting.
 
 ### *Status
-Very early stages of development. Only authentication is completed at this time.
+User API is mostly done. It's possible to authenticate with Github and request user details. If you authenticate as a user then additional data and API calls are available.
+
+The API does not use an internal IoC or Common Service Locator internally, nor is there any real need to do so at this stage.
+
+### Usage
+Recommended usage is to configure your IoC container of choice to wire up the dependencies for the main Github class. This class has two constructor overloads, one which takes a settings object, and one which takes in the string parameters required to authenticate successfully.
+
+For example, with Structuremap:
+
+	var github = ObjectFactory.GetInstance<Github>();
+	var user = github.User.GetUser("sgrassie");
+	var followers = user.Following
+
+It is possible to follow and unfollow another Github user:
+
+	var github = new Github("http://github.com/api/v2/json", username, apiKey);
+	var user = github.User.GetUser("sgrassie");
+	var following = user.Authenticated.Follow("mono");
+
 
 ### License
 Licensed under the Apache License, Version 2.0, details included in the source.
@@ -24,12 +40,21 @@ Is currently in a state of flux (i.e. I need to workout how to get UppercuT to d
 	git submodule update
 	build
 Then wait for BUILD SUCCEEDED, then grab the assembly from the code_drop folder.
+Solutions are provided for both VS2008 (not guaranteed to work) and VS2010.
 
-Solutions are provided for both VS2008 and VS2010.
+### Running the test
+Not all of the tests require authentication. Some of them do however. The integration test project takes care of wiring up all the required classes in the Bootstrapper, using Structuremap. One thing I obviously don't want to do is put my password and api token into a public repository. So the integration test project also implements a basic settings provider which does the job of parsing a file containing your username, password, token and optionally a different base url for the Github.com API.
+
+The file should go in the root of the Integration test project, and should be called 'secrets.json'. It should look like this:
+	{
+	"Username" : "<your user name>",
+	"Password" : "<your password>",
+	"Token" : "<your api token>"
+	}
+
 	
 
   [1]: http://temporalcohesion.co.uk
   [2]: http://github.com/johnsheehan/RestSharp
   [3]: http://restsharp.org/
   [4]: http://develop.github.com/
-  [5]: http://kayakhttp.com/
