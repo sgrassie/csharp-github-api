@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using StructureMap;
 
 namespace csharp_github_api.IntegrationTests
 {
@@ -10,7 +11,8 @@ namespace csharp_github_api.IntegrationTests
         [TestFixtureSetUp]
         public void Setup()
         {
-            _github = new Github("http://github.com/api/v2/json", @"C:\development\secretpasswordfile.xml");
+            Bootstrapper.Bootstrap();
+            _github = ObjectFactory.GetInstance<Github>();
         }
 
         [Test]

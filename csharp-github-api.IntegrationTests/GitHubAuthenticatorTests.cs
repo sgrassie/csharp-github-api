@@ -2,20 +2,19 @@
 using RestSharp;
 using System;
 using System.Linq;
+using csharp_github_api.Framework;
 
 namespace csharp_github_api.IntegrationTests
 {
     [TestFixture]
     public class GitHubAuthenticatorTests
     {
-        private SecretsHandler _secretsHandler;
+        private IGitHubApiSettings _gitHubApiSettings;
         private RestRequest _restRequest;
 
         [SetUp]
         public void Setup()
         {
-            _secretsHandler = new SecretsHandler(@"C:\development\secretpasswordfile.xml");
-
             _restRequest = new RestRequest
             {
                 Resource = "/user/show/sgrassie"
@@ -28,7 +27,6 @@ namespace csharp_github_api.IntegrationTests
             var client = new RestClient
                              {
                                  BaseUrl = "http://github.com/api/v2/json",
-                                 Authenticator = new GitHubAuthenticator(_secretsHandler.Username, _secretsHandler.Password, false)
                              };
 
             var response = client.Execute(_restRequest);
@@ -42,7 +40,6 @@ namespace csharp_github_api.IntegrationTests
             var client = new RestClient
             {
                 BaseUrl = "http://github.com/api/v2/json",
-                Authenticator = new GitHubAuthenticator(_secretsHandler.Username, _secretsHandler.Token, true)
             };
 
             var response = client.Execute(_restRequest);

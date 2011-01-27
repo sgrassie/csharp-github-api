@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using csharp_github_api.Core;
 using NUnit.Framework;
+using StructureMap;
 
 namespace csharp_github_api.IntegrationTests
 {
@@ -15,7 +16,7 @@ namespace csharp_github_api.IntegrationTests
         [Ignore("Fix me")]
         public void ExceptionThrownForBadRequest()
         {
-            var github = new Github("http://github.com/api/v2/json");
+            var github = ObjectFactory.GetInstance<Github>();
             //github.User.GetFollowers("sgrassie");
         }
     }

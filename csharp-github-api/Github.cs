@@ -16,12 +16,13 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using csharp_github_api.Core;
+using System;
 
 namespace csharp_github_api
 {
+    using Core;
+    using Framework;
     using RestSharp;
-    using Models;
 
     /// <summary>
     /// Access the Github.com API.
@@ -29,6 +30,7 @@ namespace csharp_github_api
     public class Github
     {
         private readonly IAuthenticator _gitHubAuthenticator;
+        private readonly IGitHubApiSettings _gitHubApiSettings;
         private string _baseUrl;
 
         private UserApi _userApi;
@@ -36,39 +38,14 @@ namespace csharp_github_api
         /// <summary>
         /// Instantiates a new instance of the <see cref="Github"/> class.
         /// </summary>
-        /// <param name="baseurl">The base url for GitHub's API.</param>
-        public Github(string baseurl)
+        /// <param name="gitHubApiSettings">The settings provider which provides the initial configuration for the API.</param>
+        public Github(IGitHubApiSettings gitHubApiSettings)
         {
-            _baseUrl = baseurl;
-        }
+            if(gitHubApiSettings == null) throw new ArgumentNullException("gitHubApiSettings", "The Github settings provider cannot be null.");
+            _gitHubApiSettings = gitHubApiSettings;
+            _baseUrl = gitHubApiSettings.BaseUrl;
 
-        /// <summary>
-        /// Instantiates a new instance of the <see cref="Github"/> class.
-        /// </summary>
-        /// <param name="baseurl">The base url for GitHub's API.</param>
-        /// <param name="passwordFile">The path to an xml file which contains the Github.com login information for the account to use.</param>
-        public Github(string baseurl, string passwordFile) : this(baseurl)
-        {
-            var secrets = new SecretsHandler(passwordFile);
-
-            if(string.IsNullOrEmpty(secrets.Token))
-            {
-                _gitHubAuthenticator = new GitHubAuthenticator(secrets.Username, secrets.Password, false);
-            }
-            else
-            {
-                _gitHubAuthenticator = new GitHubAuthenticator(secrets.Username, secrets.Token, true);
-            }
-        }
-
-        /// <summary>
-        /// Instantiates a new instance of the <see cref="Github"/> class.
-        /// </summary>
-        /// <param name="baseUrl">The base url for GitHub's API.</param>
-        /// <param name="authenticator">The <see cref="IAuthenticator"/> to use to authenticate requests to Github.com</param>
-        public Github(string baseUrl, IAuthenticator authenticator) : this(baseUrl)
-        {
-            _gitHubAuthenticator = authenticator;
+            _gitHubAuthenticator = string.IsNullOrEmpty(gitHubApiSettings.Token) ? new GitHubAuthenticator(gitHubApiSettings.Username, gitHubApiSettings.Password, false) : new GitHubAuthenticator(gitHubApiSettings.Username, gitHubApiSettings.Token, true);
         }
 
         /// <summary>
@@ -76,11 +53,17 @@ namespace csharp_github_api
         /// </summary>
         /// <param name="baseUrl">The base url for GitHub's API.</param>
         /// <param name="username">The username to authenticate as.</param>
-        /// <param name="password">The password for the user. If authenticating with an API token, pass the token instead of the password.</param>
-        /// <param name="useApiKey">Indicates whether or not to use a Github.com API token. If <c>true</c>, then pass the token instead of the password.</param>
-        public Github(string baseUrl, string username, string password, bool useApiKey) : this(baseUrl)
+        /// <param name="apiKey">Indicates whether or not to use a Github.com API token. If <c>true</c>, then pass the token instead of the password.</param>
+        public Github(string baseUrl, string username, string apiKey)
         {
-            _gitHubAuthenticator = new GitHubAuthenticator(username, password, useApiKey);
+            _gitHubApiSettings = new GitHubApiSettings
+                                     {
+                                         BaseUrl = baseUrl,
+                                         Username = username,
+                                         Token = apiKey,
+                                         Password = string.Empty
+                                     };
+            _gitHubAuthenticator = new GitHubAuthenticator(username, apiKey, true);
         }
 
         /// <summary>

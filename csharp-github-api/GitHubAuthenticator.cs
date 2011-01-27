@@ -22,6 +22,7 @@ namespace csharp_github_api
     using System.Linq;
     using System.Text;
     using RestSharp;
+using csharp_github_api.Framework;
 
     /// <summary>
     /// A custom implementation of a RestSharp <see cref="IAuthenticator"/>. It is basically the same as RestSharp's
@@ -44,6 +45,24 @@ namespace csharp_github_api
             _username = username;
             _password = password;
             _useApiKey = useApiKey;
+        }
+
+        /// <summary>
+        /// Instantiates a new instance of the <see cref="GitHubAuthenticator"/> class.
+        /// </summary>
+        /// <param name="gitHubApiSettings">The <see cref="IGitHubApiSettings"/> settings provider.</param>
+        public GitHubAuthenticator(IGitHubApiSettings gitHubApiSettings)
+        {
+            _username = gitHubApiSettings.Username;
+            if(!string.IsNullOrEmpty(gitHubApiSettings.Password))
+            {
+                _password = gitHubApiSettings.Password;
+            }
+            else
+            {
+                _password = gitHubApiSettings.Token;
+                _useApiKey = true;
+            }
         }
 
         /// <summary>
