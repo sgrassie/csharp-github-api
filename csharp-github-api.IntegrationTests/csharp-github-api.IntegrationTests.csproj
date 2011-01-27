@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="ApiTests.cs" />
     <Compile Include="Bootstrap\Bootstrapper.cs" />
-    <Compile Include="GitHubApiSettingsProvider.cs" />
+    <Compile Include="Bootstrap\GitHubApiSettingsProvider.cs" />
     <Compile Include="GitHubAuthenticatorTests.cs" />
     <Compile Include="Bootstrap\ISettingsProvider.cs" />
     <Compile Include="Models\UserTests.cs" />
@@ -84,6 +84,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(ProjectDir)secrets.json $(ProjectDir)$(OutDir) /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

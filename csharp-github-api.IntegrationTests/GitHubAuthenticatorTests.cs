@@ -3,6 +3,7 @@ using RestSharp;
 using System;
 using System.Linq;
 using csharp_github_api.Framework;
+using StructureMap;
 
 namespace csharp_github_api.IntegrationTests
 {
@@ -12,9 +13,10 @@ namespace csharp_github_api.IntegrationTests
         private IGitHubApiSettings _gitHubApiSettings;
         private RestRequest _restRequest;
 
-        [SetUp]
+        [TestFixtureSetUp]
         public void Setup()
         {
+            _gitHubApiSettings = ObjectFactory.GetInstance<GitHubApiSettings>();
             _restRequest = new RestRequest
             {
                 Resource = "/user/show/sgrassie"

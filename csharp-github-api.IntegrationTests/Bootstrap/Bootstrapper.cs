@@ -9,11 +9,12 @@ namespace csharp_github_api.IntegrationTests.Bootstrap
         public static void Bootstrap()
         {
             ObjectFactory.Initialize(x => x.Scan(s =>
-                                                  {
-                                                      s.TheCallingAssembly();
-                                                      s.LookForRegistries();
-                                                      s.With(new SettingsScanner());
-                                                  }));
+                                                     {
+                                                         s.AssemblyContainingType<IGitHubApiSettings>();
+                                                         s.TheCallingAssembly();
+                                                         s.LookForRegistries();
+                                                         s.With(new SettingsScanner());
+                                                     }));
         }
     }
 
