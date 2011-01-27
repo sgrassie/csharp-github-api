@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using csharp_github_api.IntegrationTests.Bootstrap;
+using NUnit.Framework;
 using StructureMap;
 
 namespace csharp_github_api.IntegrationTests

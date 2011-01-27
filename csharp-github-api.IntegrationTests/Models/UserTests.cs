@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using csharp_github_api.IntegrationTests.Bootstrap;
 using NUnit.Framework;
 using StructureMap;
 

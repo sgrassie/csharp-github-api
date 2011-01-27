@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="GitHubApiSettingsProvider.cs" company="TemporalCohesion.co.uk">
+// <copyright file="ISettingsProvider.cs" company="TemporalCohesion.co.uk">
 //     Copyright [2010] [Stuart Grassie]
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,20 +16,20 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using System;
 using csharp_github_api.Framework;
-using csharp_github_api.IntegrationTests.Bootstrap;
 
-namespace csharp_github_api.IntegrationTests
+namespace csharp_github_api.IntegrationTests.Bootstrap
 {
     /// <summary>
-    /// The default settings provider for the API.
+    /// Defines the interface for settings providers.
     /// </summary>
-    public class GitHubApiSettingsProvider : ISettingsProvider
+    public interface ISettingsProvider
     {
-        public IGitHubApiSettings PopulateSettings(IGitHubApiSettings settings)
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// Populates the settings object.
+        /// </summary>
+        /// <param name="settings">The <see cref="IGitHubApiSettings"/> object to pass to the API.</param>
+        /// <returns>The populated <paramref name="settings"/> object.</returns>
+        IGitHubApiSettings PopulateSettings(IGitHubApiSettings settings);
     }
 }
