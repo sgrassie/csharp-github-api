@@ -42,7 +42,7 @@ Is currently in a state of flux (i.e. I need to workout how to get UppercuT to d
 Then wait for BUILD SUCCEEDED, then grab the assembly from the code_drop folder.
 Solutions are provided for both VS2008 (not guaranteed to work) and VS2010.
 
-### Running the test
+### Running the tests
 Not all of the tests require authentication. Some of them do however. The integration test project takes care of wiring up all the required classes in the Bootstrapper, using Structuremap. One thing I obviously don't want to do is put my password and api token into a public repository. So the integration test project also implements a basic settings provider which does the job of parsing a file containing your username, password, token and optionally a different base url for the Github.com API.
 
 The file should go in the root of the Integration test project, and should be called 'secrets.json'. It should look like this:
@@ -51,7 +51,7 @@ The file should go in the root of the Integration test project, and should be ca
 	"Password" : "<your password>",
 	"Token" : "<your api token>"
 	}
-
+NOTE: secrets.json is specifically ignored in the .gitignore. If you decide to use another method of providing your credentials, I will not be held responsible for you checking in your password and/or token.
 	
 
   [1]: http://temporalcohesion.co.uk
