@@ -12,7 +12,7 @@ namespace csharp_github_api.IntegrationTests
     {
         public static void Bootstrap()
         {
-            ObjectFactory.Initialize(x=>x.Scan(s=>
+            ObjectFactory.Initialize(x => x.Scan(s =>
                                                   {
                                                       s.TheCallingAssembly();
                                                       s.LookForRegistries();
@@ -25,7 +25,7 @@ namespace csharp_github_api.IntegrationTests
     {
         public TestsRegistry()
         {
-            SelectConstructor(()=> new Github(null as IGitHubApiSettings));
+            SelectConstructor(() => new Github(null));
             For<Github>().Use<Github>().Ctor<IGitHubApiSettings>().Is(x => x.GetInstance<GitHubApiSettings>());
         }
     }

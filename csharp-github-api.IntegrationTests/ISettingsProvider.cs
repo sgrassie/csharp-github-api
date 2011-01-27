@@ -25,6 +25,11 @@ namespace csharp_github_api.IntegrationTests
     /// </summary>
     public interface ISettingsProvider
     {
+        /// <summary>
+        /// Populates the settings object.
+        /// </summary>
+        /// <param name="settings">The <see cref="IGitHubApiSettings"/> object to pass to the API.</param>
+        /// <returns>The populated <paramref name="settings"/> object.</returns>
         IGitHubApiSettings PopulateSettings(IGitHubApiSettings settings);
     }
 }
