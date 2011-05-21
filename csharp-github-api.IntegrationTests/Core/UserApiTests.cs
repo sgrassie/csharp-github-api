@@ -10,7 +10,7 @@ namespace csharp_github_api.IntegrationTests.Core
         [TestFixtureSetUp]
         public void Setup()
         {
-            _github = new Github("http://github.com/api/v3/json", @"C:\development\secretpasswordfile.xml");
+            _github = new Github("https://api.github.com", @"C:\development\secretpasswordfile.xml");
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace csharp_github_api.IntegrationTests.Core
 
             var following = user.Following;
 
-            Assert.That(following, Is.Not.Empty);
+            Assert.That(following, Is.Not.Null.And.Not.Empty);
         }
 
         [Test]

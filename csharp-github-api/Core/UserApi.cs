@@ -60,11 +60,12 @@ namespace csharp_github_api.Core
 
             var request = new RestRequest
                               {
-                                  Resource = string.Format("/user/show/{0}", username),
-                                  RootElement = "user"
+                                  Resource = string.Format("/users/{0}", username)
                               };
 
             var response = Client.Execute<User>(request);
+
+            CheckRepsonse(response);
 
             var user = response.Data;
             user.UserApi = this;
@@ -145,11 +146,11 @@ namespace csharp_github_api.Core
 
             var request = new RestRequest
             {
-                Resource = string.Format("/user/show/{0}/following", username),
-                RootElement = "users"
+                Resource = string.Format("/users/{0}/following", username)
             };
 
             var response = Client.Execute<List<string>>(request);
+            CheckRepsonse(response);
 
             return response.Data;
         }
@@ -180,7 +181,7 @@ namespace csharp_github_api.Core
                               };
 
             var response = Client.Execute<List<string>>(request);
-            ThrowExceptionForBadResponseIfNeccessary(response);
+            CheckRepsonse(response);
 
             return response.Data;
         }

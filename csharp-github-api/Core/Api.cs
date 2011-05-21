@@ -16,6 +16,12 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Collections.Generic;
+using csharp_github_api.Models;
+
 namespace csharp_github_api.Core
 {
     using System.Net;
@@ -29,6 +35,7 @@ namespace csharp_github_api.Core
         public string BaseUrl;
         protected RestClient Client;
         protected IAuthenticator Authenticator;
+        private int _rateLimitRemaining;
 
         /// <summary>
         /// Instantiattes a new instance of the <see cref="Api"/> class.
@@ -52,24 +59,63 @@ namespace csharp_github_api.Core
             Client = new RestClient(BaseUrl);
         }
 
-        public virtual void ThrowExceptionForBadResponseIfNeccessary(RestResponseBase response)
+        /// <summary>
+        /// Gets an integer which holds the API rate limit.
+        /// </summary>
+        public int RateLimit
         {
-            if (response.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                var message = response.Content;
+            get; private set;
+        }
 
-                var exception = new GitHubResponseException(message)
-                                    {
-                                        Response = response
-                                    };
+        /// <summary>
+        /// Gets an integer which holds the remaining count of API requests calls
+        /// </summary>
+        public int RateLimitRemaining
+        {
+            get { return _rateLimitRemaining; }
+            private set 
+            { 
+                _rateLimitRemaining = value; 
 
-                throw exception;
+                if (_rateLimitRemaining <= 0)
+                    throw new GitHubResponseException(string.Format("Github API rate limit ({0}) has been reached.", RateLimit));
             }
         }
 
         protected virtual RestClient GetRestClient()
         {
             return new RestClient(BaseUrl);
+        }
+
+        protected void CheckRepsonse(RestResponseBase response)
+        {
+            CheckResponseStatus(response);
+            CheckRateLimit(response.Headers);
+        }
+
+        private static void CheckResponseStatus(RestResponseBase response)
+        {
+            if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode != HttpStatusCode.OK)
+            {
+                var message = response.Content;
+
+                var exception = new GitHubResponseException(message)
+                {
+                    Response = response
+                };
+
+                throw exception;
+            }
+        }
+
+        private void CheckRateLimit(IEnumerable<Parameter> headers)
+        {
+            var rateLimits = headers.AsQueryable().Where(x => x.Name.StartsWith("X-RateLimit"));
+            var actualRateLimit = rateLimits.Single(x => x.Name.EndsWith("-Limit"));
+            var remainingRateLimit = rateLimits.Single(x => x.Name.EndsWith("-Remaining"));
+
+            RateLimit = Convert.ToInt32(actualRateLimit.Value);
+            RateLimitRemaining = Convert.ToInt32(remainingRateLimit.Value);
         }
     }
 }
