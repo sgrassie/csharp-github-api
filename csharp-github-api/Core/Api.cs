@@ -26,6 +26,7 @@ namespace csharp_github_api.Core
 {
     using System.Net;
     using RestSharp;
+    using System.Diagnostics;
 
     /// <summary>
     /// Base class for specific API classes.
@@ -76,6 +77,8 @@ namespace csharp_github_api.Core
             private set 
             { 
                 _rateLimitRemaining = value; 
+
+                Debug.WriteLine(string.Format("Current remaining rate limit: {0}", _rateLimitRemaining));
 
                 if (_rateLimitRemaining <= 0)
                     throw new GitHubResponseException(string.Format("Github API rate limit ({0}) has been reached.", RateLimit));
