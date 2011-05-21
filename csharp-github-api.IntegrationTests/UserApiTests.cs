@@ -10,7 +10,7 @@ namespace csharp_github_api.IntegrationTests
         [TestFixtureSetUp]
         public void Setup()
         {
-            _github = new Github("http://github.com/api/v2/json", @"C:\development\secretpasswordfile.xml");
+            _github = new Github("http://github.com/api/v3/json", @"C:\development\secretpasswordfile.xml");
         }
 
         [Test]

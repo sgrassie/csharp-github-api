@@ -3,7 +3,7 @@
   <metadata>
     <definitions>Mono 2.6</definitions>
     <momaversion>2.0.0.0</momaversion>
-    <date>2010-08-29 13:45:37Z</date>
+    <date>2011-05-21 08:33:47Z</date>
     <name />
     <email />
     <homepage />
@@ -12,9 +12,7 @@
     <apptype />
   </metadata>
   <assemblies>
-    <assembly name="csharp-github-api.dll" version="0.0.0.12" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Kayak.dll" version="1.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
-    <assembly name="Kayak.Framework.dll" version="1.0.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
+    <assembly name="csharp-github-api.dll" version="0.0.0.31" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
     <assembly name="Newtonsoft.Json.dll" version="3.5.0.0" runtime="2.0" todo="0" niex="0" miss="0" pinv="0" />
     <assembly name="RestSharp.dll" version="1.0.0.0" runtime="2.0" todo="1" niex="0" miss="0" pinv="0">
       <issue type="todo">

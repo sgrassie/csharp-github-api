@@ -27,6 +27,7 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
+*.*~
 
 #Ignore the nubular config store
 .nu
@@ -37,3 +38,6 @@ build_output/
 code_drop/
 gems/
 SolutionVersion.cs
+
+#ignore password stuff
+secrets.json
