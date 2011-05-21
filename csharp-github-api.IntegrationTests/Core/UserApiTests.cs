@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace csharp_github_api.IntegrationTests
+namespace csharp_github_api.IntegrationTests.Core
 {
     [TestFixture]
     public class UserApiTests

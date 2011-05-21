@@ -57,11 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiTests.cs" />
-    <Compile Include="BasicAuthenticationTest.cs" />
+    <Compile Include="Authentication\BasicAuthenticationTest.cs" />
+    <Compile Include="Core\ApiTests.cs" />
+    <Compile Include="Core\UserApiTests.cs" />
     <Compile Include="Models\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserApiTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-github-api\csharp-github-api.csproj">

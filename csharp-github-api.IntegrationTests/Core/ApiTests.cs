@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using csharp_github_api.Core;
+﻿using csharp_github_api.Core;
 using NUnit.Framework;
 
-namespace csharp_github_api.IntegrationTests
+namespace csharp_github_api.IntegrationTests.Core
 {
     [TestFixture]
     public class ApiTests

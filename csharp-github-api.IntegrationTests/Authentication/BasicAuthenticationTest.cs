@@ -1,10 +1,7 @@
-﻿using csharp_github_api.Authentication;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using RestSharp;
-using System;
-using System.Linq;
 
-namespace csharp_github_api.IntegrationTests
+namespace csharp_github_api.IntegrationTests.Authentication
 {
     [TestFixture]
     public class BasicAuthenticationTest
