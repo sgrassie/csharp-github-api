@@ -73,5 +73,14 @@ namespace csharp_github_api.Authentication
                 request.AddParameter("Authorization", authHeader, ParameterType.HttpHeader);
             }
         }
+
+        #region IAuthenticator Members
+
+        public void Authenticate(RestClient client, RestRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

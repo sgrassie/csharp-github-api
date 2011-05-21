@@ -37,6 +37,13 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json.Net35">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.2\lib\net35\Newtonsoft.Json.Net35.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=101.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.101.3\lib\net35\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -66,10 +73,7 @@
     <Compile Include="Secrets.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestSharp\RestSharp\RestSharp.csproj">
-      <Project>{2ECECFBF-5F3E-40EE-A963-72336DC7ABE2}</Project>
-      <Name>RestSharp</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

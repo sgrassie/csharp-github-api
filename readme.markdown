@@ -20,8 +20,6 @@ Licensed under the Apache License, Version 2.0, details included in the source.
 Is currently in a state of flux (i.e. I need to workout how to get UppercuT to do my bidding properly, but, it should be fairly straightforward, like so:
 	git clone git://github.com/sgrassie/csharp-github-api.git
 	cd csharp-github-api
-	git submodule init
-	git submodule update
 	build
 Then wait for BUILD SUCCEEDED, then grab the assembly from the code_drop folder.
 
