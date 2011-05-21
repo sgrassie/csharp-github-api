@@ -54,11 +54,11 @@
     <Compile Include="..\SolutionVersion.cs">
       <Link>Properties\SolutionVersion.cs</Link>
     </Compile>
+    <Compile Include="Authentication\GitHubAuthenticator.cs" />
     <Compile Include="Core\Api.cs" />
     <Compile Include="Core\GitHubResponseException.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Github.cs" />
-    <Compile Include="GitHubAuthenticator.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\User.cs" />

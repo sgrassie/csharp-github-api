@@ -16,6 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using csharp_github_api.Authentication;
 using csharp_github_api.Core;
 
 namespace csharp_github_api
@@ -53,11 +54,11 @@ namespace csharp_github_api
 
             if(string.IsNullOrEmpty(secrets.Token))
             {
-                _gitHubAuthenticator = new GitHubAuthenticator(secrets.Username, secrets.Password, false);
+                _gitHubAuthenticator = new GitHubOAuthAuthenticator(secrets.Username, secrets.Password, false);
             }
             else
             {
-                _gitHubAuthenticator = new GitHubAuthenticator(secrets.Username, secrets.Token, true);
+                _gitHubAuthenticator = new GitHubOAuthAuthenticator(secrets.Username, secrets.Token, true);
             }
         }
 
@@ -80,7 +81,7 @@ namespace csharp_github_api
         /// <param name="useApiKey">Indicates whether or not to use a Github.com API token. If <c>true</c>, then pass the token instead of the password.</param>
         public Github(string baseUrl, string username, string password, bool useApiKey) : this(baseUrl)
         {
-            _gitHubAuthenticator = new GitHubAuthenticator(username, password, useApiKey);
+            _gitHubAuthenticator = new GitHubOAuthAuthenticator(username, password, useApiKey);
         }
 
         /// <summary>
