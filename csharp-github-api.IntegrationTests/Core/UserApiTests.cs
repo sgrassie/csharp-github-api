@@ -1,9 +1,7 @@
 ﻿using NUnit.Framework;
 using csharp_github_api.IntegrationTests.Bootstrap;
-using NUnit.Framework;
 using StructureMap;
 
-namespace csharp_github_api.IntegrationTests
 namespace csharp_github_api.IntegrationTests.Core
 {
     [TestFixture]
@@ -14,7 +12,6 @@ namespace csharp_github_api.IntegrationTests.Core
         [TestFixtureSetUp]
         public void Setup()
         {
-            _
             Bootstrapper.Bootstrap();
             _github = ObjectFactory.GetInstance<Github>();
         }

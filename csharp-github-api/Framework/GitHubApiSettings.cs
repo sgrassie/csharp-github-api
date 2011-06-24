@@ -32,7 +32,7 @@ namespace csharp_github_api.Framework
         /// </remarks>
         public GitHubApiSettings()
         {
-            BaseUrl = "http://github.com/api/v2/json";    
+            BaseUrl = "https://api.github.com";    
         }
 
         /// <summary>

@@ -146,7 +146,6 @@ namespace csharp_github_api.Core
 
             var request = new RestRequest(Method.GET)
             {
-                //Resource = string.Format("/users/{0}/following", username)
                 Resource = "/users/{user}/following"
             };
             request.AddParameter("user", username, ParameterType.UrlSegment);

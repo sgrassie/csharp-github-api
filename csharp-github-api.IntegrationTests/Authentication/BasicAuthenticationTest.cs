@@ -1,19 +1,22 @@
 ﻿using NUnit.Framework;
 using RestSharp;
+using csharp_github_api.Framework;
+using StructureMap;
+using csharp_github_api.IntegrationTests.Bootstrap;
 
 namespace csharp_github_api.IntegrationTests.Authentication
 {
     [TestFixture]
     public class BasicAuthenticationTest
     {
-        private SecretsHandler _secretsHandler;
         private RestRequest _restRequest;
+        private IGitHubApiSettings _settings;
 
         [SetUp]
         public void Setup()
         {
-            _secretsHandler = new SecretsHandler(@"C:\development\secretpasswordfile.xml");
-
+            Bootstrapper.Bootstrap();
+            _settings = ObjectFactory.GetInstance<GitHubApiSettings>();
             _restRequest = new RestRequest
             {
                 Resource = "/users/sgrassie"
@@ -26,7 +29,7 @@ namespace csharp_github_api.IntegrationTests.Authentication
             var client = new RestClient
                              {
                                  BaseUrl ="https://api.github.com",
-                                 Authenticator = new HttpBasicAuthenticator(_secretsHandler.Username, _secretsHandler.Password)
+                                 Authenticator = new HttpBasicAuthenticator(_settings.Username, _settings.Password)
                              };
 
             var response = client.Execute(_restRequest);

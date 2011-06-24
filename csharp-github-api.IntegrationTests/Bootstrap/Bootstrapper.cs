@@ -23,11 +23,7 @@ namespace csharp_github_api.IntegrationTests.Bootstrap
     {
         public TestsRegistry()
         {
-            SelectConstructor(() => new Github(null));
             For<Github>().Use<Github>().Ctor<IGitHubApiSettings>().Is(x => x.GetInstance<GitHubApiSettings>());
-            SelectConstructor(() => new GitHubAuthenticator(null));
-            For<GitHubAuthenticator>().Use<GitHubAuthenticator>().Ctor<IGitHubApiSettings>().Is(
-                x => x.GetInstance<GitHubApiSettings>());
         }
     }
 }

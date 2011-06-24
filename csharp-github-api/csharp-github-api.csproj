@@ -68,6 +68,7 @@
     <Compile Include="Framework\GitHubApiSettings.cs" />
     <Compile Include="Framework\IGitHubApiSettings.cs" />
     <Compile Include="Github.cs" />
+    <Compile Include="GitHubAuthenticator.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\Following.cs" />
     <Compile Include="Models\Plan.cs" />
