@@ -27,6 +27,7 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
+*.*~
 
 #Ignore Secrets.json
 [Ss]ecrets.json
@@ -40,3 +41,6 @@ build_output/
 code_drop/
 gems/
 SolutionVersion.cs
+
+#ignore password stuff
+secrets.json

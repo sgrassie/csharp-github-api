@@ -1,8 +1,10 @@
-﻿using csharp_github_api.IntegrationTests.Bootstrap;
+﻿using NUnit.Framework;
+using csharp_github_api.IntegrationTests.Bootstrap;
 using NUnit.Framework;
 using StructureMap;
 
 namespace csharp_github_api.IntegrationTests
+namespace csharp_github_api.IntegrationTests.Core
 {
     [TestFixture]
     public class UserApiTests
@@ -12,6 +14,7 @@ namespace csharp_github_api.IntegrationTests
         [TestFixtureSetUp]
         public void Setup()
         {
+            _
             Bootstrapper.Bootstrap();
             _github = ObjectFactory.GetInstance<Github>();
         }
@@ -32,6 +35,7 @@ namespace csharp_github_api.IntegrationTests
             var following = user.Following;
 
             Assert.That(following, Is.Not.Empty);
+            Assert.That(following, Is.Not.Null.And.Not.Empty);
         }
 
         [Test]
