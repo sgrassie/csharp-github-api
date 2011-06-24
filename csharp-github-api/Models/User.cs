@@ -52,7 +52,7 @@ namespace csharp_github_api.Models
         /// <summary>
         /// Gets an <see cref="IEnumerable{T}"/> of the usernames of the followers of this user.
         /// </summary>
-        public IEnumerable<string> Following
+        public IEnumerable<Following> Following
         {
             get
             {
@@ -63,7 +63,7 @@ namespace csharp_github_api.Models
         /// <summary>
         /// Gets an <see cref="IEnumerable{T}"/> of the usernames of the followers of this user.
         /// </summary>
-        public IEnumerable<string> Followers
+        public IEnumerable<Following> Followers
         {
             get
             {

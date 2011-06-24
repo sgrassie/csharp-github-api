@@ -67,6 +67,7 @@
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
+    <Compile Include="Models\Following.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

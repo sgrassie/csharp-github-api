@@ -130,7 +130,7 @@ namespace csharp_github_api.Core
         /// </summary>
         /// <param name="user">The <see cref="User"/> to get the following list for.</param>
         /// <returns>A list of the users (username only) that the specified user is following.</returns>
-        internal IList<string> GetFollowing(User user)
+        internal IList<Following> GetFollowing(User user)
         {
             return GetFollowing(user.Login);
         }
@@ -140,16 +140,18 @@ namespace csharp_github_api.Core
         /// </summary>
         /// <param name="username">The username to get the following list for.</param>
         /// <returns>A list of the users (username only) that the specified user is following.</returns>
-        internal IList<string> GetFollowing(string username)
+        internal IList<Following> GetFollowing(string username)
         {
             if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest
+            var request = new RestRequest(Method.GET)
             {
-                Resource = string.Format("/users/{0}/following", username)
+                //Resource = string.Format("/users/{0}/following", username)
+                Resource = "/users/{user}/following"
             };
+            request.AddParameter("user", username, ParameterType.UrlSegment);
 
-            var response = Client.Execute<List<string>>(request);
+            var response = Client.Execute<List<Following>>(request);
             CheckRepsonse(response);
 
             return response.Data;
@@ -160,7 +162,7 @@ namespace csharp_github_api.Core
         /// </summary>
         /// <param name="user">The <see cref="User"/> to get the list of followers for.</param>
         /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
-        internal IList<string> GetFollowers(User user)
+        internal IList<Following> GetFollowers(User user)
         {
             return GetFollowers(user.Login);
         }
@@ -170,17 +172,17 @@ namespace csharp_github_api.Core
         /// </summary>
         /// <param name="username">The user to get the list of followers for.</param>
         /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
-        internal IList<string> GetFollowers(string username)
+        internal IList<Following> GetFollowers(string username)
         {
             if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest
+            var request = new RestRequest(Method.GET)
                               {
-                                  Resource = string.Format("/user/show/{0}/followers", username),
-                                  RootElement = "users"
+                                  Resource = "/users/{user}/followers"
                               };
+            request.AddParameter("user", username, ParameterType.UrlSegment);
 
-            var response = Client.Execute<List<string>>(request);
+            var response = Client.Execute<List<Following>>(request);
             CheckRepsonse(response);
 
             return response.Data;
@@ -190,25 +192,33 @@ namespace csharp_github_api.Core
         {
             if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest(Method.POST)
+            var request = new RestRequest(Method.PUT)
                               {
-                                  Resource = string.Format("/user/follow/{0}", username)
+                                  Resource = "/user/following/{user}"
                               };
+            request.AddParameter("user", username, ParameterType.UrlSegment);
             var response = Client.Execute(request);
-            return response.StatusCode == HttpStatusCode.OK;
+
+            CheckRepsonse(response);
+
+            return response.StatusCode == HttpStatusCode.NoContent;
         }
 
         public bool UnFollow(string username)
         {
             if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest(Method.POST)
+            var request = new RestRequest(Method.DELETE)
                               {
-                                  Resource = String.Format("/user/unfollow/{0}", username)
+                                  Resource = "/user/following/{user}"
                               };
+            request.AddParameter("user", username, ParameterType.UrlSegment);
 
             var response = Client.Execute(request);
-            return response.StatusCode == HttpStatusCode.OK;
+
+            CheckRepsonse(response);
+
+            return response.StatusCode == HttpStatusCode.NoContent;
         }
     }
 }

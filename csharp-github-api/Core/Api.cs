@@ -98,17 +98,17 @@ namespace csharp_github_api.Core
 
         private static void CheckResponseStatus(RestResponseBase response)
         {
-            if (response.StatusCode == HttpStatusCode.Unauthorized || response.StatusCode != HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.OK) return;
+            if (response.StatusCode == HttpStatusCode.NoContent) return;
+
+            var message = response.Content;
+
+            var exception = new GitHubResponseException(message)
             {
-                var message = response.Content;
+                Response = response
+            };
 
-                var exception = new GitHubResponseException(message)
-                {
-                    Response = response
-                };
-
-                throw exception;
-            }
+            throw exception;
         }
 
         private void CheckRateLimit(IEnumerable<Parameter> headers)

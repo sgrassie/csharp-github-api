@@ -27,6 +27,7 @@ namespace csharp_github_api.Authentication
     /// A custom implementation of a RestSharp <see cref="IAuthenticator"/>. It is basically the same as RestSharp's
     /// <see cref="HttpBasicAuthenticator" />, but it add's the facility to authenticate with a GitHub api token.
     /// </summary>
+    [Obsolete]
     public class GitHubOAuthAuthenticator : IAuthenticator
     {
         private readonly string _username;
@@ -74,13 +75,9 @@ namespace csharp_github_api.Authentication
             }
         }
 
-        #region IAuthenticator Members
-
         public void Authenticate(RestClient client, RestRequest request)
         {
-            throw new NotImplementedException();
+            Authenticate(request);
         }
-
-        #endregion
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using FluentAssertions;
+using RestSharp;
 
 namespace csharp_github_api.IntegrationTests.Models
 {
@@ -14,7 +16,9 @@ namespace csharp_github_api.IntegrationTests.Models
         [TestFixtureSetUp]
         public void Setup()
         {
-            _github = new Github("http://github.com/api/v2/json", @"C:\development\secretpasswordfile.xml");    
+            var secrets = new SecretsHandler(@"C:\development\secretpasswordfile.xml");
+            var authenticator = new HttpBasicAuthenticator(secrets.Username, secrets.Password);
+            _github = new Github("https://api.github.com", authenticator);    
         }
 
         [Test]
@@ -37,18 +41,14 @@ namespace csharp_github_api.IntegrationTests.Models
         public void Should_Follow_And_Unfollow_User()
         {
             var user =  _github.User.GetUser("sgrassie");
-            
-            user.Authenticated.Follow("mono");
 
-            var following = user.Following;
+            user.Authenticated.Follow("mono").Should().BeTrue("should follow the user mono");
 
-            Assert.That(following, Contains.Item("mono"));
+            user.Following.Should().Contain(x => x.Login == "mono");
 
-            user.Authenticated.UnFollow("mono");
+            user.Authenticated.UnFollow("mono").Should().BeTrue("Should unfollow the user mono");
 
-            following = user.Following;
-
-            Assert.That(following, !Contains.Item("mono"));
+            user.Following.Should().NotContain(x => x.Login == "mono");
         }
     }
 }
