@@ -16,6 +16,8 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using csharp_github_api.Extensions;
+
 namespace csharp_github_api.Core
 {
     using System;
@@ -65,7 +67,7 @@ namespace csharp_github_api.Core
 
             var response = Client.Execute<User>(request);
 
-            CheckRepsonse(response);
+            CheckRateLimit(response.Headers);
 
             var user = response.Data;
             user.UserApi = this;
@@ -151,7 +153,9 @@ namespace csharp_github_api.Core
             request.AddParameter("user", username, ParameterType.UrlSegment);
 
             var response = Client.Execute<List<Following>>(request);
-            CheckRepsonse(response);
+            CheckRateLimit(response.Headers);
+
+            response.StatusCode.ShouldBe(HttpStatusCode.OK).IfNotRaiseAnError(response);
 
             return response.Data;
         }
@@ -182,7 +186,9 @@ namespace csharp_github_api.Core
             request.AddParameter("user", username, ParameterType.UrlSegment);
 
             var response = Client.Execute<List<Following>>(request);
-            CheckRepsonse(response);
+            CheckRateLimit(response.Headers);
+
+            response.StatusCode.ShouldBe(HttpStatusCode.OK).IfNotRaiseAnError(response);
 
             return response.Data;
         }
@@ -198,9 +204,9 @@ namespace csharp_github_api.Core
             request.AddParameter("user", username, ParameterType.UrlSegment);
             var response = Client.Execute(request);
 
-            CheckRepsonse(response);
+            CheckRateLimit(response.Headers);
 
-            return response.StatusCode == HttpStatusCode.NoContent;
+            return response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
         public bool UnFollow(string username)
@@ -215,9 +221,9 @@ namespace csharp_github_api.Core
 
             var response = Client.Execute(request);
 
-            CheckRepsonse(response);
+            CheckRateLimit(response.Headers);
 
-            return response.StatusCode == HttpStatusCode.NoContent;
+            return response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
     }
 }

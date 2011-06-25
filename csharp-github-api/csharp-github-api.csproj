@@ -65,6 +65,7 @@
     <Compile Include="Core\Api.cs" />
     <Compile Include="Core\GitHubResponseException.cs" />
     <Compile Include="Core\UserApi.cs" />
+    <Compile Include="Extensions\MiscExtensions.cs" />
     <Compile Include="Framework\GitHubApiSettings.cs" />
     <Compile Include="Framework\IGitHubApiSettings.cs" />
     <Compile Include="Github.cs" />

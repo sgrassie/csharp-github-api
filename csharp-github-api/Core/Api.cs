@@ -20,6 +20,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
+using csharp_github_api.Extensions;
 using csharp_github_api.Models;
 
 namespace csharp_github_api.Core
@@ -90,28 +91,7 @@ namespace csharp_github_api.Core
             return new RestClient(BaseUrl);
         }
 
-        protected void CheckRepsonse(RestResponseBase response)
-        {
-            CheckResponseStatus(response);
-            CheckRateLimit(response.Headers);
-        }
-
-        private static void CheckResponseStatus(RestResponseBase response)
-        {
-            if (response.StatusCode == HttpStatusCode.OK) return;
-            if (response.StatusCode == HttpStatusCode.NoContent) return;
-
-            var message = response.Content;
-
-            var exception = new GitHubResponseException(message)
-            {
-                Response = response
-            };
-
-            throw exception;
-        }
-
-        private void CheckRateLimit(IEnumerable<Parameter> headers)
+        protected virtual void CheckRateLimit(IEnumerable<Parameter> headers)
         {
             var rateLimits = headers.AsQueryable().Where(x => x.Name.StartsWith("X-RateLimit"));
             var actualRateLimit = rateLimits.Single(x => x.Name.EndsWith("-Limit"));
