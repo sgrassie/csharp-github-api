@@ -16,10 +16,9 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using System;
-
 namespace csharp_github_api
 {
+    using System;
     using Core;
     using Framework;
     using RestSharp;
@@ -32,8 +31,6 @@ namespace csharp_github_api
         private readonly IAuthenticator _gitHubAuthenticator;
         private readonly IGitHubApiSettings _gitHubApiSettings;
         private string _baseUrl;
-
-        private UserApi _userApi;
 
         /// <summary>
         /// Instantiates a new instance of the <see cref="Github"/> class.

@@ -16,6 +16,8 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using System;
+
 namespace csharp_github_api.Models
 {
     using System.Collections.Generic;
@@ -26,7 +28,9 @@ namespace csharp_github_api.Models
     /// </summary>
     public class User
     {
-        internal UserApi UserApi;
+        private UserApi _userApi;
+
+        public User(){}
 
         /* public, authentication not required */
         public virtual int Id { get; set; }
@@ -56,7 +60,7 @@ namespace csharp_github_api.Models
         {
             get
             {
-                return UserApi.GetFollowing(this);
+                return _userApi.GetFollowing(this);
             }
         }
 
@@ -67,7 +71,7 @@ namespace csharp_github_api.Models
         {
             get
             {
-                return UserApi.GetFollowers(this);
+                return _userApi.GetFollowers(this);
             }
         }
 
@@ -79,8 +83,14 @@ namespace csharp_github_api.Models
         {
             get
             {
-                return new AuthenticatedUser(UserApi);
+                return new AuthenticatedUser(_userApi);
             }
+        }
+
+        public UserApi UserApi
+        {
+            get { return _userApi; }
+            set { _userApi = value; }
         }
 
         /// <summary>
