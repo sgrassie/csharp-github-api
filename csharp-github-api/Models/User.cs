@@ -16,8 +16,6 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using System;
-
 namespace csharp_github_api.Models
 {
     using System.Collections.Generic;
@@ -29,8 +27,6 @@ namespace csharp_github_api.Models
     public class User
     {
         private UserApi _userApi;
-
-        public User(){}
 
         /* public, authentication not required */
         public virtual int Id { get; set; }
