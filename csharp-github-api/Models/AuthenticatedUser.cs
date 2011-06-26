@@ -28,9 +28,12 @@ namespace csharp_github_api.Models
     /// </remarks>
     public class AuthenticatedUser
     {
-        internal UserApi _userApi;
+        private readonly UserApi _userApi;
 
-        internal AuthenticatedUser(){ }
+        public AuthenticatedUser(UserApi userApi )
+        {
+            _userApi = userApi;
+        }
 
         /// <summary>
         /// Follow the specified user. Must be authenticated.

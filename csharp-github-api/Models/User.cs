@@ -79,7 +79,7 @@ namespace csharp_github_api.Models
         {
             get
             {
-                return new AuthenticatedUser {_userApi = UserApi};
+                return new AuthenticatedUser(UserApi);
             }
         }
 
