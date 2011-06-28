@@ -16,13 +16,11 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using csharp_github_api.Extensions;
-
 namespace csharp_github_api.Core
 {
-    using System;
     using System.Collections.Generic;
     using System.Net;
+    using Extensions;
     using Models;
     using RestSharp;
 
