@@ -16,6 +16,8 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace csharp_github_api.Models
 {
     using Core;
@@ -55,6 +57,11 @@ namespace csharp_github_api.Models
         public bool UnFollow(string username)
         {
             return _userApi.Authenticated().UnFollow(username);
+        }
+
+        public bool Update(UpdateableUser user)
+        {
+            return true;
         }
     }
 }

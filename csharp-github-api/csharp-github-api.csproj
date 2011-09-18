@@ -73,6 +73,7 @@
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\Following.cs" />
     <Compile Include="Models\Plan.cs" />
+    <Compile Include="Models\UpdateableUser.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

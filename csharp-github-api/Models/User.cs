@@ -24,18 +24,13 @@ namespace csharp_github_api.Models
     /// <summary>
     /// Represents a GitHub.com user account.
     /// </summary>
-    public class User
+    public class User : UpdateableUser
     {
         private UserApi _userApi;
 
         /* public, authentication not required */
         public virtual int Id { get; set; }
         public virtual string Login { get; set; }
-        public virtual string Name { get; set;}
-        public virtual string Company { get; set;}
-        public virtual string Location { get; set;}
-        public virtual string Email { get; set;}
-        public virtual string Blog { get; set;}
         public virtual int FollowingCount { get; set;}
         public virtual int FollowersCount { get; set;}
         public virtual int PublicGistCount { get; set;}
