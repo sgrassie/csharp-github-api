@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using csharp_github_api.IntegrationTests.Bootstrap;
 using StructureMap;
+using csharp_github_api.Core;
 
 namespace csharp_github_api.IntegrationTests.Core
 {
@@ -41,6 +42,15 @@ namespace csharp_github_api.IntegrationTests.Core
             var user = _github.User.GetUser("defunkt");
 
             Assert.That(user.Name, Is.StringMatching("Chris Wanstrath"));
+        }
+
+        [Test]
+        public void UnAuthenticatedCallShouldFail()
+        {
+            var api = new UserApi("https://api.github.com");
+            var user = api.GetUser("sgrassie");
+            
+            Assert.That(user.DiskUsage, Is.EqualTo(0));
         }
     }
 }
