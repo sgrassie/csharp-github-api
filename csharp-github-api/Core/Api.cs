@@ -39,6 +39,8 @@ namespace csharp_github_api.Core
         protected IAuthenticator Authenticator;
         private int _rateLimitRemaining;
 
+        protected Api(){}
+
         /// <summary>
         /// Instantiattes a new instance of the <see cref="Api"/> class.
         /// </summary>

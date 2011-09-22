@@ -32,6 +32,8 @@ namespace csharp_github_api.Core
     /// </remarks>
     public class UserApi : Api
     {
+        public UserApi(){}
+
         /// <summary>
         /// Instantiattes a new instance of the <see cref="UserApi"/> class.
         /// </summary>
