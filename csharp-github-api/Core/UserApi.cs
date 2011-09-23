@@ -43,15 +43,6 @@ namespace csharp_github_api.Core
         }
 
         /// <summary>
-        /// Instantiattes a new instance of the <see cref="UserApi"/> class.
-        /// </summary>
-        /// <param name="baseUrl">The base url for GitHub's API.</param>
-        /// <param name="authenticator">The <see cref="IAuthenticator"/> class to use to authenticate requests to the user api.</param>
-        public UserApi(string baseUrl, IAuthenticator authenticator) : base(baseUrl, authenticator)
-        {
-        }
-
-        /// <summary>
         /// Gets the specified user from GitHub.
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
@@ -70,7 +61,6 @@ namespace csharp_github_api.Core
             CheckRateLimit(response.Headers);
 
             var user = response.Data;
-            user.UserApi = this;
 
             return user;
         }
@@ -132,7 +122,7 @@ namespace csharp_github_api.Core
         /// </summary>
         /// <param name="user">The <see cref="User"/> to get the following list for.</param>
         /// <returns>A list of the users (username only) that the specified user is following.</returns>
-        internal IList<Following> GetFollowing(User user)
+        public IList<Following> GetFollowing(User user)
         {
             return GetFollowing(user.Login);
         }
@@ -142,7 +132,7 @@ namespace csharp_github_api.Core
         /// </summary>
         /// <param name="username">The username to get the following list for.</param>
         /// <returns>A list of the users (username only) that the specified user is following.</returns>
-        internal IList<Following> GetFollowing(string username)
+        public IList<Following> GetFollowing(string username)
         {
             if (Client == null) Client = GetRestClient();
 
@@ -165,7 +155,7 @@ namespace csharp_github_api.Core
         /// </summary>
         /// <param name="user">The <see cref="User"/> to get the list of followers for.</param>
         /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
-        internal IList<Following> GetFollowers(User user)
+        public IList<Following> GetFollowers(User user)
         {
             return GetFollowers(user.Login);
         }
@@ -175,7 +165,7 @@ namespace csharp_github_api.Core
         /// </summary>
         /// <param name="username">The user to get the list of followers for.</param>
         /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
-        internal IList<Following> GetFollowers(string username)
+        public IList<Following> GetFollowers(string username)
         {
             if (Client == null) Client = GetRestClient();
 
@@ -193,9 +183,10 @@ namespace csharp_github_api.Core
             return response.Data;
         }
 
-        internal bool Follow(string username)
+        public bool Follow(string username)
         {
             if (Client == null) Client = GetRestClient();
+            RequiresAuthentication();
 
             var request = new RestRequest(Method.PUT)
                               {

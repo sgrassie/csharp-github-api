@@ -17,17 +17,13 @@
 //----------------------------------------------------------------------
 
 using System;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Collections.Generic;
-using csharp_github_api.Extensions;
-using csharp_github_api.Models;
+using System.Linq;
 
 namespace csharp_github_api.Core
 {
-    using System.Net;
-    using RestSharp;
     using System.Diagnostics;
+    using RestSharp;
 
     /// <summary>
     /// Base class for specific API classes.
@@ -48,19 +44,6 @@ namespace csharp_github_api.Core
         protected Api(string baseUrl)
         {
             BaseUrl = baseUrl;
-            Client = new RestClient(BaseUrl);
-        }
-
-        /// <summary>
-        /// Instantiattes a new instance of the <see cref="Api"/> class.
-        /// </summary>
-        /// <param name="baseUrl">The base url for GitHub's API.</param>
-        /// <param name="authenticator">The <see cref="IAuthenticator"/> class to use to authenticate requests to the user api.</param>
-        protected Api(string baseUrl, IAuthenticator authenticator)
-        {
-            BaseUrl = baseUrl;
-            Authenticator = authenticator;
-            Client = new RestClient(BaseUrl);
         }
 
         /// <summary>
@@ -91,6 +74,14 @@ namespace csharp_github_api.Core
         protected virtual RestClient GetRestClient()
         {
             return new RestClient(BaseUrl);
+        }
+
+        protected virtual void RequiresAuthentication()
+        {
+            if(Client.Authenticator == null)
+            {
+                throw new GitHubAuthorizationException("Access to this method requires an authenticated user");
+            }
         }
 
         protected virtual void CheckRateLimit(IEnumerable<Parameter> headers)

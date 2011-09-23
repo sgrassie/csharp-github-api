@@ -63,7 +63,7 @@ namespace csharp_github_api
         {
             get
             {
-                return new UserApi(_baseUrl, _gitHubAuthenticator);
+                return new UserApi(_baseUrl);
             }
         }
     }

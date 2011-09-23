@@ -18,16 +18,11 @@
 
 namespace csharp_github_api.Models
 {
-    using System.Collections.Generic;
-    using Core;
-
     /// <summary>
     /// Represents a GitHub.com user account.
     /// </summary>
     public class User : UpdateableUser
     {
-        private UserApi _userApi;
-
         /* public, authentication not required */
         public virtual int Id { get; set; }
         public virtual string Login { get; set; }
@@ -43,46 +38,6 @@ namespace csharp_github_api.Models
         public virtual int OwnedPrivateRepoCount { get; set;}
         public virtual int PrivateGistCount { get; set;}
         public virtual Plan Plan { get; set;}
-
-        /// <summary>
-        /// Gets an <see cref="IEnumerable{T}"/> of the usernames of the followers of this user.
-        /// </summary>
-        public IEnumerable<Following> Following
-        {
-            get
-            {
-                return _userApi.GetFollowing(this);
-            }
-        }
-
-        /// <summary>
-        /// Gets an <see cref="IEnumerable{T}"/> of the usernames of the followers of this user.
-        /// </summary>
-        public IEnumerable<Following> Followers
-        {
-            get
-            {
-                return _userApi.GetFollowers(this);
-            }
-        }
-
-        /// <summary>
-        /// Gets the <see cref="AuthenticatedUser"/> object with which actions may be performed which required
-        /// the user to be authenticated.
-        /// </summary>
-        public AuthenticatedUser Authenticated
-        {
-            get
-            {
-                return new AuthenticatedUser(_userApi);
-            }
-        }
-
-        public UserApi UserApi
-        {
-            get { return _userApi; }
-            set { _userApi = value; }
-        }
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
