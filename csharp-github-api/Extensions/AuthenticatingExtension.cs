@@ -40,5 +40,20 @@ namespace csharp_github_api.Extensions
         {
             return AuthenticatingInterceptor<TTarget>.Create(target, authenticator);
         }
+
+        /// <summary>
+        /// Intercept the TTarget and add a <see cref="HttpBasicAuthenticator"/> to it so that calls to Github are authenticated on the fly.
+        /// </summary>
+        /// <typeparam name="TTarget">The type of <see cref="Api"/> object intercept.</typeparam>
+        /// <param name="target">The <see cref="TTarget"/> instance to intercept.</param>
+        /// <param name="username">The username to authenticate as.</param>
+        /// <param name="password">The password to authenticate with.</param>
+        /// <returns>A Dynamic Proxy for the <see cref="TTarget"/> which now has authentication enabled.</returns>
+        public static TTarget WithAuthentication<TTarget>(this TTarget target, string username, string password)
+            where TTarget : Api
+        {
+            IAuthenticator authenticator = new HttpBasicAuthenticator(username, password);
+            return AuthenticatingInterceptor<TTarget>.Create(target, authenticator);
+        }
     }
 }
