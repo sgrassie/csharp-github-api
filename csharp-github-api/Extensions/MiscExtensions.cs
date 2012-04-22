@@ -16,8 +16,10 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using System.Collections.Generic;
 using csharp_github_api.Core;
 using RestSharp;
+using csharp_github_api.Models;
 
 namespace csharp_github_api.Extensions
 {
@@ -39,7 +41,7 @@ namespace csharp_github_api.Extensions
             return response.Equals(expected);
         }
 
-        public static void IfNotRaiseAnError(this bool ok, RestResponseBase response)
+        public static void IfNotRaiseAnError<TModel>(this bool ok, IRestResponse<List<TModel>> response)
         {
             if (ok) return;
 

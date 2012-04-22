@@ -28,12 +28,10 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 *.*~
+[Pp]ackages/
 
 #Ignore Secrets.json
 [Ss]ecrets.json
-
-#Ignore the nubular config store
-.nu
 
 #Ignore UppercuT output
 deployment/
@@ -41,6 +39,3 @@ build_output/
 code_drop/
 gems/
 SolutionVersion.cs
-
-#ignore password stuff
-secrets.json

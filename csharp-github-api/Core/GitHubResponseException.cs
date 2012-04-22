@@ -35,7 +35,7 @@ namespace csharp_github_api.Core
         /// <summary>
         /// Gets or sets the raw error response from GitHub.
         /// </summary>
-        public RestResponseBase Response
+        public object Response
         {
             get; set;
         }
