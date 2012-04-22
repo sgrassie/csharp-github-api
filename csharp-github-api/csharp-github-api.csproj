@@ -59,6 +59,7 @@
     <Compile Include="Authentication\AuthenticatingInterceptor.cs" />
     <Compile Include="Core\Api.cs" />
     <Compile Include="Core\GitHubResponseException.cs" />
+    <Compile Include="Core\IApi.cs" />
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Extensions\AuthenticatingExtension.cs" />
     <Compile Include="Extensions\MiscExtensions.cs" />

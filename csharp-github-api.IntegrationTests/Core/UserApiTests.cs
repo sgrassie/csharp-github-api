@@ -88,10 +88,10 @@ namespace csharp_github_api.IntegrationTests.Core
             var user = api.GetUser("sgrassie");
 
             api.Follow("mono").Should().BeTrue("should follow the user mono");
-            api.GetFollowers(user).Should().Contain(x => x.Login == "mono");
+            api.GetFollowing(user).Should().Contain(x => x.Login == "mono");
 
             api.UnFollow("mono").Should().BeTrue("Should unfollow the user mono");
-            api.GetFollowers(user).Should().NotContain(x => x.Login == "mono");
+            api.GetFollowing(user).Should().NotContain(x => x.Login == "mono");
         }
     }
 }
