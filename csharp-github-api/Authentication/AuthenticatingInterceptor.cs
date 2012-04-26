@@ -80,6 +80,10 @@ namespace csharp_github_api.Authentication
         /// </remarks>
         public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
         {
+            if(memberInfo.Name == "GetRestClient")
+            {
+                throw new ProxyGenerationException("Can't proxy it man.");
+            }
         }
 
         /// <summary>

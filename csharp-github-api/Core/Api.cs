@@ -49,7 +49,7 @@ namespace csharp_github_api.Core
         /// <summary>
         /// Gets an integer which holds the API rate limit.
         /// </summary>
-        public int RateLimit
+        public virtual int RateLimit
         {
             get; private set;
         }
@@ -57,7 +57,7 @@ namespace csharp_github_api.Core
         /// <summary>
         /// Gets an integer which holds the remaining count of API requests calls
         /// </summary>
-        public int RateLimitRemaining
+        public virtual int RateLimitRemaining
         {
             get { return _rateLimitRemaining; }
             private set 
@@ -71,7 +71,7 @@ namespace csharp_github_api.Core
             }
         }
 
-        protected virtual RestClient GetRestClient()
+        public virtual RestClient GetRestClient()
         {
             return new RestClient(BaseUrl);
         }
