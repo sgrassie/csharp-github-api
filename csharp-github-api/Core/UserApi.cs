@@ -28,7 +28,7 @@ namespace csharp_github_api.Core
     /// Encapsulates access to the Github.com User API.
     /// </summary>
     /// <remarks>
-    /// See http://developer.github.com/v3/ for more details.
+    /// See http://developer.github.com/v3/users/ for more details.
     /// </remarks>
     public class UserApi : Api
     {
