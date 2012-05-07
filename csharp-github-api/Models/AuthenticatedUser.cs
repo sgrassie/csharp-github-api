@@ -21,6 +21,7 @@ using System.Collections.Generic;
 namespace csharp_github_api.Models
 {
     using Core;
+    using System;
 
     /// <summary>
     /// Allows access to actions which the user must be authenticated for.
@@ -28,40 +29,41 @@ namespace csharp_github_api.Models
     /// <remarks>
     /// If the user is not authenticatd, then the actions will fail.
     /// </remarks>
+    [Obsolete("Not used. Redesigned.")]
     public class AuthenticatedUser
     {
-        private readonly UserApi _userApi;
+        //private readonly UserApi _userApi;
 
-        public AuthenticatedUser(UserApi userApi )
-        {
-            _userApi = userApi;
-        }
+        //public AuthenticatedUser(UserApi userApi )
+        //{
+        //    _userApi = userApi;
+        //}
 
-        /// <summary>
-        /// Follow the specified user. Must be authenticated.
-        /// </summary>
-        /// <param name="username">The user name of the user on github to follow.</param>
-        /// TODO: Consider returning the follow list from the response
-        /// <returns><c>True</c> if the user was followed; otherwise <c>false</c>.</returns>
-        public bool Follow(string username)
-        {
-            return _userApi.Authenticated().Follow(username);
-        }
+        ///// <summary>
+        ///// Follow the specified user. Must be authenticated.
+        ///// </summary>
+        ///// <param name="username">The user name of the user on github to follow.</param>
+        ///// TODO: Consider returning the follow list from the response
+        ///// <returns><c>True</c> if the user was followed; otherwise <c>false</c>.</returns>
+        //public bool Follow(string username)
+        //{
+        //    return _userApi.Authenticated().Follow(username);
+        //}
 
-        /// <summary>
-        /// Unfollow the specified user. Must be authenticated.
-        /// </summary>
-        /// <param name="username">The user name of the user on github to follow.</param>
-        /// TODO: Consider returning the follow list from the response
-        /// <returns><c>True</c> if the user was followed; otherwise <c>false</c>.</returns>
-        public bool UnFollow(string username)
-        {
-            return _userApi.Authenticated().UnFollow(username);
-        }
+        ///// <summary>
+        ///// Unfollow the specified user. Must be authenticated.
+        ///// </summary>
+        ///// <param name="username">The user name of the user on github to follow.</param>
+        ///// TODO: Consider returning the follow list from the response
+        ///// <returns><c>True</c> if the user was followed; otherwise <c>false</c>.</returns>
+        //public bool UnFollow(string username)
+        //{
+        //    return _userApi.Authenticated().UnFollow(username);
+        //}
 
-        public bool Update(UpdateableUser user)
-        {
-            return true;
-        }
+        //public bool Update(UpdateableUser user)
+        //{
+        //    return true;
+        //}
     }
 }

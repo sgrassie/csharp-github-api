@@ -106,17 +106,6 @@ namespace csharp_github_api.Core
             return response.Data;
         }
 
-        internal UserApi Authenticated()
-        {
-            if (Authenticator != null)
-            {
-                Client = GetRestClient();
-                Client.Authenticator = Authenticator;
-            }
-
-            return this;
-        }
-
         /// <summary>
         /// Gets a list of the users that the specified user is following.
         /// </summary>
