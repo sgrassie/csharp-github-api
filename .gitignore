@@ -32,10 +32,3 @@ _ReSharper*/
 
 #Ignore Secrets.json
 [Ss]ecrets.json
-
-#Ignore UppercuT output
-deployment/
-build_output/
-code_drop/
-gems/
-SolutionVersion.cs
