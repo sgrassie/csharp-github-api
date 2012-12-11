@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-github-api", "csharp-github-api\csharp-github-api.csproj", "{AC8795CC-BDFF-4D37-85EE-E17A7D5A8A59}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-github-api.Tests", "csharp-github-api.Tests\csharp-github-api.Tests.csproj", "{16450E56-7802-4E7B-9F01-6A4824175B15}"
@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2FE975C2-5936-4F20-869D-48EC01639188}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE.txt = LICENSE.txt
+		SolutionVersion.cs = SolutionVersion.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A399513F-82FF-4E02-94A0-6F7C76430C35}"
