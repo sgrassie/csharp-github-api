@@ -30,5 +30,5 @@ _ReSharper*/
 *.*~
 [Pp]ackages/
 
-#Ignore Secrets.json
-[Ss]ecrets.json
+#Ignore settings
+csharp-github-api.IntegrationTests.dll.config

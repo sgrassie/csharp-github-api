@@ -1,8 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System.Configuration;
+using NUnit.Framework;
 using RestSharp;
-using csharp_github_api.Framework;
 using StructureMap;
-using csharp_github_api.IntegrationTests.Bootstrap;
 
 namespace csharp_github_api.IntegrationTests.Authentication
 {
@@ -10,13 +9,16 @@ namespace csharp_github_api.IntegrationTests.Authentication
     public class BasicAuthenticationTest
     {
         private RestRequest _restRequest;
-        private IGitHubApiSettings _settings;
+        private string _username;
+        private string _password;
 
         [SetUp]
         public void Setup()
         {
-            Bootstrapper.Bootstrap();
-            _settings = ObjectFactory.GetInstance<GitHubApiSettings>();
+            Configuration config = ConfigurationManager.OpenExeConfiguration("csharp-github-api.IntegrationTests.dll");
+            _username = config.AppSettings.Settings["username"].Value;
+            _password = config.AppSettings.Settings["password"].Value;
+
             _restRequest = new RestRequest
             {
                 Resource = "/users/sgrassie"
@@ -29,7 +31,7 @@ namespace csharp_github_api.IntegrationTests.Authentication
             var client = new RestClient
                              {
                                  BaseUrl ="https://api.github.com",
-                                 Authenticator = new HttpBasicAuthenticator(_settings.Username, _settings.Password)
+                                 Authenticator = new HttpBasicAuthenticator(_username, _password)
                              };
 
             var response = client.Execute(_restRequest);

@@ -62,8 +62,6 @@
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Extensions\AuthenticatingExtension.cs" />
     <Compile Include="Extensions\MiscExtensions.cs" />
-    <Compile Include="Framework\GitHubApiSettings.cs" />
-    <Compile Include="Framework\IGitHubApiSettings.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="GitHubAuthorizationException.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />

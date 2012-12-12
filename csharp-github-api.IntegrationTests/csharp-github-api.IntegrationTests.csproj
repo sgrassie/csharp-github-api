@@ -60,6 +60,7 @@
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -74,15 +75,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\BasicAuthenticationTest.cs" />
-    <Compile Include="Bootstrap\Bootstrapper.cs" />
-    <Compile Include="Bootstrap\GitHubApiSettingsProvider.cs" />
     <Compile Include="CastleTest.cs" />
     <Compile Include="Core\ApiTests.cs" />
     <Compile Include="Core\UserApiTests.cs" />
-    <Compile Include="Bootstrap\ISettingsProvider.cs" />
     <Compile Include="Models\UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Bootstrap\SettingsScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-github-api\csharp-github-api.csproj">
@@ -92,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="csharp-github-api.IntegrationTests.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Authenticated\" />

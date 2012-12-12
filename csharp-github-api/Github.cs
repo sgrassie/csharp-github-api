@@ -20,7 +20,6 @@ namespace csharp_github_api
 {
     using System;
     using Core;
-    using Framework;
     using RestSharp;
 
     /// <summary>
@@ -29,22 +28,20 @@ namespace csharp_github_api
     public class Github
     {
         private readonly IAuthenticator _gitHubAuthenticator;
-        private readonly IGitHubApiSettings _gitHubApiSettings;
         private string _baseUrl;
 
         /// <summary>
-        /// Instantiates a new instance of the <see cref="Github"/> class.
+        /// Default Constructor.
         /// </summary>
-        /// <param name="gitHubApiSettings">The settings provider which provides the initial configuration for the API.</param>
-        public Github(IGitHubApiSettings gitHubApiSettings)
+        public Github()
         {
-            if(gitHubApiSettings == null) throw new ArgumentNullException("gitHubApiSettings", "The Github settings provider cannot be null.");
-            _gitHubApiSettings = gitHubApiSettings;
-            _baseUrl = gitHubApiSettings.BaseUrl;
-
-            _gitHubAuthenticator = new HttpBasicAuthenticator(gitHubApiSettings.Username, gitHubApiSettings.Password);
+            
         }
 
+        /// <summary>
+        /// Instantiates a new instance of the Github class.
+        /// </summary>
+        /// <param name="authenticator">The <see cref="IAuthenticator"/> to use for authentication.</param>
         public Github(IAuthenticator authenticator)
         {
             _gitHubAuthenticator = authenticator;

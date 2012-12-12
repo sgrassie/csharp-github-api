@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using csharp_github_api.IntegrationTests.Bootstrap;
 using NUnit.Framework;
 using StructureMap;
 using FluentAssertions;
@@ -18,8 +17,7 @@ namespace csharp_github_api.IntegrationTests.Models
         [TestFixtureSetUp]
         public void Setup()
         {
-            Bootstrapper.Bootstrap();
-            _github = ObjectFactory.GetInstance<Github>();
+            _github = new Github();
         }
 
         
