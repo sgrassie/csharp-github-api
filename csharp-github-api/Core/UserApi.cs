@@ -29,13 +29,12 @@ namespace csharp_github_api.Core
     /// <remarks>
     /// See http://developer.github.com/v3/users/ for more details.
     /// </remarks>
-    public class UserApi<TUser> : Api
-        where TUser : new()
+    public class UserApi : Api
     {
         public UserApi(){}
 
         /// <summary>
-        /// Instantiattes a new instance of the <see cref="UserApi"/> class.
+        /// Instantiates a new instance of the <see cref="UserApi"/> class.
         /// </summary>
         /// <param name="baseUrl">The base url for GitHub's API.</param>
         public UserApi(string baseUrl) : base(baseUrl)
@@ -46,8 +45,26 @@ namespace csharp_github_api.Core
         /// Gets the specified user from GitHub.
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
-        /// <returns>A <see cref="csharp_github_api.Models.User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
-        public TUser GetUser(string username)
+        public IRestResponse GetUser(string username)
+        {
+            if (Client == null) Client = GetRestClient();
+
+            var request = new RestRequest
+                              {
+                                  Resource = string.Format("/users/{0}", username)
+                              };
+
+            var response = Client.Execute(request);
+            CheckRateLimit(response.Headers);
+
+            return response;
+        }
+
+        /// <summary>
+        /// Gets the specified user from GitHub.
+        /// </summary>
+        /// <param name="username">The user to get from GitHub.</param>
+        public IRestResponse<TUser> GetUser<TUser>(string username) where TUser : new()
         {
             if (Client == null) Client = GetRestClient();
 
@@ -60,130 +77,128 @@ namespace csharp_github_api.Core
 
             CheckRateLimit(response.Headers);
 
-            var user = response.Data;
-
-            return user;
+            return response;
         }
 
-        /// <summary>
-        /// Searches for the user on GitHub.
-        /// </summary>
-        /// <param name="username">The user to search for.</param>
-        /// <returns>Returns a lise of <see cref="csharp_github_api.Models.User"/> instances of GitHub users who may match the search.</returns>
-        public IList<TUser> SearchUser(string username)
-        {
-            if (Client == null) Client = GetRestClient();
+        ///// <summary>
+        ///// Searches for the user on GitHub.
+        ///// </summary>
+        ///// <param name="username">The user to search for.</param>
+        ///// <returns>Returns a lise of <see cref="csharp_github_api.Models.User"/> instances of GitHub users who may match the search.</returns>
+        //public IList<TUser> SearchUser(string username)
+        //{
+        //    if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest
-                              {
-                                  Resource = string.Format("/user/search/{0}", username),
-                                  RootElement = "users"
-                              };
+        //    var request = new RestRequest
+        //                      {
+        //                          Resource = string.Format("/user/search/{0}", username),
+        //                          RootElement = "users"
+        //                      };
 
-            var response = Client.Execute<List<TUser>>(request);
+        //    var response = Client.Execute<List<TUser>>(request);
 
-            return response.Data;
-        }
+        //    return response.Data;
+        //}
 
-        /// <summary>
-        /// Finds a user specified by their email address. 
-        /// This will only match the email address listed in a users public profile, and is opt-in for everyone.
-        /// </summary>
-        /// <param name="email">The email address of the user to search for.</param>
-        /// <returns>A <see cref="csharp_github_api.Models.User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
-        public TUser FindUserByEmail(string email)
-        {
-            if (Client == null) Client = GetRestClient();
+        ///// <summary>
+        ///// Finds a user specified by their email address. 
+        ///// This will only match the email address listed in a users public profile, and is opt-in for everyone.
+        ///// </summary>
+        ///// <param name="email">The email address of the user to search for.</param>
+        ///// <returns>A <see cref="csharp_github_api.Models.User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
+        //public TUser FindUserByEmail(string email)
+        //{
+        //    if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest
-            {
-                Resource = string.Format("/user/email/{0}", email),
-                RootElement = "users"
-            };
+        //    var request = new RestRequest
+        //    {
+        //        Resource = string.Format("/user/email/{0}", email),
+        //        RootElement = "users"
+        //    };
 
-            var response = Client.Execute<TUser>(request);
+        //    var response = Client.Execute<TUser>(request);
 
-            return response.Data;
-        }
+        //    return response.Data;
+        //}
 
-        /// <summary>
-        /// Gets a list of the users that the specified user is following.
-        /// </summary>
-        /// <param name="username">The username to get the following list for.</param>
-        /// <returns>A list of the users (username only) that the specified user is following.</returns>
-        public IList<TFollowing> GetFollowing<TFollowing>(string username)
-        {
-            if (Client == null) Client = GetRestClient();
+        ///// <summary>
+        ///// Gets a list of the users that the specified user is following.
+        ///// </summary>
+        ///// <param name="username">The username to get the following list for.</param>
+        ///// <returns>A list of the users (username only) that the specified user is following.</returns>
+        //public IList<TFollowing> GetFollowing<TFollowing>(string username)
+        //{
+        //    if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest(Method.GET)
-            {
-                Resource = "/users/{user}/following"
-            };
-            request.AddParameter("user", username, ParameterType.UrlSegment);
+        //    var request = new RestRequest(Method.GET)
+        //    {
+        //        Resource = "/users/{user}/following"
+        //    };
+        //    request.AddParameter("user", username, ParameterType.UrlSegment);
 
-            var response = Client.Execute<List<TFollowing>>(request);
-            CheckRateLimit(response.Headers);
+        //    var response = Client.Execute<List<TFollowing>>(request);
+        //    CheckRateLimit(response.Headers);
 
-            response.StatusCode.ShouldBe(HttpStatusCode.OK).IfNotRaiseAnError(response);
+        //    response.StatusCode.ShouldBe(HttpStatusCode.OK).IfNotRaiseAnError(response);
 
-            return response.Data;
-        }
+        //    return response.Data;
+        //}
 
-        /// <summary>
-        /// Gets a list of the users that the specified user is following.
-        /// </summary>
-        /// <param name="username">The user to get the list of followers for.</param>
-        /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
-        public IList<TFollowing> GetFollowers<TFollowing>(string username)
-        {
-            if (Client == null) Client = GetRestClient();
+        ///// <summary>
+        ///// Gets a list of the users that the specified user is following.
+        ///// </summary>
+        ///// <param name="username">The user to get the list of followers for.</param>
+        ///// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
+        //public IList<TFollowing> GetFollowers<TFollowing>(string username)
+        //{
+        //    if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest(Method.GET)
-                              {
-                                  Resource = "/users/{user}/followers"
-                              };
-            request.AddParameter("user", username, ParameterType.UrlSegment);
+        //    var request = new RestRequest(Method.GET)
+        //                      {
+        //                          Resource = "/users/{user}/followers"
+        //                      };
+        //    request.AddParameter("user", username, ParameterType.UrlSegment);
 
-            var response = Client.Execute<List<TFollowing>>(request);
-            CheckRateLimit(response.Headers);
+        //    var response = Client.Execute<List<TFollowing>>(request);
+        //    CheckRateLimit(response.Headers);
 
-            response.StatusCode.ShouldBe(HttpStatusCode.OK).IfNotRaiseAnError(response);
+        //    response.StatusCode.ShouldBe(HttpStatusCode.OK).IfNotRaiseAnError(response);
 
-            return response.Data;
-        }
+        //    return response.Data;
+        //}
 
-        public bool Follow(string username)
-        {
-            if (Client == null) Client = GetRestClient();
-            RequiresAuthentication();
+        //public bool Follow(string username)
+        //{
+        //    if (Client == null) Client = GetRestClient();
+        //    RequiresAuthentication();
 
-            var request = new RestRequest(Method.PUT)
-                              {
-                                  Resource = "/user/following/{user}"
-                              };
-            request.AddParameter("user", username, ParameterType.UrlSegment);
-            var response = Client.Execute(request);
+        //    var request = new RestRequest(Method.PUT)
+        //                      {
+        //                          Resource = "/user/following/{user}"
+        //                      };
+        //    request.AddParameter("user", username, ParameterType.UrlSegment);
+        //    var response = Client.Execute(request);
 
-            CheckRateLimit(response.Headers);
+        //    CheckRateLimit(response.Headers);
 
-            return response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
-        }
+        //    return response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+        //}
 
-        public bool UnFollow(string username)
-        {
-            if (Client == null) Client = GetRestClient();
+        //public bool UnFollow(string username)
+        //{
+        //    if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest(Method.DELETE)
-                              {
-                                  Resource = "/user/following/{user}"
-                              };
-            request.AddParameter("user", username, ParameterType.UrlSegment);
+        //    var request = new RestRequest(Method.DELETE)
+        //                      {
+        //                          Resource = "/user/following/{user}"
+        //                      };
+        //    request.AddParameter("user", username, ParameterType.UrlSegment);
 
-            var response = Client.Execute(request);
+        //    var response = Client.Execute(request);
 
-            CheckRateLimit(response.Headers);
+        //    CheckRateLimit(response.Headers);
 
-            return response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
-        }
+        //    return response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+        //}
     }
 }

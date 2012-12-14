@@ -18,7 +18,6 @@
 
 namespace csharp_github_api
 {
-    using System;
     using Core;
     using RestSharp;
 
@@ -32,16 +31,19 @@ namespace csharp_github_api
         /// <summary>
         /// Default Constructor.
         /// </summary>
-        public Github()
+        /// <param name="baseUrl">The base URL for accessing GitHub's API.</param>
+        public Github(string baseUrl)
         {
-            
+            BaseUrl = baseUrl;
         }
 
         /// <summary>
         /// Instantiates a new instance of the Github class.
         /// </summary>
+        /// <param name="baseUrl">The base URL for accessing GitHub's API.</param>
         /// <param name="authenticator">The <see cref="IAuthenticator"/> to use for authentication.</param>
-        public Github(IAuthenticator authenticator)
+        public Github(string baseUrl, IAuthenticator authenticator)
+            : this(baseUrl)
         {
             _gitHubAuthenticator = authenticator;
         }
@@ -51,9 +53,9 @@ namespace csharp_github_api
         /// </summary>
         public string BaseUrl { get; set; }
 
-        public UserApi<TUser> User<TUser>() where TUser : new()
+        public UserApi User()
         {
-            return new UserApi<TUser>(BaseUrl);
+            return new UserApi(BaseUrl);
         }
     }
 }
