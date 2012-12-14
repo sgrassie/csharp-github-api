@@ -21,7 +21,6 @@ namespace csharp_github_api.Core
     using System.Collections.Generic;
     using System.Net;
     using Extensions;
-    using Models;
     using RestSharp;
 
     /// <summary>
@@ -30,7 +29,8 @@ namespace csharp_github_api.Core
     /// <remarks>
     /// See http://developer.github.com/v3/users/ for more details.
     /// </remarks>
-    public class UserApi : Api
+    public class UserApi<TUser> : Api
+        where TUser : new()
     {
         public UserApi(){}
 
@@ -46,8 +46,8 @@ namespace csharp_github_api.Core
         /// Gets the specified user from GitHub.
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
-        /// <returns>A <see cref="User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
-        public User GetUser(string username)
+        /// <returns>A <see cref="csharp_github_api.Models.User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
+        public TUser GetUser(string username)
         {
             if (Client == null) Client = GetRestClient();
 
@@ -56,7 +56,7 @@ namespace csharp_github_api.Core
                                   Resource = string.Format("/users/{0}", username)
                               };
 
-            var response = Client.Execute<User>(request);
+            var response = Client.Execute<TUser>(request);
 
             CheckRateLimit(response.Headers);
 
@@ -69,8 +69,8 @@ namespace csharp_github_api.Core
         /// Searches for the user on GitHub.
         /// </summary>
         /// <param name="username">The user to search for.</param>
-        /// <returns>Returns a lise of <see cref="User"/> instances of GitHub users who may match the search.</returns>
-        public IList<User> SearchUser(string username)
+        /// <returns>Returns a lise of <see cref="csharp_github_api.Models.User"/> instances of GitHub users who may match the search.</returns>
+        public IList<TUser> SearchUser(string username)
         {
             if (Client == null) Client = GetRestClient();
 
@@ -80,7 +80,7 @@ namespace csharp_github_api.Core
                                   RootElement = "users"
                               };
 
-            var response = Client.Execute<List<User>>(request);
+            var response = Client.Execute<List<TUser>>(request);
 
             return response.Data;
         }
@@ -90,8 +90,8 @@ namespace csharp_github_api.Core
         /// This will only match the email address listed in a users public profile, and is opt-in for everyone.
         /// </summary>
         /// <param name="email">The email address of the user to search for.</param>
-        /// <returns>A <see cref="User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
-        public User FindUserByEmail(string email)
+        /// <returns>A <see cref="csharp_github_api.Models.User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
+        public TUser FindUserByEmail(string email)
         {
             if (Client == null) Client = GetRestClient();
 
@@ -101,7 +101,7 @@ namespace csharp_github_api.Core
                 RootElement = "users"
             };
 
-            var response = Client.Execute<User>(request);
+            var response = Client.Execute<TUser>(request);
 
             return response.Data;
         }
@@ -109,19 +109,9 @@ namespace csharp_github_api.Core
         /// <summary>
         /// Gets a list of the users that the specified user is following.
         /// </summary>
-        /// <param name="user">The <see cref="User"/> to get the following list for.</param>
-        /// <returns>A list of the users (username only) that the specified user is following.</returns>
-        public IList<Following> GetFollowing(User user)
-        {
-            return GetFollowing(user.Login);
-        }
-
-        /// <summary>
-        /// Gets a list of the users that the specified user is following.
-        /// </summary>
         /// <param name="username">The username to get the following list for.</param>
         /// <returns>A list of the users (username only) that the specified user is following.</returns>
-        public IList<Following> GetFollowing(string username)
+        public IList<TFollowing> GetFollowing<TFollowing>(string username)
         {
             if (Client == null) Client = GetRestClient();
 
@@ -131,7 +121,7 @@ namespace csharp_github_api.Core
             };
             request.AddParameter("user", username, ParameterType.UrlSegment);
 
-            var response = Client.Execute<List<Following>>(request);
+            var response = Client.Execute<List<TFollowing>>(request);
             CheckRateLimit(response.Headers);
 
             response.StatusCode.ShouldBe(HttpStatusCode.OK).IfNotRaiseAnError(response);
@@ -142,19 +132,9 @@ namespace csharp_github_api.Core
         /// <summary>
         /// Gets a list of the users that the specified user is following.
         /// </summary>
-        /// <param name="user">The <see cref="User"/> to get the list of followers for.</param>
-        /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
-        public IList<Following> GetFollowers(User user)
-        {
-            return GetFollowers(user.Login);
-        }
-
-        /// <summary>
-        /// Gets a list of the users that the specified user is following.
-        /// </summary>
         /// <param name="username">The user to get the list of followers for.</param>
         /// <returns>A string list containing the (username only) list of users who are followers of the specified user.</returns>
-        public IList<Following> GetFollowers(string username)
+        public IList<TFollowing> GetFollowers<TFollowing>(string username)
         {
             if (Client == null) Client = GetRestClient();
 
@@ -164,7 +144,7 @@ namespace csharp_github_api.Core
                               };
             request.AddParameter("user", username, ParameterType.UrlSegment);
 
-            var response = Client.Execute<List<Following>>(request);
+            var response = Client.Execute<List<TFollowing>>(request);
             CheckRateLimit(response.Headers);
 
             response.StatusCode.ShouldBe(HttpStatusCode.OK).IfNotRaiseAnError(response);

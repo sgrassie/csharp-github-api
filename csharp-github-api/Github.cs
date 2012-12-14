@@ -28,7 +28,6 @@ namespace csharp_github_api
     public class Github
     {
         private readonly IAuthenticator _gitHubAuthenticator;
-        private string _baseUrl;
 
         /// <summary>
         /// Default Constructor.
@@ -50,18 +49,11 @@ namespace csharp_github_api
         /// <summary>
         /// Gets or sets the base URL for accessing GitHub's API.
         /// </summary>
-        public string BaseUrl
-        {
-            get { return _baseUrl; }
-            set { _baseUrl = value; }
-        }
+        public string BaseUrl { get; set; }
 
-        public UserApi User
+        public UserApi<TUser> User<TUser>() where TUser : new()
         {
-            get
-            {
-                return new UserApi(_baseUrl);
-            }
+            return new UserApi<TUser>(BaseUrl);
         }
     }
 }

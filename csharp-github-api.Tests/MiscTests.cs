@@ -6,7 +6,6 @@ using NUnit.Framework;
 using RestSharp;
 using RestSharp.Deserializers;
 using csharp_github_api.Extensions;
-using csharp_github_api.Models;
 
 namespace csharp_github_api.Tests
 {

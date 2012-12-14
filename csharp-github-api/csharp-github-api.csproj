@@ -63,15 +63,9 @@
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Extensions\AuthenticatingExtension.cs" />
     <Compile Include="Extensions\MiscExtensions.cs" />
-    <Compile Include="Extensions\RestSharpRestResponseExtension.cs" />
     <Compile Include="RestSharpRestResponseExtension.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="GitHubAuthorizationException.cs" />
-    <Compile Include="Models\AuthenticatedUser.cs" />
-    <Compile Include="Models\Following.cs" />
-    <Compile Include="Models\Plan.cs" />
-    <Compile Include="Models\UpdateableUser.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleJson.cs" />
   </ItemGroup>

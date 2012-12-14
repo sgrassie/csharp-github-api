@@ -22,7 +22,7 @@ namespace csharp_github_api.IntegrationTests.Core
         [Test]
         public void GetUser_shouldReturnDeserialisedUserObject()
         {
-            var user = _github.User.GetUser("sgrassie");
+            var user = _github.User().GetUser("sgrassie");
 
             Assert.That(user.Name, Is.StringMatching("Stuart Grassie"));
         }
