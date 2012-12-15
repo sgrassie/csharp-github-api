@@ -63,7 +63,6 @@
     <Compile Include="Core\UserApi.cs" />
     <Compile Include="Extensions\AuthenticatingExtension.cs" />
     <Compile Include="Extensions\MiscExtensions.cs" />
-    <Compile Include="Extensions\RestSharpRestResponseExtension.cs" />
     <Compile Include="RestSharpRestResponseExtension.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="GitHubAuthorizationException.cs" />
