@@ -4,12 +4,12 @@
 ### What
 It does what it says on the tin*: A C# library for accessing [GitHub's API][4].
 
-Currently targets .NET 3.5
+Targets .NET 4
 
 Uses John Sheehan's excellent [RestSharp][3] [REST client][2] library for most of the heavy lifting.
 
 ### *Status
-I'm lazy. Started working on this off and on again. Send a pull request.
+Barely does anything at the moment. I'm lazy. Started working on this off and on again. Send a pull request.
 
 ### Building
 For now, just fire up VS and hit build.
