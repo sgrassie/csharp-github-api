@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="GitHubResponseException.cs" company="TemporalCohesion.co.uk">
 //     Copyright [2010] [Stuart Grassie]
 //
@@ -17,9 +17,8 @@
 //----------------------------------------------------------------------
 
 using System;
-using RestSharp;
 
-namespace csharp_github_api.Core
+namespace csharp_github_api.Exceptions
 {
     [Serializable]
     public class GitHubResponseException : Exception

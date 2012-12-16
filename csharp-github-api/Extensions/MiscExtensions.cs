@@ -17,8 +17,8 @@
 //----------------------------------------------------------------------
 
 using System.Collections.Generic;
-using csharp_github_api.Core;
 using RestSharp;
+using csharp_github_api.Exceptions;
 
 namespace csharp_github_api.Extensions
 {

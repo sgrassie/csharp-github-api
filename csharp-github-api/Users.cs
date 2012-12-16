@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="UserApi.cs" company="TemporalCohesion.co.uk">
 //     Copyright [2010] [Stuart Grassie]
 //
@@ -16,28 +16,25 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Core
-{
-    using System.Collections.Generic;
-    using System.Net;
-    using Extensions;
-    using RestSharp;
+using RestSharp;
 
+namespace csharp_github_api
+{
     /// <summary>
     /// Encapsulates access to the Github.com User API.
     /// </summary>
     /// <remarks>
     /// See http://developer.github.com/v3/users/ for more details.
     /// </remarks>
-    public class UserApi : Api
+    public class Users : Api
     {
-        public UserApi(){}
+        public Users(){}
 
         /// <summary>
-        /// Instantiates a new instance of the <see cref="UserApi"/> class.
+        /// Instantiates a new instance of the <see cref="Users"/> class.
         /// </summary>
         /// <param name="baseUrl">The base url for GitHub's API.</param>
-        public UserApi(string baseUrl) : base(baseUrl)
+        public Users(string baseUrl) : base(baseUrl)
         {
         }
 

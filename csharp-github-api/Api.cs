@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="Api.cs" company="TemporalCohesion.co.uk">
 //     Copyright [2010] [Stuart Grassie]
 //
@@ -18,13 +18,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using RestSharp;
+using csharp_github_api.Exceptions;
 
-namespace csharp_github_api.Core
+namespace csharp_github_api
 {
-    using System.Diagnostics;
-    using RestSharp;
-
     /// <summary>
     /// Base class for specific API classes.
     /// </summary>

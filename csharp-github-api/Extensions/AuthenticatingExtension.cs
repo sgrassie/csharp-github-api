@@ -19,7 +19,6 @@
 namespace csharp_github_api.Extensions
 {
     using Authentication;
-    using Core;
     using RestSharp;
 
     /// <summary>

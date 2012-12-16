@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="GitHubAuthorizationException.cs" company="TemporalCohesion.co.uk">
 //     Copyright [2010] [Stuart Grassie]
 //
@@ -16,10 +16,10 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api
-{
-    using System;
+using System;
 
+namespace csharp_github_api.Exceptions
+{
     [Serializable]
     public class GitHubAuthorizationException : Exception
     {

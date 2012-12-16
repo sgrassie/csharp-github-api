@@ -21,7 +21,6 @@ namespace csharp_github_api.Authentication
     using System;
     using System.Reflection;
     using Castle.DynamicProxy;
-    using Core;
     using RestSharp;
 
     public static class AuthenticatingInterceptor<TTarget>

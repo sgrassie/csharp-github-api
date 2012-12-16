@@ -18,7 +18,6 @@
 
 namespace csharp_github_api
 {
-    using Core;
     using RestSharp;
 
     /// <summary>
@@ -53,9 +52,9 @@ namespace csharp_github_api
         /// </summary>
         public string BaseUrl { get; set; }
 
-        public UserApi User()
+        public Users User()
         {
-            return new UserApi(BaseUrl);
+            return new Users(BaseUrl);
         }
     }
 }

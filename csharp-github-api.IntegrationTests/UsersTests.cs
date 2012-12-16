@@ -1,14 +1,9 @@
-﻿using FluentAssertions;
 using NUnit.Framework;
-using RestSharp;
-using StructureMap;
-using csharp_github_api.Core;
-using csharp_github_api.Extensions;
 
-namespace csharp_github_api.IntegrationTests.Core
+namespace csharp_github_api.IntegrationTests
 {
     [TestFixture]
-    public class UserApiTests
+    public class UsersTests
     {
         private Github _github;
         private const string GitHubUrl = @"https://api.github.com";

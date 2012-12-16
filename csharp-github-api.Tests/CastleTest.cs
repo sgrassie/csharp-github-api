@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 using System.Reflection;
-using System.Text;
 using Castle.DynamicProxy;
 using FluentAssertions;
 using NUnit.Framework;
-using RestSharp;
-using csharp_github_api.Core;
 
-namespace csharp_github_api.IntegrationTests
+namespace csharp_github_api.Tests
 {
     public abstract class AbstractBaseClass
     {

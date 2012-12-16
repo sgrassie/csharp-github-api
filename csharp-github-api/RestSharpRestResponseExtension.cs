@@ -16,6 +16,8 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using csharp_github_api.Lib;
+
 namespace csharp_github_api
 {
     using RestSharp;
