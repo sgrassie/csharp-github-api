@@ -17,6 +17,7 @@
 //----------------------------------------------------------------------
 
 using RestSharp;
+using csharp_github_api.Logging;
 
 namespace csharp_github_api
 {
@@ -44,6 +45,8 @@ namespace csharp_github_api
         /// <param name="username">The user to get from GitHub.</param>
         public IRestResponse GetUser(string username)
         {
+            this.Log().Info("Making request for {0}", username);
+
             if (Client == null) Client = GetRestClient();
 
             var request = new RestRequest

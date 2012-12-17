@@ -16,9 +16,12 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using System;
+
 namespace csharp_github_api
 {
     using RestSharp;
+    using Logging;
 
     /// <summary>
     /// Access the Github.com API.
@@ -34,6 +37,14 @@ namespace csharp_github_api
         public Github(string baseUrl)
         {
             BaseUrl = baseUrl;
+        }
+
+        public Github WithLogger(Func<Type, ILog> logger)
+        {
+            LogManager.GetLog = logger;
+            
+            this.Log().Debug(() => "Initialised with Logger.");
+            return this;
         }
 
         /// <summary>
