@@ -79,7 +79,8 @@
     <Compile Include="DebugLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestLogging.cs" />
-    <Compile Include="UsersTests.cs" />
+    <Compile Include="UsersTestsUnAuthenticated.cs" />
+    <Compile Include="UsersTestsAuthenticated.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-github-api\csharp-github-api.csproj">

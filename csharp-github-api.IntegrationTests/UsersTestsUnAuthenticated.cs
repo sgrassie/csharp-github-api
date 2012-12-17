@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace csharp_github_api.IntegrationTests
 {
     [TestFixture]
-    public class UsersTests
+    public class UsersTestsUnAuthenticated
     {
         private Github _github;
         private const string GitHubUrl = @"https://api.github.com";
