@@ -43,7 +43,7 @@ namespace csharp_github_api
         /// Gets the specified user from GitHub.
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
-        public IRestResponse GetUser(string username)
+        public IRestResponse Get(string username)
         {
             this.Log().Info("Making request for {0}", username);
 
@@ -64,7 +64,7 @@ namespace csharp_github_api
         /// Gets the specified user from GitHub.
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
-        public IRestResponse<TUser> GetUser<TUser>(string username) where TUser : new()
+        public IRestResponse<TUser> Get<TUser>(string username) where TUser : new()
         {
             if (Client == null) Client = GetRestClient();
 
