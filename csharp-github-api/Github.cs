@@ -28,6 +28,7 @@ namespace csharp_github_api
     /// </summary>
     public class Github
     {
+        private static ILog Log;
         private readonly IAuthenticator _gitHubAuthenticator;
 
         /// <summary>
@@ -42,8 +43,9 @@ namespace csharp_github_api
         public Github WithLogger(Func<Type, ILog> logger)
         {
             LogManager.GetLog = logger;
-            
-            this.Log().Debug(() => "Initialised with Logger.");
+            Log = LogManager.GetLog(typeof (Github));
+            Log.Info(() => "Initialised with Logger.");
+
             return this;
         }
 
