@@ -29,6 +29,8 @@ namespace csharp_github_api
     /// </remarks>
     public class Users : Api
     {
+        private static readonly ILog Log = LogManager.GetLog(typeof (Users));
+
         public Users(){}
 
         /// <summary>
@@ -43,9 +45,9 @@ namespace csharp_github_api
         /// Gets the specified user from GitHub.
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
-        public IRestResponse GetUser(string username)
+        public IRestResponse Get(string username)
         {
-            this.Log().Info("Making request for {0}", username);
+            Log.Info("Making request for {0}", username);
 
             if (Client == null) Client = GetRestClient();
 
@@ -64,7 +66,7 @@ namespace csharp_github_api
         /// Gets the specified user from GitHub.
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
-        public IRestResponse<TUser> GetUser<TUser>(string username) where TUser : new()
+        public IRestResponse<TUser> Get<TUser>(string username) where TUser : new()
         {
             if (Client == null) Client = GetRestClient();
 
