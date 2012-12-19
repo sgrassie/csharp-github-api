@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
 using RestSharp;
+using csharp_github_api.Resource;
 
 namespace csharp_github_api.Tests
 {
@@ -86,64 +86,6 @@ namespace csharp_github_api.Tests
             var response = _client.Execute(request);
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-        }
-    }
-
-    public class RestRequestFactory
-    {
-        private RestRequestFactory()
-        {
-        }
-
-        public static IRestRequest CreateRequest(Func<IRestRequest> request)
-        {
-            return request.Invoke();
-        }
-
-        public static IRestRequest CreateRequest(string resource, Method method = Method.GET, params Parameter[] parameters)
-        {
-            return CreateRequest(
-                () =>
-                    {
-                        var request = new RestRequest
-                            {
-                                Resource = resource,
-                                Method = method
-                            };
-
-                        if (parameters.Length == 0) return request;
-
-                        foreach (var parameter in parameters)
-                        {
-                            request.AddParameter(parameter);
-                        }
-
-                        return request;
-                    }
-                );
-        }
-
-        public static IRestRequest CreateRequest(string resource, Method method = Method.GET, params KeyValuePair<string, string>[] parameters)
-        {
-            return CreateRequest(
-                () =>
-                    {
-                        var request = new RestRequest
-                                          {
-                                              Resource = resource,
-                                              Method = method
-                                          };
-
-                        if (parameters.Length == 0) return request;
-
-                        foreach (var kvp in parameters)
-                        {
-                            request.AddUrlSegment(kvp.Key, kvp.Value);
-                        }
-
-                        return request;
-                    }
-                );
         }
     }
 }

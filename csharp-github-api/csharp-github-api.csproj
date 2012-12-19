@@ -68,6 +68,7 @@
     <Compile Include="Logging\LogExtensions.cs" />
     <Compile Include="Logging\LogManager.cs" />
     <Compile Include="Logging\NullLogger.cs" />
+    <Compile Include="Resource\RestRequestFactory.cs" />
     <Compile Include="RestSharpRestResponseExtension.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
