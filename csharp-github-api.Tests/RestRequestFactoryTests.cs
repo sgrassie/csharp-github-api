@@ -111,6 +111,8 @@ namespace csharp_github_api.Tests
                                 Method = method
                             };
 
+                        if (parameters.Length == 0) return request;
+
                         foreach (var parameter in parameters)
                         {
                             request.AddParameter(parameter);
@@ -131,6 +133,9 @@ namespace csharp_github_api.Tests
                                               Resource = resource,
                                               Method = method
                                           };
+
+                        if (parameters.Length == 0) return request;
+
                         foreach (var kvp in parameters)
                         {
                             request.AddUrlSegment(kvp.Key, kvp.Value);
