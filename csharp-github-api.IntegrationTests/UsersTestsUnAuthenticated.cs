@@ -1,3 +1,4 @@
+using LoggingExtensions.log4net;
 using NUnit.Framework;
 
 namespace csharp_github_api.IntegrationTests
@@ -11,7 +12,7 @@ namespace csharp_github_api.IntegrationTests
         [TestFixtureSetUp]
         public void Setup()
         {
-            _github = new Github(GitHubUrl).WithLogger<DebugLogger>();
+            _github = new Github(GitHubUrl).WithLogger<Log4NetLog>();
         }
 
         [Test]
