@@ -48,6 +48,9 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -76,6 +79,9 @@
     <Reference Include="this.Log, Version=0.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\this.Log.0.0.2.0\lib\net40\this.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="this.Log-log4net">
+      <HintPath>..\packages\this.Log-log4net.0.0.2.0\lib\net40\this.Log-log4net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
