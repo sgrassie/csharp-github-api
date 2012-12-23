@@ -64,10 +64,6 @@
     <Compile Include="Extensions\AuthenticatingExtension.cs" />
     <Compile Include="Extensions\MiscExtensions.cs" />
     <Compile Include="Lib\SimpleJson.cs" />
-    <Compile Include="Logging\ILog.cs" />
-    <Compile Include="Logging\LogExtensions.cs" />
-    <Compile Include="Logging\LogManager.cs" />
-    <Compile Include="Logging\NullLogger.cs" />
     <Compile Include="Resource\RestRequestFactory.cs" />
     <Compile Include="RestSharpRestResponseExtension.cs" />
     <Compile Include="Github.cs" />
