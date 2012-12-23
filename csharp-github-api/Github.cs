@@ -16,19 +16,17 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using System;
-
 namespace csharp_github_api
 {
+    using LoggingExtensions.Logging;
     using RestSharp;
-    using Logging;
+    using System;
 
     /// <summary>
     /// Access the Github.com API.
     /// </summary>
     public class Github
     {
-        private static ILog Log;
         private readonly IAuthenticator _gitHubAuthenticator;
 
         /// <summary>
@@ -38,13 +36,13 @@ namespace csharp_github_api
         public Github(string baseUrl)
         {
             BaseUrl = baseUrl;
+            Log.InitializeWith<NullLog>();
         }
 
-        public Github WithLogger(Func<Type, ILog> logger)
+        public Github WithLogger<TLogger>() where TLogger : ILog, new()
         {
-            LogManager.GetLog = logger;
-            Log = LogManager.GetLog(typeof (Github));
-            Log.Info(() => "Initialised with Logger.");
+            Log.InitializeWith<TLogger>();
+            this.Log().Info("Logging enabled with {0}.", typeof(TLogger).FullName);
 
             return this;
         }

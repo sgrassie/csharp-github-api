@@ -16,11 +16,11 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using RestSharp;
-using csharp_github_api.Logging;
-
 namespace csharp_github_api
 {
+    using RestSharp;
+    using LoggingExtensions.Logging;
+
     /// <summary>
     /// Encapsulates access to the Github.com User API.
     /// </summary>
@@ -29,7 +29,7 @@ namespace csharp_github_api
     /// </remarks>
     public class Users : Api
     {
-        private static readonly ILog Log = LogManager.GetLog(typeof (Users));
+        //private static readonly ILog Log = LoggingExtensions.Logging.Log.
 
         public Users(){}
 
@@ -47,7 +47,7 @@ namespace csharp_github_api
         /// <param name="username">The user to get from GitHub.</param>
         public IRestResponse Get(string username)
         {
-            Log.Info("Making request for {0}", username);
+            this.Log().Info("Making request for {0}", username);
 
             if (Client == null) Client = GetRestClient();
 

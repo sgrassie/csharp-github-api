@@ -11,7 +11,7 @@ namespace csharp_github_api.IntegrationTests
         [TestFixtureSetUp]
         public void Setup()
         {
-            _github = new Github(GitHubUrl).WithLogger(type => new DebugLogger(type));
+            _github = new Github(GitHubUrl).WithLogger<DebugLogger>();
         }
 
         [Test]

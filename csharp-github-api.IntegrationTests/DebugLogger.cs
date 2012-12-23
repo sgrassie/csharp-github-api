@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using csharp_github_api.Logging;
+using Logging = global::LoggingExtensions.Logging;
 using VS = System.Diagnostics.Debug;
 
 namespace csharp_github_api.IntegrationTests
@@ -15,23 +12,22 @@ namespace csharp_github_api.IntegrationTests
         public static string ERROR = "Error";
         public static string FATAL = "Fatal";
     }
-    public class DebugLogger : ILog, ILog<DebugLogger>
+    public class DebugLogger : Logging.ILog, Logging.ILog<DebugLogger>
     {
-        private static Type _typeBeingLogged;
+        private static string _loggerName;
 
         private readonly Action<string, string, object[]> _writeWithFormatting
             = (category, message, objects) =>
                   {
                       var formatted = string.Format(message, objects);
-                      var output = string.Format("{0} - {1}", _typeBeingLogged.FullName, formatted);
+                      var output = string.Format("{0} - {1}", _loggerName, formatted);
                       VS.WriteLine(output, category);
                   };
 
         private readonly Action<string, Func<string>> _write = (category, message) =>
                                                                    {
                                                                        var output = string.Format("{0} - {1}",
-                                                                                                  _typeBeingLogged.
-                                                                                                      FullName,
+                                                                                                  _loggerName,
                                                                                                   message.Invoke());
                                                                        VS.WriteLine(output, category);
                                                                    };
@@ -41,13 +37,9 @@ namespace csharp_github_api.IntegrationTests
             throw new NotImplementedException();
         }
 
-        public DebugLogger()
+        public void InitializeFor(string loggerName)
         {
-        }
-        
-        public DebugLogger(Type type)
-        {
-            _typeBeingLogged = type;
+            _loggerName = loggerName;
         }
 
         /// <summary>

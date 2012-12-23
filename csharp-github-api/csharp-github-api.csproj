@@ -52,6 +52,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="this.Log">
+      <HintPath>..\packages\this.Log.0.0.2.0\lib\net40\this.Log.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SolutionVersion.cs">
@@ -64,6 +67,7 @@
     <Compile Include="Extensions\AuthenticatingExtension.cs" />
     <Compile Include="Extensions\MiscExtensions.cs" />
     <Compile Include="Lib\SimpleJson.cs" />
+    <Compile Include="LogExtensions.cs" />
     <Compile Include="Resource\RestRequestFactory.cs" />
     <Compile Include="RestSharpRestResponseExtension.cs" />
     <Compile Include="Github.cs" />
