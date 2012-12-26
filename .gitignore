@@ -29,7 +29,7 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.*~
 [Pp]ackages/
-*.DotSettings
+*.[Uu]ser
 
 #Ignore settings
 csharp-github-api.IntegrationTests.dll.config
