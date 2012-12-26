@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
 using RestSharp;
+using csharp_github_api.Core;
 
 namespace csharp_github_api.Resource
 {
     public class RestRequestFactory
     {
-        private RestRequestFactory()
+        private static IHeaderProvider _headerProvider;
+
+        private RestRequestFactory(IHeaderProvider headerProvider = null)
         {
+            _headerProvider = headerProvider;
         }
 
         public static IRestRequest CreateRequest(Func<IRestRequest> request)
@@ -20,7 +24,7 @@ namespace csharp_github_api.Resource
             return CreateRequest(
                 () =>
                     {
-                        var request = new RestRequest
+                        IRestRequest request = new RestRequest
                                           {
                                               Resource = resource,
                                               Method = method
@@ -33,6 +37,9 @@ namespace csharp_github_api.Resource
                             request.AddParameter(parameter);
                         }
 
+                        if (_headerProvider != null)
+                            _headerProvider.PopulateHeaders(ref request);
+
                         return request;
                     }
                 );
@@ -43,7 +50,7 @@ namespace csharp_github_api.Resource
             return CreateRequest(
                 () =>
                     {
-                        var request = new RestRequest
+                        IRestRequest request = new RestRequest
                                           {
                                               Resource = resource,
                                               Method = method
@@ -55,6 +62,9 @@ namespace csharp_github_api.Resource
                         {
                             request.AddUrlSegment(kvp.Key, kvp.Value);
                         }
+
+                        if (_headerProvider != null)
+                            _headerProvider.PopulateHeaders(ref request);
 
                         return request;
                     }
