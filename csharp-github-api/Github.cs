@@ -25,7 +25,7 @@ namespace csharp_github_api
     /// <summary>
     /// Access the Github.com API.
     /// </summary>
-    public class Github
+    public partial class GithubRestApiClient
     {
         private readonly IAuthenticator _gitHubAuthenticator;
 
@@ -33,13 +33,13 @@ namespace csharp_github_api
         /// Default Constructor.
         /// </summary>
         /// <param name="baseUrl">The base URL for accessing GitHub's API.</param>
-        public Github(string baseUrl)
+        public GithubRestApiClient(string baseUrl)
         {
             BaseUrl = baseUrl;
             Log.InitializeWith<NullLog>();
         }
 
-        public Github WithLogger<TLogger>() where TLogger : ILog, new()
+        public GithubRestApiClient WithLogger<TLogger>() where TLogger : ILog, new()
         {
             Log.InitializeWith<TLogger>();
             this.Log().Info("Logging enabled with {0}.", typeof(TLogger).FullName);
@@ -52,7 +52,7 @@ namespace csharp_github_api
         /// </summary>
         /// <param name="baseUrl">The base URL for accessing GitHub's API.</param>
         /// <param name="authenticator">The <see cref="IAuthenticator"/> to use for authentication.</param>
-        public Github(string baseUrl, IAuthenticator authenticator)
+        public GithubRestApiClient(string baseUrl, IAuthenticator authenticator)
             : this(baseUrl)
         {
             _gitHubAuthenticator = authenticator;

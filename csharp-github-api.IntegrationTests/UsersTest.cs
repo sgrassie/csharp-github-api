@@ -10,13 +10,13 @@ namespace csharp_github_api.IntegrationTests
     {
         public abstract class UsersTestsBase : TestsSpecBase
         {
-            protected Github Github;
+            protected GithubRestApiClient Github;
 
             protected string User;
 
             public override void Context()
             {
-                Github = new Github(GitHubUrl);
+                Github = new GithubRestApiClient(GitHubUrl);
             }
         }
 

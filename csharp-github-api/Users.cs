@@ -18,7 +18,8 @@
 
 namespace csharp_github_api
 {
-    using RestSharp;
+    using csharp_github_api.Resource;
+using RestSharp;
 
     /// <summary>
     /// Encapsulates access to the Github.com User API.
@@ -28,8 +29,6 @@ namespace csharp_github_api
     /// </remarks>
     public class Users : Api
     {
-        //private static readonly ILog Log = LoggingExtensions.Logging.Log.
-
         public Users(){}
 
         /// <summary>
@@ -38,6 +37,7 @@ namespace csharp_github_api
         /// <param name="baseUrl">The base url for GitHub's API.</param>
         public Users(string baseUrl) : base(baseUrl)
         {
+            
         }
 
         /// <summary>
