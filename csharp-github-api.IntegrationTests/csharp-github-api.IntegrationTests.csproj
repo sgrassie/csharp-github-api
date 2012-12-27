@@ -98,7 +98,7 @@
     </Compile>
     <Compile Include="Ext\TinySpec.cs" />
     <Compile Include="Ext\TestsSpecBase.cs" />
-    <Compile Include="UsersTestsUnAuthenticated.cs" />
+    <Compile Include="UsersTest.cs" />
     <Compile Include="UsersTestsAuthenticated.cs" />
   </ItemGroup>
   <ItemGroup>
