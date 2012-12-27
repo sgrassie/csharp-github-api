@@ -13,6 +13,7 @@ namespace csharp_github_api.Tests
     public class RestRequestFactoryTests
     {
         private RestClient _client;
+        private IRestRequestFactory requestFactory = new RestRequestFactory();
 
         [TestFixtureSetUp]
         public void Setup()
@@ -42,7 +43,7 @@ namespace csharp_github_api.Tests
         [Test]
         public void CreateRequestUsingFunc()
         {
-            var request = RestRequestFactory.CreateRequest(
+            var request = requestFactory.CreateRequest(
                 () => new RestRequest
                             {
                                 Resource = "/users/sgrassie",
@@ -58,7 +59,7 @@ namespace csharp_github_api.Tests
         [Test]
         public void CreateRequestSpecifyingResourceAndParameters()
         {
-            var request = RestRequestFactory.CreateRequest("/users/{user}", Method.GET, new[]
+            var request = requestFactory.CreateRequest("/users/{user}", Method.GET, new[]
                                                                                             {
                                                                                                 new Parameter
                                                                                                     {
@@ -76,7 +77,7 @@ namespace csharp_github_api.Tests
         [Test]
         public void CreateRequestSpecifyingResourceAndParametersWithKeyValuePairs()
         {
-            var request = RestRequestFactory.CreateRequest(
+            var request = requestFactory.CreateRequest(
                 "/users/{user}", 
                 Method.GET, 
                 new[]

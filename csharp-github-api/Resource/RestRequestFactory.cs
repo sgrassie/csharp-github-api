@@ -5,21 +5,21 @@ using csharp_github_api.Core;
 
 namespace csharp_github_api.Resource
 {
-    public class RestRequestFactory
+    public class RestRequestFactory : IRestRequestFactory
     {
         private static IHeaderProvider _headerProvider;
 
-        private RestRequestFactory(IHeaderProvider headerProvider = null)
+        public RestRequestFactory(IHeaderProvider headerProvider = null)
         {
             _headerProvider = headerProvider;
         }
 
-        public static IRestRequest CreateRequest(Func<IRestRequest> request)
+        public IRestRequest CreateRequest(Func<IRestRequest> request)
         {
             return request.Invoke();
         }
 
-        public static IRestRequest CreateRequest(string resource, Method method = Method.GET, params Parameter[] parameters)
+        public IRestRequest CreateRequest(string resource, Method method = Method.GET, params Parameter[] parameters)
         {
             return CreateRequest(
                 () =>
@@ -45,7 +45,7 @@ namespace csharp_github_api.Resource
                 );
         }
 
-        public static IRestRequest CreateRequest(string resource, Method method = Method.GET, params KeyValuePair<string, string>[] parameters)
+        public IRestRequest CreateRequest(string resource, Method method = Method.GET, params KeyValuePair<string, string>[] parameters)
         {
             return CreateRequest(
                 () =>

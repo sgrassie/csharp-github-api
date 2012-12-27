@@ -70,6 +70,7 @@
     <Compile Include="Extensions\MiscExtensions.cs" />
     <Compile Include="Lib\SimpleJson.cs" />
     <Compile Include="LogExtensions.cs" />
+    <Compile Include="Resource\IRestRequestFactory.cs" />
     <Compile Include="Resource\RestRequestFactory.cs" />
     <Compile Include="RestSharpRestResponseExtension.cs" />
     <Compile Include="Github.cs" />

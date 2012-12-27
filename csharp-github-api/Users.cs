@@ -19,7 +19,6 @@
 namespace csharp_github_api
 {
     using RestSharp;
-    using LoggingExtensions.Logging;
 
     /// <summary>
     /// Encapsulates access to the Github.com User API.
