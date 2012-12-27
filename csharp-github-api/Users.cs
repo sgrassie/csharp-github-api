@@ -16,6 +16,8 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using System.Globalization;
+
 namespace csharp_github_api
 {
     using RestSharp;
@@ -36,6 +38,10 @@ namespace csharp_github_api
         private readonly Func<string, IRestRequest> _user = username => _restRequestFactory.CreateRequest(
             "/users/{username}", Method.GET, new[]{ new KeyValuePair<string, string>("username", username)});
 
+        /// <summary>
+        /// Get the authenticated user
+        /// </summary>
+        /// <returns>A <see cref="IRestResponse"/> for the authenticated user.</returns>
         public IRestResponse GetUser()
         {
             this.Log().Info(() => "Making request for the authenticated user.");
@@ -48,6 +54,11 @@ namespace csharp_github_api
             return response;
         }
 
+        /// <summary>
+        /// Get the authenticated user
+        /// </summary>
+        /// <typeparam name="T">The user model to serialise the JSON data into.</typeparam>
+        /// <returns>A <see cref="IRestResponse{T}"/> for the authenticated user.</returns>
         public IRestResponse<T> GetUser<T>() where T : new()
         {
             this.Log().Info(() => "Making request for the authenticated user.");
@@ -60,7 +71,7 @@ namespace csharp_github_api
         }
 
         /// <summary>
-        /// Gets the specified user from GitHub.
+        /// Get a single user
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
         public IRestResponse GetUser(string username)
@@ -76,7 +87,7 @@ namespace csharp_github_api
         }
 
         /// <summary>
-        /// Gets the specified user from GitHub.
+        /// Get a single user
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
         public IRestResponse<TUser> GetUser<TUser>(string username) where TUser : new()
@@ -88,6 +99,32 @@ namespace csharp_github_api
 
             CheckRateLimit(response.Headers);
 
+            return response;
+        }
+
+        /// <summary>
+        /// Get all users
+        /// </summary>
+        /// <remarks>
+        /// This provides a dump of every user, in the order that they signed up for GitHub.
+        /// </remarks>
+        /// <param name="id">The integer ID of the last User that you’ve seen.</param>
+        /// <returns>A <see cref="IRestResponse"/> containing a chunk of users.</returns>
+        public IRestResponse GetUsers(int id = 0)
+        {
+            var request = _restRequestFactory.CreateRequest(
+                () =>
+                    {
+                        var req = new RestRequest("/users?since={id}")
+                                      {
+                                          Method = Method.GET
+                                      };
+                        req.AddUrlSegment("id", Convert.ToString(id, CultureInfo.InvariantCulture));
+                        return req;
+                    });
+            var response = _innerRestClient.Execute(request);
+
+            CheckRateLimit(response.Headers);
             return response;
         }
 
