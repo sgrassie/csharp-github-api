@@ -1,44 +1,57 @@
+using FluentAssertions;
 using LoggingExtensions.log4net;
 using NUnit.Framework;
+using csharp_github_api.IntegrationTests.Ext;
+using csharp_github_api.Models;
 
 namespace csharp_github_api.IntegrationTests
 {
-    [TestFixture]
-    public class UsersTestsUnAuthenticated
+    public class UsersTest
     {
-        private Github _github;
-        private const string GitHubUrl = @"https://api.github.com";
-
-        [TestFixtureSetUp]
-        public void Setup()
+        public abstract class UsersTestsBase : TestsSpecBase
         {
-            _github = new Github(GitHubUrl).WithLogger<Log4NetLog>();
+            protected Github Github;
+
+            protected string User;
+
+            public override void Context()
+            {
+                Github = new Github(GitHubUrl);
+            }
         }
 
-        [Test]
-        public void GetUser_shouldReturnDeserialisedUserObject()
+        public class when_retrieving_unauthenticated_user : UsersTestsBase
         {
-            var response = _github.User().Get("sgrassie");
+            public override void Because()
+            {
+                User = "sgrassie";
+            }
 
-            Assert.That(response.Dynamic().login, Is.StringMatching("sgrassie"));
+            [Fact]
+            public void then_response_data_with_model_should_contain_expected_user()
+            {
+                var response = Github.User().Get<User>("sgrassie");
+
+                response.Data.Login.Should().Be(User, "The response should be for the specified user.");
+            }
+
+            [Fact]
+            public void then_response_dynamic_should_have_login_property_with_expected_user()
+            {
+                var response = Github.User().Get("sgrassie");
+
+                Assert.That(response.Dynamic().login, Is.StringMatching(User));
+            }
+
+            [Fact]
+            public void then_response_data_with_model_should_not_contain_private_data()
+            {
+                var userApi = Github.User();
+                var user = userApi.Get<User>("sgrassie");
+
+                user.Data.DiskUsage.Should().Be(0);
+            }
         }
-
-        //[Test]
-        //public void GetUser_returns_validUserObject()
-        //{
-        //    var user = _github.User.Get("defunkt");
-
-        //    Assert.That(user.Name, Is.StringMatching("Chris Wanstrath"));
-        //}
-
-        //[Test]
-        //public void UnAuthenticatedCallShouldFail()
-        //{
-        //    var api = new UserApi(GitHubUrl);
-        //    var user = api.Get("sgrassie");
-            
-        //    Assert.That(user.DiskUsage, Is.EqualTo(0));
-        //}
 
         //[Test]
         //public void WithAuthenticationCallToMethodRequiringAuthenticationShouldBeSuccessful()

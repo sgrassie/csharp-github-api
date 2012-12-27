@@ -5,31 +5,45 @@ using System;
 using System.Linq;
 using System.Text;
 using csharp_github_api.Core;
+using csharp_github_api.IntegrationTests.Ext;
 
 namespace csharp_github_api.IntegrationTests
 {
-    [TestFixture]
     public class HeaderProviderTests
     {
-        [Test]
-        [Ignore("Not sure what default headers to provide yet.")]
-        public void should_provide_default_headers()
+        public abstract class HeaderProviderTestsBase : TinySpec
         {
-            var provider = new HeaderProvider();
+            protected HeaderProvider HeaderProvider;
 
-            var headers = provider.Headers;
-
-            headers.Should().NotBeEmpty("Default headers should be provided.");
+            public override void Context()
+            {
+                HeaderProvider = new HeaderProvider();
+            }
         }
 
-        [Test]
-        public void addheader_should_add_to_default_headers()
+        public class when_new_object_instance_instantiated : HeaderProviderTestsBase
         {
-            var provider = new HeaderProvider();
-            var header = new Header("name", "value");
-            provider.AddHeader(header);
+            public override void Because()
+            {
+            }
 
-            provider.Headers.Contains(header).Should().BeTrue();
+            [Fact]
+            [Ignore("Not sure what default headers to provide yet.")]
+            public void should_provide_default_headers()
+            {
+                var headers = HeaderProvider.Headers;
+
+                headers.Should().NotBeEmpty("Default headers should be provided.");
+            }
+
+            [Fact]
+            public void should_be_able_to_add_to_default_headers()
+            {
+                var header = new Header("name", "value");
+                HeaderProvider.AddHeader(header);
+
+                HeaderProvider.Headers.Contains(header).Should().BeTrue();
+            }
         }
     }
 }
