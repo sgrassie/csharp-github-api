@@ -18,8 +18,9 @@
 
 namespace csharp_github_api
 {
-    using csharp_github_api.Resource;
-using RestSharp;
+    using RestSharp;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Encapsulates access to the Github.com User API.
@@ -29,6 +30,35 @@ using RestSharp;
     /// </remarks>
     public partial class GithubRestApiClient
     {
+        private readonly Func<IRestRequest> _authenticatedUser =
+            () => _restRequestFactory.CreateRequest(() => new RestRequest("/user"));
+
+        private readonly Func<string, IRestRequest> _user = username => _restRequestFactory.CreateRequest(
+            "/users/{username}", Method.GET, new[]{ new KeyValuePair<string, string>("username", username)});
+
+        public IRestResponse GetUser()
+        {
+            this.Log().Info(() => "Making request for the authenticated user.");
+
+            var request = _authenticatedUser.Invoke();
+
+            var response = _innerRestClient.Execute(request);
+            CheckRateLimit(response.Headers);
+
+            return response;
+        }
+
+        public IRestResponse<T> GetUser<T>() where T : new()
+        {
+            this.Log().Info(() => "Making request for the authenticated user.");
+            var request = _authenticatedUser.Invoke();
+
+            var response = _innerRestClient.Execute<T>(request);
+            CheckRateLimit(response.Headers);
+
+            return response;
+        }
+
         /// <summary>
         /// Gets the specified user from GitHub.
         /// </summary>
@@ -37,14 +67,9 @@ using RestSharp;
         {
             this.Log().Info("Making request for {0}", username);
 
-            if (Client == null) Client = GetRestClient();
+            var request = _user(username);
 
-            var request = new RestRequest
-                              {
-                                  Resource = string.Format("/users/{0}", username)
-                              };
-
-            var response = Client.Execute(request);
+            var response = _innerRestClient.Execute(request);
             CheckRateLimit(response.Headers);
 
             return response;
@@ -56,14 +81,10 @@ using RestSharp;
         /// <param name="username">The user to get from GitHub.</param>
         public IRestResponse<TUser> GetUser<TUser>(string username) where TUser : new()
         {
-            if (Client == null) Client = GetRestClient();
 
-            var request = new RestRequest
-                              {
-                                  Resource = string.Format("/users/{0}", username)
-                              };
+            var request = _user(username);
 
-            var response = Client.Execute<TUser>(request);
+            var response = _innerRestClient.Execute<TUser>(request);
 
             CheckRateLimit(response.Headers);
 

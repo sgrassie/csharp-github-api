@@ -1,6 +1,8 @@
+using System.Configuration;
 using FluentAssertions;
 using LoggingExtensions.log4net;
 using NUnit.Framework;
+using RestSharp;
 using csharp_github_api.IntegrationTests.Ext;
 using csharp_github_api.Models;
 
@@ -49,6 +51,32 @@ namespace csharp_github_api.IntegrationTests
                 var user = Github.GetUser<User>("sgrassie");
 
                 user.Data.DiskUsage.Should().Be(0);
+            }
+        }
+
+        public class when_retrieving_the_authenticated_user : UsersTestsBase
+        {
+            public override void Because()
+            {
+                User = "sgrassie";
+            }
+
+            public override void Context()
+            {
+                base.Context();
+                var config = ConfigurationManager.OpenExeConfiguration("csharp-github-api.IntegrationTests.dll");
+                var basicAuthenticator = new HttpBasicAuthenticator(
+                    config.AppSettings.Settings["username"].Value,
+                    config.AppSettings.Settings["password"].Value);
+                Github = Github.WithAuthentication(basicAuthenticator);
+            }
+
+            [Fact]
+            public void then_response_data_with_model_should_contain_expected_user()
+            {
+                var user = Github.GetUser<User>();
+
+                user.Data.DiskUsage.Should().BeGreaterThan(0);
             }
         }
 

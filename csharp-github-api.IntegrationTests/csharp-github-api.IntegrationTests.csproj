@@ -99,7 +99,6 @@
     <Compile Include="Ext\TinySpec.cs" />
     <Compile Include="Ext\TestsSpecBase.cs" />
     <Compile Include="UsersTest.cs" />
-    <Compile Include="UsersTestsAuthenticated.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-github-api.Models\csharp-github-api.Models.csproj">

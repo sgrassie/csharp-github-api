@@ -18,10 +18,9 @@
 
 namespace csharp_github_api
 {
-    using csharp_github_api.Resource;
     using LoggingExtensions.Logging;
+    using Resource;
     using RestSharp;
-    using System;
 
     /// <summary>
     /// Access the Github.com API.
@@ -29,7 +28,8 @@ namespace csharp_github_api
     public partial class GithubRestApiClient : Api
     {
         private IAuthenticator _gitHubAuthenticator;
-        private IRestRequestFactory _restRequestFactory;
+        private static IRestRequestFactory _restRequestFactory;
+        private IRestClient _innerRestClient;
 
         /// <summary>
         /// Default Constructor.
@@ -38,7 +38,9 @@ namespace csharp_github_api
         public GithubRestApiClient(string baseUrl = "https://api.github.com")
         {
             BaseUrl = baseUrl;
+            _innerRestClient = new RestClient(BaseUrl);
             Log.InitializeWith<NullLog>();
+            _restRequestFactory = new RestRequestFactory();
         }
 
         public GithubRestApiClient WithLogger<TLogger>() where TLogger : ILog, new()
@@ -55,7 +57,8 @@ namespace csharp_github_api
         /// <param name="authenticator">The <see cref="IAuthenticator"/> to use for authentication.</param>
         public GithubRestApiClient WithAuthentication(IAuthenticator authenticator)
         {
-            _gitHubAuthenticator = authenticator;
+            this.Log().Info("Authentication enabled with {0}", authenticator.GetType().FullName);
+            _innerRestClient.Authenticator = authenticator;
             return this;
         }
     }

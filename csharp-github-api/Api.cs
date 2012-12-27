@@ -31,7 +31,6 @@ namespace csharp_github_api
     public abstract class Api
     {
         public string BaseUrl;
-        protected RestClient Client;
         protected IAuthenticator Authenticator;
         private int _rateLimitRemaining;
 
@@ -68,19 +67,6 @@ namespace csharp_github_api
 
                 if (_rateLimitRemaining <= 0)
                     throw new GitHubResponseException(string.Format("Github API rate limit ({0}) has been reached.", RateLimit));
-            }
-        }
-
-        public virtual RestClient GetRestClient()
-        {
-            return new RestClient(BaseUrl);
-        }
-
-        protected virtual void RequiresAuthentication()
-        {
-            if(Client.Authenticator == null)
-            {
-                throw new GitHubAuthorizationException("Access to this method requires an authenticated user");
             }
         }
 
