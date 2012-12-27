@@ -27,24 +27,13 @@ using RestSharp;
     /// <remarks>
     /// See http://developer.github.com/v3/users/ for more details.
     /// </remarks>
-    public class Users : Api
+    public partial class GithubRestApiClient
     {
-        public Users(){}
-
-        /// <summary>
-        /// Instantiates a new instance of the <see cref="Users"/> class.
-        /// </summary>
-        /// <param name="baseUrl">The base url for GitHub's API.</param>
-        public Users(string baseUrl) : base(baseUrl)
-        {
-            
-        }
-
         /// <summary>
         /// Gets the specified user from GitHub.
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
-        public IRestResponse Get(string username)
+        public IRestResponse GetUser(string username)
         {
             this.Log().Info("Making request for {0}", username);
 
@@ -65,7 +54,7 @@ using RestSharp;
         /// Gets the specified user from GitHub.
         /// </summary>
         /// <param name="username">The user to get from GitHub.</param>
-        public IRestResponse<TUser> Get<TUser>(string username) where TUser : new()
+        public IRestResponse<TUser> GetUser<TUser>(string username) where TUser : new()
         {
             if (Client == null) Client = GetRestClient();
 

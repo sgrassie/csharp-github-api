@@ -30,7 +30,7 @@ namespace csharp_github_api.IntegrationTests
             [Fact]
             public void then_response_data_with_model_should_contain_expected_user()
             {
-                var response = Github.User().Get<User>("sgrassie");
+                var response = Github.GetUser<User>("sgrassie");
 
                 response.Data.Login.Should().Be(User, "The response should be for the specified user.");
             }
@@ -38,7 +38,7 @@ namespace csharp_github_api.IntegrationTests
             [Fact]
             public void then_response_dynamic_should_have_login_property_with_expected_user()
             {
-                var response = Github.User().Get("sgrassie");
+                var response = Github.GetUser("sgrassie");
 
                 Assert.That(response.Dynamic().login, Is.StringMatching(User));
             }
@@ -46,8 +46,7 @@ namespace csharp_github_api.IntegrationTests
             [Fact]
             public void then_response_data_with_model_should_not_contain_private_data()
             {
-                var userApi = Github.User();
-                var user = userApi.Get<User>("sgrassie");
+                var user = Github.GetUser<User>("sgrassie");
 
                 user.Data.DiskUsage.Should().Be(0);
             }
@@ -58,7 +57,7 @@ namespace csharp_github_api.IntegrationTests
         //{
         //    var authenticator = ObjectFactory.GetInstance<IAuthenticator>();
         //    var api = new UserApi(GitHubUrl).WithAuthentication(authenticator);
-        //    var user = api.Get("sgrassie");
+        //    var user = api.GetUser("sgrassie");
         //    Assert.That(user.DiskUsage, Is.GreaterThan(0));
         //}
 
@@ -66,7 +65,7 @@ namespace csharp_github_api.IntegrationTests
         //public void Should_Get_List_Of_Following()
         //{
         //    var api = new UserApi(GitHubUrl);
-        //    var user = api.Get("sgrassie");
+        //    var user = api.GetUser("sgrassie");
 
         //    api.GetFollowing(user).Count.Should().BeGreaterThan(0);
         //}
@@ -83,7 +82,7 @@ namespace csharp_github_api.IntegrationTests
         //public void WhenNotAuthenticatedFollowShouldThrowNotAuthenticatedException()
         //{
         //    var api = new UserApi(GitHubUrl);
-        //    var user = api.Get("sgrassie");
+        //    var user = api.GetUser("sgrassie");
 
         //    Assert.Throws<GitHubAuthorizationException>(() => api.Follow("mono"));
         //}
@@ -92,7 +91,7 @@ namespace csharp_github_api.IntegrationTests
         //public void Should_Follow_And_Unfollow_User()
         //{
         //    var api = new UserApi(GitHubUrl).WithAuthentication(ObjectFactory.GetInstance<IAuthenticator>());
-        //    var user = api.Get("sgrassie");
+        //    var user = api.GetUser("sgrassie");
 
         //    api.Follow("mono").Should().BeTrue("should follow the user mono");
         //    api.GetFollowing(user).Should().Contain(x => x.Login == "mono");

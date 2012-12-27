@@ -18,6 +18,7 @@
 
 namespace csharp_github_api
 {
+    using csharp_github_api.Resource;
     using LoggingExtensions.Logging;
     using RestSharp;
     using System;
@@ -25,15 +26,16 @@ namespace csharp_github_api
     /// <summary>
     /// Access the Github.com API.
     /// </summary>
-    public partial class GithubRestApiClient
+    public partial class GithubRestApiClient : Api
     {
-        private readonly IAuthenticator _gitHubAuthenticator;
+        private IAuthenticator _gitHubAuthenticator;
+        private IRestRequestFactory _restRequestFactory;
 
         /// <summary>
         /// Default Constructor.
         /// </summary>
         /// <param name="baseUrl">The base URL for accessing GitHub's API.</param>
-        public GithubRestApiClient(string baseUrl)
+        public GithubRestApiClient(string baseUrl = "https://api.github.com")
         {
             BaseUrl = baseUrl;
             Log.InitializeWith<NullLog>();
@@ -48,24 +50,13 @@ namespace csharp_github_api
         }
 
         /// <summary>
-        /// Instantiates a new instance of the Github class.
+        /// Add authentication to the client.
         /// </summary>
-        /// <param name="baseUrl">The base URL for accessing GitHub's API.</param>
         /// <param name="authenticator">The <see cref="IAuthenticator"/> to use for authentication.</param>
-        public GithubRestApiClient(string baseUrl, IAuthenticator authenticator)
-            : this(baseUrl)
+        public GithubRestApiClient WithAuthentication(IAuthenticator authenticator)
         {
             _gitHubAuthenticator = authenticator;
-        }
-
-        /// <summary>
-        /// Gets or sets the base URL for accessing GitHub's API.
-        /// </summary>
-        public string BaseUrl { get; set; }
-
-        public Users User()
-        {
-            return new Users(BaseUrl);
+            return this;
         }
     }
 }
