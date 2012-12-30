@@ -18,6 +18,7 @@ namespace csharp_github_api.IntegrationTests
 
             public override void Context()
             {
+                base.Context();
                 Github = new GithubRestApiClient(GitHubUrl);
             }
         }
@@ -26,13 +27,13 @@ namespace csharp_github_api.IntegrationTests
         {
             public override void Because()
             {
-                User = "sgrassie";
+                User = Username;
             }
 
             [Fact]
             public void then_response_data_with_model_should_contain_expected_user()
             {
-                var response = Github.GetUser<User>("sgrassie");
+                var response = Github.GetUser<User>(Username);
 
                 response.Data.Login.Should().Be(User, "The response should be for the specified user.");
             }
@@ -40,7 +41,7 @@ namespace csharp_github_api.IntegrationTests
             [Fact]
             public void then_response_dynamic_should_have_login_property_with_expected_user()
             {
-                var response = Github.GetUser("sgrassie");
+                var response = Github.GetUser(Username);
 
                 Assert.That(response.Dynamic().login, Is.StringMatching(User));
             }
@@ -48,7 +49,7 @@ namespace csharp_github_api.IntegrationTests
             [Fact]
             public void then_response_data_with_model_should_not_contain_private_data()
             {
-                var user = Github.GetUser<User>("sgrassie");
+                var user = Github.GetUser<User>(Username);
 
                 user.Data.DiskUsage.Should().Be(0);
             }
@@ -58,17 +59,14 @@ namespace csharp_github_api.IntegrationTests
         {
             public override void Because()
             {
-                User = "sgrassie";
+                User = Username;
             }
 
             public override void Context()
             {
                 base.Context();
-                var config = ConfigurationManager.OpenExeConfiguration("csharp-github-api.IntegrationTests.dll");
-                var basicAuthenticator = new HttpBasicAuthenticator(
-                    config.AppSettings.Settings["username"].Value,
-                    config.AppSettings.Settings["password"].Value);
-                Github = Github.WithAuthentication(basicAuthenticator);
+                
+                Github = Github.WithAuthentication(Authenticator());
             }
 
             [Fact]
