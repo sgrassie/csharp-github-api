@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
-// <copyright file="UserApi.cs" company="TemporalCohesion.co.uk">
-//     Copyright [2010] [Stuart Grassie]
+// <copyright file="Users.cs" company="TemporalCohesion.co.uk">
+//     Copyright 2010 - Present Stuart Grassie
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
 //     you may not use this file except in compliance with the License.
@@ -16,13 +16,12 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using System.Globalization;
-
 namespace csharp_github_api
 {
     using RestSharp;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
 
     /// <summary>
     /// Encapsulates access to the Github.com User API.

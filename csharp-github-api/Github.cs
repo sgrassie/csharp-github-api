@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="Github.cs" company="TemporalCohesion.co.uk">
-//     Copyright [2010] [Stuart Grassie]
+//     Copyright 2010 - Present Stuart Grassie
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
 //     you may not use this file except in compliance with the License.
@@ -27,9 +27,8 @@ namespace csharp_github_api
     /// </summary>
     public partial class GithubRestApiClient : Api
     {
-        private IAuthenticator _gitHubAuthenticator;
         private static IRestRequestFactory _restRequestFactory;
-        private IRestClient _innerRestClient;
+        private readonly IRestClient _innerRestClient;
 
         /// <summary>
         /// Default Constructor.

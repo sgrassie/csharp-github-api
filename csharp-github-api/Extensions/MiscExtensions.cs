@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MiscExtensionscs" company="TemporalCohesion.co.uk">
-//     Copyright [2011] [Stuart Grassie]
+// <copyright file="MiscExtensions.cs" company="TemporalCohesion.co.uk">
+//     Copyright 2011 - Present Stuart Grassie
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
 //     you may not use this file except in compliance with the License.
@@ -16,12 +16,11 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using System.Collections.Generic;
-using RestSharp;
-using csharp_github_api.Exceptions;
-
 namespace csharp_github_api.Extensions
 {
+    using Exceptions;
+    using RestSharp;
+    using System.Collections.Generic;
     using System.Net;
 
     /// <summary>

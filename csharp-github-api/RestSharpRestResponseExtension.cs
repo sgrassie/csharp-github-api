@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RestSharpRestResponseExtension.cs" company="TemporalCohesion.co.uk">
-//     Copyright [2012] [Stuart Grassie]
+//     Copyright 2012 - Present Stuart Grassie
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
 //     you may not use this file except in compliance with the License.
@@ -16,10 +16,9 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using csharp_github_api.Lib;
-
 namespace csharp_github_api
 {
+    using Lib;
     using RestSharp;
 
     public static class RestSharpRestResponseExtension

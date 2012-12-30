@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
 // <copyright file="Api.cs" company="TemporalCohesion.co.uk">
-//     Copyright [2010] [Stuart Grassie]
+//     Copyright 2010 - Present Stuart Grassie
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
 //     you may not use this file except in compliance with the License.
@@ -16,15 +16,15 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using RestSharp;
-using csharp_github_api.Exceptions;
-
 namespace csharp_github_api
 {
+    using Exceptions;
+    using RestSharp;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+
     /// <summary>
     /// Base class for specific API classes.
     /// </summary>
