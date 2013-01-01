@@ -21,6 +21,7 @@ namespace csharp_github_api
     using RestSharp;
     using System;
     using System.Collections.Generic;
+    using System.Dynamic;
     using System.Globalization;
 
     /// <summary>
@@ -125,6 +126,46 @@ namespace csharp_github_api
 
             CheckRateLimit(response.Headers);
             return response;
+        }
+
+        public IRestResponse<TUser> UpdateUser<TUser>(
+            string name = "", string email = "", string blog = null, string company = "", string location = "", 
+            string hireable = "", string bio = "") where TUser : new()
+        {
+            dynamic data = GetUpdateData(name, email, blog, company, location, hireable, bio);
+
+            var request = _restRequestFactory.CreateRequest(
+                () =>
+                    {
+                        var req = new RestRequest("/user")
+                                      {
+                                          Method = Method.PATCH,
+                                          RequestFormat = DataFormat.Json
+                                      };
+                        req.AddBody(data);
+                        return req;
+                    });
+
+            var response = _innerRestClient.Execute<TUser>(request);
+            CheckRateLimit(response.Headers);
+
+            return response;
+        }
+
+        private dynamic GetUpdateData(string name = "", string email = "", string blog = null, string company = "",
+                                      string location = "",
+                                      string hireable = "", string bio = "")
+        {
+            dynamic data = new ExpandoObject();
+            data.name = !string.IsNullOrEmpty(name) ? name : null;
+            data.email = !string.IsNullOrEmpty(email) ? email : null;
+            data.blog = !string.IsNullOrEmpty(blog) ? blog : null;
+            data.company = !string.IsNullOrEmpty(company) ? company : null;
+            data.location = !string.IsNullOrEmpty(location) ? location : null;
+            data.hireable = !string.IsNullOrEmpty(hireable) ? (dynamic) bool.Parse(hireable) : null;
+            data.bio = !string.IsNullOrEmpty(bio) ? bio : null;
+
+            return data;
         }
 
         ///// <summary>

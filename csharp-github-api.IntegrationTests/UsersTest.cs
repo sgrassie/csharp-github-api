@@ -74,7 +74,38 @@ namespace csharp_github_api.IntegrationTests
             {
                 var user = Github.GetUser<User>();
 
+                user.Data.Login.Should().Be(Username);
+            }
+
+            [Fact]
+            public void then_response_data_with_model_should_contain_private_data()
+            {
+                var user = Github.GetUser<User>();
+
                 user.Data.DiskUsage.Should().BeGreaterThan(0);
+            }
+        }
+
+        public class when_updating_a_user : UsersTestsBase
+        {
+            public override void Because()
+            {
+                User = Username;
+            }
+
+            public override void Context()
+            {
+                base.Context();
+                Github = Github.WithAuthentication(Authenticator());
+            }
+
+            [Fact]
+            [Ignore]
+            public void then_private_data_should_be_updated()
+            {
+                var response = Github.UpdateUser<User>(location: "moon");
+
+                response.Data.Location.Should().Be("moon");
             }
         }
 
