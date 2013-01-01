@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Configuration;
 using FluentAssertions;
 using LoggingExtensions.log4net;
@@ -83,6 +84,39 @@ namespace csharp_github_api.IntegrationTests
                 var user = Github.GetUser<User>();
 
                 user.Data.DiskUsage.Should().BeGreaterThan(0);
+            }
+        }
+
+        public class when_getting_the_list_of_users : UsersTestsBase
+        {
+            public override void Because()
+            {
+                User = Username;
+            }
+
+            public override void Context()
+            {
+                base.Context();
+                Github = Github.WithAuthentication(Authenticator());
+            }
+
+            [Fact]
+            public void then_a_typed_list_should_be_able_to_be_returned()
+            {
+                var users = Github.GetUsers<List<Users>>();
+
+                users.Data.Should().BeOfType<List<Users>>();
+                users.Data.Count.Should().BeGreaterThan(0);
+            }
+            
+            [Fact]
+            public void then_dynamic_json_array_is_accessible()
+            {
+                var users = Github.GetUsers();
+
+                string url = users.Dynamic()[0].avatar_url;
+
+                url.Should().NotBeNullOrEmpty();
             }
         }
 

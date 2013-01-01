@@ -38,6 +38,17 @@ namespace csharp_github_api
         private readonly Func<string, IRestRequest> _user = username => _restRequestFactory.CreateRequest(
             "/users/{username}", Method.GET, new[]{ new KeyValuePair<string, string>("username", username)});
 
+        private readonly Func<string, IRestRequest> _listUsers = (since) => _restRequestFactory.CreateRequest(
+            () =>
+                {
+                    var req = new RestRequest("/users?since={id}")
+                                    {
+                                        Method = Method.GET
+                                    };
+                    req.AddUrlSegment("id", Convert.ToString(since,CultureInfo.InvariantCulture));
+                    return req;
+                });
+
         /// <summary>
         /// Get the authenticated user
         /// </summary>
@@ -110,19 +121,27 @@ namespace csharp_github_api
         /// </remarks>
         /// <param name="id">The integer ID of the last User that you’ve seen.</param>
         /// <returns>A <see cref="IRestResponse"/> containing a chunk of users.</returns>
-        public IRestResponse GetUsers(int id = 0)
+        public IRestResponse GetUsers(string id = "")
         {
-            var request = _restRequestFactory.CreateRequest(
-                () =>
-                    {
-                        var req = new RestRequest("/users?since={id}")
-                                      {
-                                          Method = Method.GET
-                                      };
-                        req.AddUrlSegment("id", Convert.ToString(id, CultureInfo.InvariantCulture));
-                        return req;
-                    });
+            var request = _listUsers.Invoke(id);
             var response = _innerRestClient.Execute(request);
+
+            CheckRateLimit(response.Headers);
+            return response;
+        }
+
+        /// <summary>
+        /// Get all users
+        /// </summary>
+        /// <remarks>
+        /// This provides a dump of every user, in the order that they signed up for GitHub.
+        /// </remarks>
+        /// <param name="id">The integer ID of the last User that you’ve seen.</param>
+        /// <returns>A <see cref="IRestResponse"/> containing a chunk of users.</returns>
+        public IRestResponse<T> GetUsers<T>(string id = "") where T : new()
+        {
+            var request = _listUsers.Invoke(id);
+            var response = _innerRestClient.Execute<T>(request);
 
             CheckRateLimit(response.Headers);
             return response;
