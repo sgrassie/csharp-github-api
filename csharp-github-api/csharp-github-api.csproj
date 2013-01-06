@@ -57,20 +57,54 @@
     <Compile Include="..\SolutionVersion.cs">
       <Link>Properties\SolutionVersion.cs</Link>
     </Compile>
-    <Compile Include="Api.cs" />
+    <Compile Include="ApiBase.cs" />
+    <Compile Include="Api\Activity\ActivityEvents.cs" />
+    <Compile Include="Api\Activity\ActivityNotifications.cs" />
+    <Compile Include="Api\Activity\ActivityStarring.cs" />
+    <Compile Include="Api\Activity\ActivityWatching.cs" />
+    <Compile Include="Api\GitData\GitDataBlobs.cs" />
+    <Compile Include="Api\GitData\GitDataCommits.cs" />
+    <Compile Include="Api\GitData\GitDataReferences.cs" />
+    <Compile Include="Api\GitData\GitDataTags.cs" />
+    <Compile Include="Api\GitData\GitDataTrees.cs" />
+    <Compile Include="Api\Issues\Issues.cs" />
+    <Compile Include="Api\Issues\IssuesAssignees.cs" />
+    <Compile Include="Api\Issues\IssuesComments.cs" />
+    <Compile Include="Api\Issues\IssuesEvents.cs" />
+    <Compile Include="Api\Issues\IssuesLabels.cs" />
+    <Compile Include="Api\Issues\IssuesMilestones.cs" />
+    <Compile Include="Api\Orgs\Orgs.cs" />
+    <Compile Include="Api\Orgs\OrgsMembers.cs" />
+    <Compile Include="Api\Orgs\OrgsTeams.cs" />
+    <Compile Include="Api\Repositories\Repositories.cs" />
+    <Compile Include="Api\Repositories\RepositoriesCollaborators.cs" />
+    <Compile Include="Api\Repositories\RepositoriesComments.cs" />
+    <Compile Include="Api\Repositories\RepositoriesCommits.cs" />
+    <Compile Include="Api\Repositories\RepositoriesContents.cs" />
+    <Compile Include="Api\Repositories\RepositoriesDownloads.cs" />
+    <Compile Include="Api\Repositories\RepositoriesForks.cs" />
+    <Compile Include="Api\Repositories\RepositoriesHooks.cs" />
+    <Compile Include="Api\Repositories\RepositoriesKeys.cs" />
+    <Compile Include="Api\Repositories\RepositoriesMerging.cs" />
+    <Compile Include="Api\Repositories\RepositoriesStatuses.cs" />
+    <Compile Include="Api\Users\Users.cs" />
+    <Compile Include="Execute.cs" />
     <Compile Include="Core\Header.cs" />
     <Compile Include="Core\HeaderProvider.cs" />
     <Compile Include="Exceptions\GitHubAuthorizationException.cs" />
     <Compile Include="Exceptions\GitHubResponseException.cs" />
     <Compile Include="Extensions\MiscExtensions.cs" />
+    <Compile Include="Api\Gists\Gists.cs" />
     <Compile Include="Lib\SimpleJson.cs" />
     <Compile Include="LogExtensions.cs" />
+    <Compile Include="Api\PullRequests\PullRequests.cs" />
+    <Compile Include="Api\PullRequests\PullRequestsReviewComments.cs" />
     <Compile Include="Resource\IRestRequestFactory.cs" />
     <Compile Include="Resource\RestRequestFactory.cs" />
     <Compile Include="RestSharpRestResponseExtension.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Users.cs" />
+    <Compile Include="Api\Search\Search.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

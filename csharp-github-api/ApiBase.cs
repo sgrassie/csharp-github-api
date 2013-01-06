@@ -28,19 +28,19 @@ namespace csharp_github_api
     /// <summary>
     /// Base class for specific API classes.
     /// </summary>
-    public abstract class Api
+    public abstract class ApiBase
     {
         public string BaseUrl;
         protected IAuthenticator Authenticator;
         private int _rateLimitRemaining;
 
-        protected Api(){}
+        protected ApiBase(){}
 
         /// <summary>
         /// Instantiattes a new instance of the <see cref="Api"/> class.
         /// </summary>
         /// <param name="baseUrl">The base url for GitHub's API.</param>
-        protected Api(string baseUrl)
+        protected ApiBase(string baseUrl)
         {
             BaseUrl = baseUrl;
         }

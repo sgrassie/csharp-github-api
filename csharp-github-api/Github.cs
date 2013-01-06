@@ -25,9 +25,8 @@ namespace csharp_github_api
     /// <summary>
     /// Access the Github.com API.
     /// </summary>
-    public partial class GithubRestApiClient : Api
+    public partial class GithubRestApiClient : ApiBase
     {
-        private static IRestRequestFactory _restRequestFactory;
         private readonly IRestClient _innerRestClient;
 
         /// <summary>
@@ -39,7 +38,7 @@ namespace csharp_github_api
             BaseUrl = baseUrl;
             _innerRestClient = new RestClient(BaseUrl);
             Log.InitializeWith<NullLog>();
-            _restRequestFactory = new RestRequestFactory();
+            RequestFactory = new RestRequestFactory();
         }
 
         public GithubRestApiClient WithLogger<TLogger>() where TLogger : ILog, new()
@@ -60,5 +59,7 @@ namespace csharp_github_api
             _innerRestClient.Authenticator = authenticator;
             return this;
         }
+
+        public IRestRequestFactory RequestFactory { get; private set; }
     }
 }

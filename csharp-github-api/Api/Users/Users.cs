@@ -16,13 +16,14 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api
+namespace csharp_github_api.Api.Users
 {
-    using RestSharp;
     using System;
     using System.Collections.Generic;
     using System.Dynamic;
     using System.Globalization;
+    using RestSharp;
+    using LoggingExtensions.Logging;
 
     /// <summary>
     /// Encapsulates access to the Github.com User API.
@@ -30,53 +31,22 @@ namespace csharp_github_api
     /// <remarks>
     /// See http://developer.github.com/v3/users/ for more details.
     /// </remarks>
-    public partial class GithubRestApiClient
+    public static class Users
     {
-        private readonly Func<IRestRequest> _authenticatedUser =
-            () => _restRequestFactory.CreateRequest(() => new RestRequest("/user"));
-
-        private readonly Func<string, IRestRequest> _user = username => _restRequestFactory.CreateRequest(
-            "/users/{username}", Method.GET, new[]{ new KeyValuePair<string, string>("username", username)});
-
-        private readonly Func<string, IRestRequest> _listUsers = (since) => _restRequestFactory.CreateRequest(
-            () =>
-                {
-                    var req = new RestRequest("/users?since={id}")
-                                    {
-                                        Method = Method.GET
-                                    };
-                    req.AddUrlSegment("id", Convert.ToString(since,CultureInfo.InvariantCulture));
-                    return req;
-                });
+        private static readonly ILog Log = LoggingExtensions.Logging.Log.GetLoggerFor(typeof (Users).FullName);
 
         /// <summary>
         /// Get the authenticated user
         /// </summary>
-        /// <returns>A <see cref="IRestResponse"/> for the authenticated user.</returns>
-        public IRestResponse GetUser()
-        {
-            this.Log().Info(() => "Making request for the authenticated user.");
-
-            var request = _authenticatedUser.Invoke();
-
-            var response = _innerRestClient.Execute(request);
-            CheckRateLimit(response.Headers);
-
-            return response;
-        }
-
-        /// <summary>
-        /// Get the authenticated user
-        /// </summary>
+        /// <param name="client">The <see cref="GithubRestApiClient"/> instance to attach to.</param>
         /// <typeparam name="T">The user model to serialise the JSON data into.</typeparam>
         /// <returns>A <see cref="IRestResponse{T}"/> for the authenticated user.</returns>
-        public IRestResponse<T> GetUser<T>() where T : new()
+        public static IRestResponse<T> GetUser<T>(this GithubRestApiClient client) where T : new()
         {
-            this.Log().Info(() => "Making request for the authenticated user.");
-            var request = _authenticatedUser.Invoke();
+            Log.Info(() => "Making request for the authenticated user.");
+            var request = client.RequestFactory.CreateRequest(() => new RestRequest("/user"));
 
-            var response = _innerRestClient.Execute<T>(request);
-            CheckRateLimit(response.Headers);
+            var response = client.Execute<T>(request);
 
             return response;
         }
@@ -84,31 +54,19 @@ namespace csharp_github_api
         /// <summary>
         /// Get a single user
         /// </summary>
+        /// <param name="client">The <see cref="GithubRestApiClient"/> instance to attach to.</param>
         /// <param name="username">The user to get from GitHub.</param>
-        public IRestResponse GetUser(string username)
-        {
-            this.Log().Info("Making request for {0}", username);
-
-            var request = _user(username);
-
-            var response = _innerRestClient.Execute(request);
-            CheckRateLimit(response.Headers);
-
-            return response;
-        }
-
-        /// <summary>
-        /// Get a single user
-        /// </summary>
-        /// <param name="username">The user to get from GitHub.</param>
-        public IRestResponse<TUser> GetUser<TUser>(string username) where TUser : new()
+        public static IRestResponse<TUser> GetUser<TUser>(this GithubRestApiClient client, string username) where TUser : new()
         {
 
-            var request = _user(username);
+            var request = client.RequestFactory.CreateRequest("/users/{username}", Method.GET,
+                                                              new[]
+                                                                  {
+                                                                      new KeyValuePair<string, string>("username",
+                                                                                                       username)
+                                                                  });
 
-            var response = _innerRestClient.Execute<TUser>(request);
-
-            CheckRateLimit(response.Headers);
+            var response = client.Execute<TUser>(request);
 
             return response;
         }
@@ -119,14 +77,23 @@ namespace csharp_github_api
         /// <remarks>
         /// This provides a dump of every user, in the order that they signed up for GitHub.
         /// </remarks>
+        /// <param name="client">The <see cref="GithubRestApiClient"/> instance to attach to.</param>
         /// <param name="id">The integer ID of the last User that you’ve seen.</param>
         /// <returns>A <see cref="IRestResponse"/> containing a chunk of users.</returns>
-        public IRestResponse GetUsers(string id = "")
+        public static IRestResponse GetUsers(this GithubRestApiClient client, string id = "")
         {
-            var request = _listUsers.Invoke(id);
-            var response = _innerRestClient.Execute(request);
-
-            CheckRateLimit(response.Headers);
+            var request = client.RequestFactory.CreateRequest(() =>
+                                                    {
+                                                        var req = new RestRequest("/users?since={id}")
+                                                                      {
+                                                                          Method = Method.GET
+                                                                      };
+                                                        req.AddUrlSegment("id",
+                                                                          Convert.ToString(id,
+                                                                                           CultureInfo.InvariantCulture));
+                                                        return req;
+                                                    });
+            var response = client.Execute(request);
             return response;
         }
 
@@ -136,24 +103,34 @@ namespace csharp_github_api
         /// <remarks>
         /// This provides a dump of every user, in the order that they signed up for GitHub.
         /// </remarks>
+        /// <param name="client">The <see cref="GithubRestApiClient"/> instance to attach to.</param>
         /// <param name="id">The integer ID of the last User that you’ve seen.</param>
         /// <returns>A <see cref="IRestResponse"/> containing a chunk of users.</returns>
-        public IRestResponse<T> GetUsers<T>(string id = "") where T : new()
+        public static IRestResponse<T> GetUsers<T>(this GithubRestApiClient client, string id = "") where T : new()
         {
-            var request = _listUsers.Invoke(id);
-            var response = _innerRestClient.Execute<T>(request);
-
-            CheckRateLimit(response.Headers);
+            var request = client.RequestFactory.CreateRequest(() =>
+                                                                  {
+                                                                      var req = new RestRequest("/users?since={id}")
+                                                                                    {
+                                                                                        Method = Method.GET
+                                                                                    };
+                                                                      req.AddUrlSegment("id",
+                                                                                        Convert.ToString(id,
+                                                                                                         CultureInfo
+                                                                                                             .InvariantCulture));
+                                                                      return req;
+                                                                  });
+            var response = client.Execute<T>(request);
             return response;
         }
 
-        public IRestResponse<TUser> UpdateUser<TUser>(
+        public static IRestResponse<TUser> UpdateUser<TUser>(this GithubRestApiClient client,
             string name = "", string email = "", string blog = null, string company = "", string location = "", 
             string hireable = "", string bio = "") where TUser : new()
         {
             dynamic data = GetUpdateData(name, email, blog, company, location, hireable, bio);
 
-            var request = _restRequestFactory.CreateRequest(
+            var request = client.RequestFactory.CreateRequest(
                 () =>
                     {
                         var req = new RestRequest("/user")
@@ -165,13 +142,12 @@ namespace csharp_github_api
                         return req;
                     });
 
-            var response = _innerRestClient.Execute<TUser>(request);
-            CheckRateLimit(response.Headers);
+            var response = client.Execute<TUser>(request);
 
             return response;
         }
 
-        private dynamic GetUpdateData(string name = "", string email = "", string blog = null, string company = "",
+        private static dynamic GetUpdateData(string name = "", string email = "", string blog = null, string company = "",
                                       string location = "",
                                       string hireable = "", string bio = "")
         {

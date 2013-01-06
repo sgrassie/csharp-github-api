@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-using System.Configuration;
-using FluentAssertions;
-using LoggingExtensions.log4net;
-using NUnit.Framework;
-using RestSharp;
+using csharp_github_api.Api.Users;
 using csharp_github_api.IntegrationTests.Ext;
 using csharp_github_api.Models;
+using FluentAssertions;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace csharp_github_api.IntegrationTests
 {
@@ -42,7 +40,7 @@ namespace csharp_github_api.IntegrationTests
             [Fact]
             public void then_response_dynamic_should_have_login_property_with_expected_user()
             {
-                var response = Github.GetUser(Username);
+                var response = Github.GetUser<User>(Username);
 
                 Assert.That(response.Dynamic().login, Is.StringMatching(User));
             }
@@ -103,9 +101,9 @@ namespace csharp_github_api.IntegrationTests
             [Fact]
             public void then_a_typed_list_should_be_able_to_be_returned()
             {
-                var users = Github.GetUsers<List<Users>>();
+                var users = Github.GetUsers<List<Models.Users>>();
 
-                users.Data.Should().BeOfType<List<Users>>();
+                users.Data.Should().BeOfType<List<Models.Users>>();
                 users.Data.Count.Should().BeGreaterThan(0);
             }
             
