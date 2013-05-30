@@ -11,8 +11,8 @@ Targets .NET 4.
 ### Status
 Barely does anything at the moment. I'm lazy. Started working on this off and on again. Send a pull request.
 
-### Building
-To build, you will need to create a file called csharp-github-api.IntegrationTests.dll.config, in the csharp-github-api.IntegrationTests
+### Running the tests
+In order to run the tests successfully, you will need to create a file called csharp-github-api.IntegrationTests.dll.config, in the csharp-github-api.IntegrationTests
 folder. Simply use the provided example as a starting point:
 
 ```
