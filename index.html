@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Csharp-github-api by sgrassie</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Csharp-github-api</h1>
+        <p class="header">A CSharp library to access the GitHub API</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/sgrassie/csharp-github-api/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/sgrassie/csharp-github-api/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/sgrassie/csharp-github-api">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/sgrassie">sgrassie</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="csharp-github-api---a-csharp-library-to-access-the-github-api" class="anchor" href="#csharp-github-api---a-csharp-library-to-access-the-github-api"><span class="octicon octicon-link"></span></a>csharp-github-api - A CSharp library to access the GitHub API</h1>
+
+<h2>
+<a name="httptemporalcohesioncouk" class="anchor" href="#httptemporalcohesioncouk"><span class="octicon octicon-link"></span></a><a href="http://temporalcohesion.co.uk">http://temporalcohesion.co.uk</a>
+</h2>
+
+<h3>
+<a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h3>
+
+<p>This is a C# library for accessing GitHub's developer <a href="http://developer.github.com/">REST API</a>. It uses the <a href="http://restsharp.org/">RestSharp</a> <a href="http://github.com/johnsheehan/RestSharp">REST client</a> library for most of the heavy lifting.</p>
+
+<p>This library is not an official Github product, is not supported or developed by Github, and all Github trademarks are their own.</p>
+
+<p>Targets .NET 4.</p>
+
+<h3>
+<a name="status" class="anchor" href="#status"><span class="octicon octicon-link"></span></a>Status</h3>
+
+<p>Barely does anything at the moment. I'm lazy. Started working on this off and on again. Send a pull request.</p>
+
+<h3>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h3>
+
+<p>Contributions in the form of pull requests are welcome :)</p>
+
+<h3>
+<a name="running-the-tests" class="anchor" href="#running-the-tests"><span class="octicon octicon-link"></span></a>Running the tests</h3>
+
+<p>In order to successfully run the integration tests which require an authenticated connection to github (i.e. quite a few of them), you will need to create a file called csharp-github-api.IntegrationTests.dll.config, in the csharp-github-api.IntegrationTests
+folder. Simply use the provided example as a starting point:</p>
+
+<pre><code>$ cp csharp-github-api.IntegrationTests/csharp-github-api.IntegrationTests.dll.config.example csharp-github-api.IntegrationTests/csharp-github-api.Integration
+Tests.dll.config
+</code></pre>
+
+<p>Just add your Github username and password. The file is in .gitignore, so you can't accidently commit it.</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;configuration&gt;
+  &lt;appSettings&gt;
+    &lt;add key="username" value="example"/&gt;
+    &lt;add key="password" value="password"/&gt;
+    &lt;add key="token" value="abcedfg"/&gt;
+  &lt;/appSettings&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<h3>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h3>
+
+<p>Licensed under the Apache License, Version 2.0, details included in the source.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
