@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("csharp-github-api.Models")]
+[assembly: AssemblyTitle("GitHubAPI.IntegrationTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PTC")]
-[assembly: AssemblyProduct("csharp-github-api.Models")]
-[assembly: AssemblyCopyright("Copyright © PTC 2012")]
+[assembly: AssemblyCompany("Windows User")]
+[assembly: AssemblyProduct("GitHubAPI.IntegrationTests")]
+[assembly: AssemblyCopyright("Copyright © Windows User 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9f589220-e942-4484-8c7f-b9fde084fc42")]
+[assembly: Guid("76ed7690-2d95-400d-9b87-6879d262fbf1")]
 
 // Version information for an assembly consists of the following four values:
 //

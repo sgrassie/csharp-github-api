@@ -5,9 +5,9 @@ using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
 using RestSharp;
-using csharp_github_api.Resource;
+using GitHubAPI.Resource;
 
-namespace csharp_github_api.Tests
+namespace GitHubAPI.Tests
 {
     [TestFixture]
     public class RestRequestFactoryTests

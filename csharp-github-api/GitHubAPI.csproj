@@ -8,8 +8,8 @@
     <ProjectGuid>{AC8795CC-BDFF-4D37-85EE-E17A7D5A8A59}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>csharp_github_api</RootNamespace>
-    <AssemblyName>csharp-github-api</AssemblyName>
+    <RootNamespace>GitHubAPI</RootNamespace>
+    <AssemblyName>GitHubAPI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -49,8 +49,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="this.Log">
-      <HintPath>..\packages\this.Log.0.0.2.0\lib\net40\this.Log.dll</HintPath>
+    <Reference Include="this.Log, Version=0.0.3.0, Culture=neutral, PublicKeyToken=cbf7544467682e94, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\this.Log.0.0.3.0\lib\net40\this.Log.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -96,15 +97,24 @@
     <Compile Include="Extensions\MiscExtensions.cs" />
     <Compile Include="Api\Gists\Gists.cs" />
     <Compile Include="Lib\SimpleJson.cs" />
-    <Compile Include="LogExtensions.cs" />
     <Compile Include="Api\PullRequests\PullRequests.cs" />
     <Compile Include="Api\PullRequests\PullRequestsReviewComments.cs" />
+    <Compile Include="LogExtensions.cs" />
+    <Compile Include="Models\AuthenticatedUser.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Issue.cs" />
+    <Compile Include="Models\Following.cs" />
+    <Compile Include="Models\Plan.cs" />
+    <Compile Include="Models\UpdateableUser.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Resource\IRestRequestFactory.cs" />
     <Compile Include="Resource\RestRequestFactory.cs" />
     <Compile Include="RestSharpRestResponseExtension.cs" />
     <Compile Include="Github.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Api\Search\Search.cs" />
+    <Compile Include="SimpleJson.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

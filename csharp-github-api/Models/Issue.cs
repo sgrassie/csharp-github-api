@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="Plan.cs" company="TemporalCohesion.co.uk">
+// <copyright file="Issue.cs" company="TemporalCohesion.co.uk">
 //     Copyright [2010] [Stuart Grassie]
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,44 +16,33 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Models
+namespace GitHubAPI.Models
 {
     /// <summary>
-    /// Maps to an authenticated users plan
+    /// Maps to an issue
     /// </summary>
-    public class Plan
+    public class Issue
     {
         /// <summary>
-        /// Gets or sets the name of the GitHub plan.
+        /// Gets or sets the title of the GitHub issue.
         /// </summary>
-        /// <remarks>
-        /// One of: Free, Micro, Small, Medium
-        /// </remarks>
-        public virtual string Name { get; set;}
+        public virtual string Title { get; set;}
 
         /// <summary>
-        /// Gets or sets the number of collaborators in the private plan
+        /// Gets or sets the issue number.
         /// </summary>
-        public virtual int Collaborators { get; set;}
+        public virtual long Number { get; set;}
 
-        /// <summary>
-        /// Gets or sets the amount of disk space in the private plan.
-        /// </summary>
-        public virtual long Space { get; set;}
 
-        /// <summary>
-        /// Gets or sets the number of private repositories the user has.
-        /// </summary>
-        public virtual int PrivateRepos { get; set; }
 
         public override bool Equals(object obj)
         {
-            if (obj is Plan)
+            if (obj is Issue)
             {
-                var compareTo = (Plan) obj;
+                var compareTo = (Issue) obj;
 
-                if (compareTo.Equals(Name) && compareTo.Collaborators.Equals(Collaborators)
-                    && compareTo.Space.Equals(Space) && compareTo.PrivateRepos.Equals(PrivateRepos))
+                if (compareTo.Title.Equals(Title) && compareTo.Number.Equals(Number)
+                   )
                 {
                     return true;
                 }
@@ -66,12 +55,12 @@ namespace csharp_github_api.Models
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() + Collaborators.GetHashCode();
+            return Title.GetHashCode() + Number.GetHashCode();
         }
 
         public override string ToString()
         {
-            return Name;
+            return Title;
         }
     }
 }

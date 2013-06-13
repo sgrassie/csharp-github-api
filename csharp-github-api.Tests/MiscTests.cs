@@ -5,9 +5,9 @@ using System.Text;
 using NUnit.Framework;
 using RestSharp;
 using RestSharp.Deserializers;
-using csharp_github_api.Extensions;
+using GitHubAPI.Extensions;
 
-namespace csharp_github_api.Tests
+namespace GitHubAPI.Tests
 {
     [TestFixture]
     public class MiscTests

@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.Gists
+namespace GitHubAPI.Api.Gists
 {
     public static class Gists
     {

@@ -4,10 +4,10 @@ using RestSharp;
 using System;
 using System.Linq;
 using System.Text;
-using csharp_github_api.Core;
-using csharp_github_api.IntegrationTests.Ext;
+using GitHubAPI.Core;
+using GitHubAPI.IntegrationTests.Ext;
 
-namespace csharp_github_api.IntegrationTests
+namespace GitHubAPI.IntegrationTests
 {
     public class HeaderProviderTests
     {

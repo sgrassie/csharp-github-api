@@ -3,7 +3,7 @@ using NUnit.Framework;
 using RestSharp;
 using StructureMap;
 
-namespace csharp_github_api.IntegrationTests.Authentication
+namespace GitHubAPI.IntegrationTests.Authentication
 {
     [TestFixture]
     public class BasicAuthenticationTest

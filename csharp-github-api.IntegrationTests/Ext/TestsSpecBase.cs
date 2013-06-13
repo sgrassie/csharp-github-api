@@ -2,7 +2,7 @@
 using System.Configuration;
 using RestSharp;
 
-namespace csharp_github_api.IntegrationTests.Ext
+namespace GitHubAPI.IntegrationTests.Ext
 {
     public abstract class TestsSpecBase : TinySpec
     {

@@ -1,11 +1,11 @@
-using csharp_github_api.Api.Users;
-using csharp_github_api.IntegrationTests.Ext;
-using csharp_github_api.Models;
+using GitHubAPI.Api.Users;
+using GitHubAPI.IntegrationTests.Ext;
+using GitHubAPI.Models;
 using FluentAssertions;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace csharp_github_api.IntegrationTests
+namespace GitHubAPI.IntegrationTests
 {
     public class UsersTest
     {

@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.Activity
+namespace GitHubAPI.Api.Activity
 {
     /// <summary>
     /// <see cref="http://developer.github.com/v3/activity/starring/"/>

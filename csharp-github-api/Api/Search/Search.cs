@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.Search
+namespace GitHubAPI.Api.Search
 {
     public static class Search
     {

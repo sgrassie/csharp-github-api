@@ -16,7 +16,7 @@
 // specific language governing permissions and limitations under the License.
 // ==============================================================================
 
-namespace csharp_github_api.IntegrationTests.Ext
+namespace GitHubAPI.IntegrationTests.Ext
 {
     using System;
     using NUnit.Framework;

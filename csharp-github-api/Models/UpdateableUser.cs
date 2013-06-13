@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Models
+namespace GitHubAPI.Models
 {
     public class UpdateableUser
     {

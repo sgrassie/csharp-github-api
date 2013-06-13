@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Exceptions
+namespace GitHubAPI.Exceptions
 {
     using System;
 

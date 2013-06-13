@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api
+namespace GitHubAPI
 {
     using Exceptions;
     using RestSharp;
@@ -73,11 +73,18 @@ namespace csharp_github_api
         protected virtual void CheckRateLimit(IEnumerable<Parameter> headers)
         {
             var rateLimits = headers.AsQueryable().Where(x => x.Name.StartsWith("X-RateLimit"));
-            var actualRateLimit = rateLimits.Single(x => x.Name.EndsWith("-Limit"));
-            var remainingRateLimit = rateLimits.Single(x => x.Name.EndsWith("-Remaining"));
+            //these aren't there in the case of an access error
+            var actualRateLimit = rateLimits.SingleOrDefault(x => x.Name.EndsWith("-Limit"));
+            if (actualRateLimit != null)
+            {
+                RateLimit = Convert.ToInt32(actualRateLimit.Value);
+            }
 
-            RateLimit = Convert.ToInt32(actualRateLimit.Value);
-            RateLimitRemaining = Convert.ToInt32(remainingRateLimit.Value);
+            var remainingRateLimit = rateLimits.SingleOrDefault(x => x.Name.EndsWith("-Remaining"));
+            if (remainingRateLimit != null)
+            {
+                RateLimitRemaining = Convert.ToInt32(remainingRateLimit.Value);
+            }
         }
     }
 }

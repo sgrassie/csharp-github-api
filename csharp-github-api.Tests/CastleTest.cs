@@ -4,7 +4,7 @@ using Castle.DynamicProxy;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace csharp_github_api.Tests
+namespace GitHubAPI.Tests
 {
     public abstract class AbstractBaseClass
     {

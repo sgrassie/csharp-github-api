@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Models
+namespace GitHubAPI.Models
 {
     public class Users
     {
@@ -37,10 +37,10 @@ namespace csharp_github_api.Models
         public string Url { get; set; }
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+        /// Determines whether the specified <see cref="TIssue:System.Object"/> is equal to the current <see cref="TIssue:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+        /// true if the specified <see cref="TIssue:System.Object"/> is equal to the current <see cref="TIssue:System.Object"/>; otherwise, false.
         /// </returns>
         /// <param name="obj">The object to compare with the current object. </param><filterpriority>2</filterpriority>
         public override bool Equals(object obj)
@@ -60,7 +60,7 @@ namespace csharp_github_api.Models
         /// Serves as a hash function for a particular type. 
         /// </summary>
         /// <returns>
-        /// A hash code for the current <see cref="T:System.Object"/>.
+        /// A hash code for the current <see cref="TIssue:System.Object"/>.
         /// </returns>
         /// <filterpriority>2</filterpriority>
         public override int GetHashCode()

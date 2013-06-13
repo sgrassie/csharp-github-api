@@ -16,7 +16,7 @@
 // specific language governing permissions and limitations under the License.
 // ==============================================================================
 
-namespace GitHubAPI
+namespace GitHubAPI.IntegrationTests
 {
     using System.Collections.Concurrent;
     using LoggingExtensions.Logging;

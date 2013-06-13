@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.GitData
+namespace GitHubAPI.Api.GitData
 {
     public static class GitDataCommits
     {
