@@ -15,7 +15,7 @@ namespace GitHubAPI.IntegrationTests.Ext
 
         public override void Context()
         {
-            var config = ConfigurationManager.OpenExeConfiguration("csharp-github-api.IntegrationTests.dll");
+            var config = ConfigurationManager.OpenExeConfiguration("GitHubAPI.IntegrationTests.dll");
             Username = ConfigurationManager.AppSettings["username"];
             Password = ConfigurationManager.AppSettings["password"];
             Token = ConfigurationManager.AppSettings["token"];
