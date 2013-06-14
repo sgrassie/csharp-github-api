@@ -1,8 +1,19 @@
+#if NUNIT
+using NUnit.Framework;
+#else
+using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+#endif
+
 using System;
 using System.Reflection;
 using Castle.DynamicProxy;
 using FluentAssertions;
-using NUnit.Framework;
+
 
 namespace GitHubAPI.Tests
 {

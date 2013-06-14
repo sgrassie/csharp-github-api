@@ -1,5 +1,16 @@
-﻿using System.Configuration;
+﻿#if NUNIT
 using NUnit.Framework;
+#else
+using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+#endif
+
+
+using System.Configuration;
+
 using RestSharp;
 using StructureMap;
 
@@ -15,13 +26,13 @@ namespace GitHubAPI.IntegrationTests.Authentication
         [SetUp]
         public void Setup()
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration("csharp-github-api.IntegrationTests.dll");
-            _username = config.AppSettings.Settings["username"].Value;
-            _password = config.AppSettings.Settings["password"].Value;
+
+            _username = ConfigurationManager.AppSettings["username"];
+            _password = ConfigurationManager.AppSettings["password"];
 
             _restRequest = new RestRequest
             {
-                Resource = "/users/sgrassie"
+                Resource = "/users/" + _username
             };
         }
 
@@ -36,7 +47,7 @@ namespace GitHubAPI.IntegrationTests.Authentication
 
             var response = client.Execute(_restRequest);
 
-            Assert.That(response.Content, Is.StringContaining("total_private_repos"));
+            NUnit.Framework.Assert.That(response.Content, NUnit.Framework.Is.StringContaining("total_private_repos"));
         }
     }
 }

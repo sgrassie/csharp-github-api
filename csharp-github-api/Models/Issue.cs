@@ -34,6 +34,16 @@ namespace GitHubAPI.Models
         public virtual long Number { get; set;}
 
 
+        /// <summary>
+        /// Gets or sets the issue user (maybe who created it?).
+        /// </summary>
+        public virtual User User { get; set; }
+
+        /// <summary>
+        /// Gets or sets the issue user (maybe who created it?).
+        /// </summary>
+        public virtual User Assignee { get; set; }
+
 
         public override bool Equals(object obj)
         {
