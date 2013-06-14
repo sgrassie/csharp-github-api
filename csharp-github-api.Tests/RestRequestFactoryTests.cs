@@ -1,13 +1,24 @@
-﻿using System.Collections.Generic;
+﻿#if NUNIT
+using NUnit.Framework;
+#else
+using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using Is = NUnit.Framework.Is;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+#endif
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using FluentAssertions;
-using NUnit.Framework;
 using RestSharp;
-using csharp_github_api.Resource;
+using GitHubAPI.Resource;
 
-namespace csharp_github_api.Tests
+namespace GitHubAPI.Tests
 {
     [TestFixture]
     public class RestRequestFactoryTests

@@ -16,10 +16,21 @@
 // specific language governing permissions and limitations under the License.
 // ==============================================================================
 
-namespace csharp_github_api.IntegrationTests.Ext
+#if NUNIT
+using NUnit.Framework;
+#else
+using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using TestFixtureTearDown = Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute;
+using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+#endif
+
+using System;
+
+namespace GitHubAPI.IntegrationTests.Ext
 {
-    using System;
-    using NUnit.Framework;
 
     [TestFixture]
     public abstract class TinySpec
@@ -44,8 +55,9 @@ namespace csharp_github_api.IntegrationTests.Ext
         public virtual void AfterObservations() {}
     }
 
-    public class ObservationAttribute : TestAttribute {}
-    public class FactAttribute : TestAttribute {}
+    //Note: Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute which is what ths should inherit from in VS testing is sealeds
+    public class ObservationAttribute : NUnit.Framework.TestAttribute {}
+    public class FactAttribute : NUnit.Framework.TestAttribute { }
     
     public class ConcernForAttribute : Attribute
     {

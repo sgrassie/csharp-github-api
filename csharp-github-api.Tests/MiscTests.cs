@@ -1,13 +1,24 @@
-﻿using System;
+﻿#if NUNIT
+using NUnit.Framework;
+#else
+using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using Is = NUnit.Framework.Is;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+#endif
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
 using RestSharp;
 using RestSharp.Deserializers;
-using csharp_github_api.Extensions;
+using GitHubAPI.Extensions;
 
-namespace csharp_github_api.Tests
+namespace GitHubAPI.Tests
 {
     [TestFixture]
     public class MiscTests
@@ -27,8 +38,8 @@ namespace csharp_github_api.Tests
             client.AddHandler("application/json", new DynamicJsonDeserializer());
 
             dynamic response = client.Execute<dynamic>(restRequest);
-            
-            Assert.That(response.Data["login"], Is.StringMatching("sgrassie"));
+
+            NUnit.Framework.Assert.That(response.Data["login"], Is.StringMatching("sgrassie"));
         }
 
         [Test]
@@ -47,7 +58,7 @@ namespace csharp_github_api.Tests
             var response = client.Execute(restRequest);
             var dynamicPart = response.Dynamic();
 
-            Assert.That(dynamicPart.login, Is.StringMatching("sgrassie"));
+            NUnit.Framework.Assert.That(dynamicPart.login, Is.StringMatching("sgrassie"));
         }
     }
 

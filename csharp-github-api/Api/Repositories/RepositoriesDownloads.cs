@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.Repositories
+namespace GitHubAPI.Api.Repositories
 {
     public static class RepositoriesDownloads
     {

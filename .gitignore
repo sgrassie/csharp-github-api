@@ -33,3 +33,4 @@ _ReSharper*/
 
 #Ignore settings
 csharp-github-api.IntegrationTests.dll.config
+App.config

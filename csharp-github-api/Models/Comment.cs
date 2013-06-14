@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="Plan.cs" company="TemporalCohesion.co.uk">
+// <copyright file="Issue.cs" company="TemporalCohesion.co.uk">
 //     Copyright [2010] [Stuart Grassie]
 //
 //     Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,44 +16,54 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Models
+namespace GitHubAPI.Models
 {
     /// <summary>
-    /// Maps to an authenticated users plan
+    /// Maps to a comment
     /// </summary>
-    public class Plan
+    public class IssueComment
     {
+        /*
+        {
+          "id": 1,
+          "url": "https://api.github.com/repos/octocat/Hello-World/issues/comments/1",
+          "html_url": "https://github.com/octocat/Hello-World/issues/1347#issuecomment-1",
+          "body": "Me too",
+          "user": {
+            "login": "octocat",
+            "id": 1,
+            "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+            "gravatar_id": "somehexcode",
+            "url": "https://api.github.com/users/octocat"
+          },
+          "created_at": "2011-04-14T16:00:49Z",
+          "updated_at": "2011-04-14T16:00:49Z"
+        }
+         */
         /// <summary>
-        /// Gets or sets the name of the GitHub plan.
+        /// Gets or sets the text of the GitHub issue comment.
         /// </summary>
-        /// <remarks>
-        /// One of: Free, Micro, Small, Medium
-        /// </remarks>
-        public virtual string Name { get; set;}
+        public virtual string Body { get; set;}
 
         /// <summary>
-        /// Gets or sets the number of collaborators in the private plan
+        /// Gets or sets the comment Id.
         /// </summary>
-        public virtual int Collaborators { get; set;}
+        public virtual long Id { get; set;}
+
 
         /// <summary>
-        /// Gets or sets the amount of disk space in the private plan.
+        /// Gets or sets the URL of the comment.
         /// </summary>
-        public virtual long Space { get; set;}
-
-        /// <summary>
-        /// Gets or sets the number of private repositories the user has.
-        /// </summary>
-        public virtual int PrivateRepos { get; set; }
+        public virtual string Url { get; set; }
 
         public override bool Equals(object obj)
         {
-            if (obj is Plan)
+            if (obj is IssueComment)
             {
-                var compareTo = (Plan) obj;
+                var compareTo = (IssueComment)obj;
 
-                if (compareTo.Equals(Name) && compareTo.Collaborators.Equals(Collaborators)
-                    && compareTo.Space.Equals(Space) && compareTo.PrivateRepos.Equals(PrivateRepos))
+                if (compareTo.Id.Equals(Id) && compareTo.Url.Equals(Url)
+                   )
                 {
                     return true;
                 }
@@ -66,12 +76,12 @@ namespace csharp_github_api.Models
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() + Collaborators.GetHashCode();
+            return Url.GetHashCode() + Id.GetHashCode();
         }
 
         public override string ToString()
         {
-            return Name;
+            return Body;
         }
     }
 }

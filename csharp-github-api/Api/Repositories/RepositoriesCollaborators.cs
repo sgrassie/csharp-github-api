@@ -16,9 +16,35 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.Repositories
+using RestSharp;
+namespace GitHubAPI.Api.Repositories
 {
     public static class RepositoriesCollaborators
     {
+
+        //http://developer.github.com/v3/repos/collaborators/#add-collaborator
+        //Strange one, has no response object
+        public static IRestResponse AddCollaborator(this GithubRestApiClient client,
+  string RepoOwner, string Repo, string UserID)
+        {
+           var request = client.RequestFactory.CreateRequest(
+                () =>
+                {
+                    var req = new RestRequest("/repos/{owner}/{repo}/collaborators/{user}")
+                    {
+                        Method = Method.PUT,
+                        RequestFormat = DataFormat.Json
+                    };
+
+                    req.AddUrlSegment("owner", RepoOwner);
+                    req.AddUrlSegment("repo", Repo);
+                    req.AddUrlSegment("user", UserID);
+                    return req;
+                });
+
+            var response = client.Execute(request);
+
+            return response;
+        }
     }
 }

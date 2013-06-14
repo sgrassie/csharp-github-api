@@ -18,7 +18,7 @@
 
 using System;
 
-namespace csharp_github_api.Models
+namespace GitHubAPI.Models
 {
     /// <summary>
     /// Allows access to actions which the user must be authenticated for.

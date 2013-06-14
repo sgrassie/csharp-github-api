@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Extensions
+namespace GitHubAPI.Extensions
 {
     using Exceptions;
     using RestSharp;

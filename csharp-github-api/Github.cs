@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api
+namespace GitHubAPI
 {
     using LoggingExtensions.Logging;
     using Resource;

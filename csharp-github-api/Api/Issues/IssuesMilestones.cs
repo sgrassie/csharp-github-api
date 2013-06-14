@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.Issues
+namespace GitHubAPI.Api.Issues
 {
     public static class IssuesMilestones
     {

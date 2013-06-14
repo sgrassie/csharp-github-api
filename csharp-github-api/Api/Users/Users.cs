@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.Users
+namespace GitHubAPI.Api.Users
 {
     using System;
     using System.Collections.Generic;
@@ -39,8 +39,8 @@ namespace csharp_github_api.Api.Users
         /// Get the authenticated user
         /// </summary>
         /// <param name="client">The <see cref="GithubRestApiClient"/> instance to attach to.</param>
-        /// <typeparam name="T">The user model to serialise the JSON data into.</typeparam>
-        /// <returns>A <see cref="IRestResponse{T}"/> for the authenticated user.</returns>
+        /// <typeparam name="TIssue">The user model to serialise the JSON data into.</typeparam>
+        /// <returns>A <see cref="IRestResponse{TIssue}"/> for the authenticated user.</returns>
         public static IRestResponse<T> GetUser<T>(this GithubRestApiClient client) where T : new()
         {
             Log.Info(() => "Making request for the authenticated user.");
@@ -167,8 +167,8 @@ namespace csharp_github_api.Api.Users
         ///// Searches for the user on GitHub.
         ///// </summary>
         ///// <param name="username">The user to search for.</param>
-        ///// <returns>Returns a lise of <see cref="csharp_github_api.Models.User"/> instances of GitHub users who may match the search.</returns>
-        //public IList<TUser> SearchUser(string username)
+        ///// <returns>Returns a lise of <see cref="GitHubAPI.Models.User"/> instances of GitHub users who may match the search.</returns>
+        //public IList<TIssue> SearchUser(string username)
         //{
         //    if (Client == null) Client = GetRestClient();
 
@@ -178,7 +178,7 @@ namespace csharp_github_api.Api.Users
         //                          RootElement = "users"
         //                      };
 
-        //    var response = Client.Execute<List<TUser>>(request);
+        //    var response = Client.Execute<List<TIssue>>(request);
 
         //    return response.Data;
         //}
@@ -188,8 +188,8 @@ namespace csharp_github_api.Api.Users
         ///// This will only match the email address listed in a users public profile, and is opt-in for everyone.
         ///// </summary>
         ///// <param name="email">The email address of the user to search for.</param>
-        ///// <returns>A <see cref="csharp_github_api.Models.User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
-        //public TUser FindUserByEmail(string email)
+        ///// <returns>A <see cref="GitHubAPI.Models.User"/> instance which encapsulates the response from GitHub for the requested user.</returns>
+        //public TIssue FindUserByEmail(string email)
         //{
         //    if (Client == null) Client = GetRestClient();
 
@@ -199,7 +199,7 @@ namespace csharp_github_api.Api.Users
         //        RootElement = "users"
         //    };
 
-        //    var response = Client.Execute<TUser>(request);
+        //    var response = Client.Execute<TIssue>(request);
 
         //    return response.Data;
         //}

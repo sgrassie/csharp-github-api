@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.PullRequests
+namespace GitHubAPI.Api.PullRequests
 {
     public static class PullRequests
     {

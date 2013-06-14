@@ -60,12 +60,12 @@ using System.Globalization;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using csharp_github_api.Tests.Reflection;
+using GitHubAPI.Tests.Reflection;
 
 // ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable RedundantExplicitArrayCreation
 // ReSharper disable SuggestUseVarKeywordEvident
-namespace csharp_github_api.Tests
+namespace GitHubAPI.Tests
 {
     /// <summary>
     /// Represents the json array.
@@ -132,7 +132,7 @@ namespace csharp_github_api.Tests
         /// <summary>
         /// Initializes a new instance of <see cref="JsonObject"/>.
         /// </summary>
-        /// <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use when comparing keys, or null to use the default <see cref="T:System.Collections.Generic.EqualityComparer`1"/> for the type of the key.</param>
+        /// <param name="comparer">The <see cref="TIssue:System.Collections.Generic.IEqualityComparer`1"/> implementation to use when comparing keys, or null to use the default <see cref="TIssue:System.Collections.Generic.EqualityComparer`1"/> for the type of the key.</param>
         public JsonObject(IEqualityComparer<string> comparer)
         {
             _members = new Dictionary<string, object>(comparer);
@@ -318,7 +318,7 @@ namespace csharp_github_api.Tests
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+        /// An <see cref="TIssue:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -326,10 +326,10 @@ namespace csharp_github_api.Tests
         }
 
         /// <summary>
-        /// Returns a json <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a json <see cref="TIssue:System.String"/> that represents the current <see cref="TIssue:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// A json <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// A json <see cref="TIssue:System.String"/> that represents the current <see cref="TIssue:System.Object"/>.
         /// </returns>
         public override string ToString()
         {
@@ -473,7 +473,7 @@ namespace csharp_github_api.Tests
     }
 }
 
-namespace csharp_github_api.Tests
+namespace GitHubAPI.Tests
 {
     /// <summary>
     /// This class encodes and decodes JSON strings.

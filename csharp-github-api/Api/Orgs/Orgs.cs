@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Api.Orgs
+namespace GitHubAPI.Api.Orgs
 {
     /// <summary>
     /// http://developer.github.com/v3/orgs/

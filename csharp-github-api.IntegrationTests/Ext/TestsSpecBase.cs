@@ -2,8 +2,9 @@
 using System.Configuration;
 using RestSharp;
 
-namespace csharp_github_api.IntegrationTests.Ext
+namespace GitHubAPI.IntegrationTests.Ext
 {
+    
     public abstract class TestsSpecBase : TinySpec
     {
         protected const string GitHubUrl = @"https://api.github.com";
@@ -15,9 +16,9 @@ namespace csharp_github_api.IntegrationTests.Ext
         public override void Context()
         {
             var config = ConfigurationManager.OpenExeConfiguration("csharp-github-api.IntegrationTests.dll");
-            Username = config.AppSettings.Settings["username"].Value;
-            Password = config.AppSettings.Settings["password"].Value;
-            Token = config.AppSettings.Settings["token"].Value;
+            Username = ConfigurationManager.AppSettings["username"];
+            Password = ConfigurationManager.AppSettings["password"];
+            Token = ConfigurationManager.AppSettings["token"];
         }
 
         /// <summary>

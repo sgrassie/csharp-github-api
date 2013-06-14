@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Resource
+namespace GitHubAPI.Resource
 {
     using Core;
     using RestSharp;

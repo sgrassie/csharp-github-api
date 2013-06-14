@@ -8,8 +8,8 @@
     <ProjectGuid>{16450E56-7802-4E7B-9F01-6A4824175B15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>csharp_github_api.Tests</RootNamespace>
-    <AssemblyName>csharp-github-api.Tests</AssemblyName>
+    <RootNamespace>GitHubAPI.Tests</RootNamespace>
+    <AssemblyName>GitHubAPI.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -48,6 +48,7 @@
       <HintPath>..\packages\FluentAssertions.2.0.0.1\lib\net35\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -78,9 +79,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\csharp-github-api\csharp-github-api.csproj">
+    <ProjectReference Include="..\csharp-github-api\GitHubAPI.csproj">
       <Project>{AC8795CC-BDFF-4D37-85EE-E17A7D5A8A59}</Project>
-      <Name>csharp-github-api</Name>
+      <Name>GitHubAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

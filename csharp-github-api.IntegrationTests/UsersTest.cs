@@ -1,15 +1,26 @@
-using csharp_github_api.Api.Users;
-using csharp_github_api.IntegrationTests.Ext;
-using csharp_github_api.Models;
-using FluentAssertions;
+#if NUNIT
 using NUnit.Framework;
+#else
+using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
+using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
+using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+#endif
+
+using GitHubAPI.Api.Users;
+using GitHubAPI.Models;
+using FluentAssertions;
 using System.Collections.Generic;
 
-namespace csharp_github_api.IntegrationTests
+namespace GitHubAPI.IntegrationTests
 {
+    [TestFixture]
     public class UsersTest
     {
-        public abstract class UsersTestsBase : TestsSpecBase
+        
+        public abstract class UsersTestsBase : GitHubAPI.IntegrationTests.Ext.TestsSpecBase
         {
             protected GithubRestApiClient Github;
 
@@ -22,6 +33,8 @@ namespace csharp_github_api.IntegrationTests
             }
         }
 
+        //You have to annotation each test class individually, i bet this is because TestClassAttribute isn't marked for inheritence while TestFixture is
+        [TestFixture]
         public class when_retrieving_unauthenticated_user : UsersTestsBase
         {
             public override void Because()
@@ -42,18 +55,19 @@ namespace csharp_github_api.IntegrationTests
             {
                 var response = Github.GetUser<User>(Username);
 
-                Assert.That(response.Dynamic().login, Is.StringMatching(User));
+                NUnit.Framework.Assert.That(response.Dynamic().login, NUnit.Framework.Is.StringMatching(User));
             }
 
             [Fact]
             public void then_response_data_with_model_should_not_contain_private_data()
             {
-                var user = Github.GetUser<User>(Username);
+                var response = Github.GetUser<User>(Username);
 
-                user.Data.DiskUsage.Should().Be(0);
+                response.Data.DiskUsage.Should().Be(0);
             }
         }
 
+        [TestFixture]
         public class when_retrieving_the_authenticated_user : UsersTestsBase
         {
             public override void Because()
@@ -85,6 +99,7 @@ namespace csharp_github_api.IntegrationTests
             }
         }
 
+        [TestFixture]
         public class when_getting_the_list_of_users : UsersTestsBase
         {
             public override void Because()
@@ -118,6 +133,7 @@ namespace csharp_github_api.IntegrationTests
             }
         }
 
+        [TestFixture]
         public class when_updating_a_user : UsersTestsBase
         {
             public override void Because()

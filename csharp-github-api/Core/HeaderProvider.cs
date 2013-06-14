@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Core
+namespace GitHubAPI.Core
 {
     using System;
     using System.Collections.Generic;

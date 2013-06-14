@@ -16,7 +16,7 @@
 // </copyright>
 //----------------------------------------------------------------------
 
-namespace csharp_github_api.Models
+namespace GitHubAPI.Models
 {
     /// <summary>
     /// Represents a GitHub.com user account.
@@ -40,13 +40,13 @@ namespace csharp_github_api.Models
         public virtual Plan Plan { get; set;}
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+        /// Determines whether the specified <see cref="TIssue:System.Object"/> is equal to the current <see cref="TIssue:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+        /// true if the specified <see cref="TIssue:System.Object"/> is equal to the current <see cref="TIssue:System.Object"/>; otherwise, false.
         /// </returns>
-        /// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>. 
-        ///                 </param><exception cref="T:System.NullReferenceException">The <paramref name="obj"/> parameter is null.
+        /// <param name="obj">The <see cref="TIssue:System.Object"/> to compare with the current <see cref="TIssue:System.Object"/>. 
+        ///                 </param><exception cref="TIssue:System.NullReferenceException">The <paramref name="obj"/> parameter is null.
         ///                 </exception><filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
@@ -64,7 +64,7 @@ namespace csharp_github_api.Models
         /// Serves as a hash function for a particular type. 
         /// </summary>
         /// <returns>
-        /// A hash code for the current <see cref="T:System.Object"/>.
+        /// A hash code for the current <see cref="TIssue:System.Object"/>.
         /// </returns>
         /// <filterpriority>2</filterpriority>
         public override int GetHashCode()
@@ -73,10 +73,10 @@ namespace csharp_github_api.Models
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="TIssue:System.String"/> that represents the current <see cref="TIssue:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// A <see cref="TIssue:System.String"/> that represents the current <see cref="TIssue:System.Object"/>.
         /// </returns>
         /// <filterpriority>2</filterpriority>
         public override string ToString()
