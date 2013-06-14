@@ -12,7 +12,7 @@ Targets .NET 4.
 Barely does anything at the moment. I'm lazy. Started working on this off and on again. Send a pull request.
 
 ### Running the tests
-In order to successfully run the integration tests which require an authenticated connection to github (i.e. quite a few of them), you will need to update the App.Config file in the GitHubAPI.IntegrationTests project. Simply use the provided example as a starting point:
+In order to successfully build and run the integration tests (which require an authenticated connection to github (i.e. quite a few of them)), you will need to create an App.Config file in the GitHubAPI.IntegrationTests project. Simply use the provided example as a starting point:
 
 Just add your Github username and password. The file is in .gitignore, so you can't accidently commit it.
 ```
