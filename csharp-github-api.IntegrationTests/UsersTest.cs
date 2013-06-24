@@ -1,26 +1,16 @@
-#if NUNIT
-using NUnit.Framework;
-#else
-using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
-using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#endif
-
-using GitHubAPI.Api.Users;
-using GitHubAPI.Models;
-using FluentAssertions;
-using System.Collections.Generic;
-
 namespace GitHubAPI.IntegrationTests
 {
-    [TestFixture]
+    using NUnit.Framework;
+
+    using GitHubAPI.Api.Users;
+    using GitHubAPI.Models;
+    using GitHubAPI.IntegrationTests.Ext;
+    using FluentAssertions;
+    using System.Collections.Generic;
+
     public class UsersTest
     {
-        
-        public abstract class UsersTestsBase : GitHubAPI.IntegrationTests.Ext.TestsSpecBase
+        public abstract class UsersTestsBase : TestsSpecBase
         {
             protected GithubRestApiClient Github;
 
@@ -34,7 +24,6 @@ namespace GitHubAPI.IntegrationTests
         }
 
         //You have to annotation each test class individually, i bet this is because TestClassAttribute isn't marked for inheritence while TestFixture is
-        [TestFixture]
         public class when_retrieving_unauthenticated_user : UsersTestsBase
         {
             public override void Because()
@@ -55,7 +44,7 @@ namespace GitHubAPI.IntegrationTests
             {
                 var response = Github.GetUser<User>(Username);
 
-                NUnit.Framework.Assert.That(response.Dynamic().login, NUnit.Framework.Is.StringMatching(User));
+                Assert.That(response.Dynamic().login, Is.StringMatching(User));
             }
 
             [Fact]
