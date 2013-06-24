@@ -36,7 +36,7 @@
             [Fact]
             public void then_response_data_with_model_should_have_one()
             {
-                //TODO: it returns {message : "Not Found"}, what should we do about that?s
+                //TODO: Check the headers for a Status = 404 not found - github returns this for resources which require authenticating
                 Response.Data.Should().HaveCount(1); 
             }
 
@@ -44,7 +44,7 @@
             public void then_response_dynamic_should_have_message_not_found()
             {
                 //TODO: why can't i do response.Dynamic().message?
-                Assert.That(Response.Dynamic()["message"], NUnit.Framework.Is.StringMatching("Not Found"));
+                Assert.That(Response.Dynamic().message, Is.StringMatching("Not Found"));
             }
 
             [Fact]

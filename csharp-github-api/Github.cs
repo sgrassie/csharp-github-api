@@ -16,6 +16,8 @@
 // </copyright>
 //----------------------------------------------------------------------
 
+using GitHubAPI.Core;
+
 namespace GitHubAPI
 {
     using LoggingExtensions.Logging;
