@@ -1,31 +1,16 @@
-﻿#if NUNIT
-using NUnit.Framework;
-#else
-using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
-using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#endif
-
-
-using System;
-using System.Configuration;
-using GitHubAPI.Models;
-
-using GitHubAPI.Api.Issues;
-using FluentAssertions;
-using RestSharp;
-using System.Collections.Generic;
-
-namespace GitHubAPI.IntegrationTests
+﻿namespace GitHubAPI.IntegrationTests
 {
-    [TestFixture]
+    using NUnit.Framework;
+    using GitHubAPI.Models;
+    using GitHubAPI.Api.Issues;
+    using GitHubAPI.IntegrationTests.Ext;
+    using FluentAssertions;
+    using RestSharp;
+    using System.Collections.Generic;
+
     public class IssueTests
     {
-
-        public abstract class GetIssuesTestsBase : GitHubAPI.IntegrationTests.Ext.TestsSpecBase
+        public abstract class GetIssuesTestsBase : TestsSpecBase
         {
             protected GithubRestApiClient Github;
 
@@ -40,8 +25,6 @@ namespace GitHubAPI.IntegrationTests
             }
         }
 
-
-        [TestFixture]
         public class when_retrieving_issues_unauthenticated : GetIssuesTestsBase
         {
             public override void Because()
@@ -61,7 +44,7 @@ namespace GitHubAPI.IntegrationTests
             public void then_response_dynamic_should_have_message_not_found()
             {
                 //TODO: why can't i do response.Dynamic().message?
-                NUnit.Framework.Assert.That(Response.Dynamic()["message"], NUnit.Framework.Is.StringMatching("Not Found"));
+                Assert.That(Response.Dynamic()["message"], NUnit.Framework.Is.StringMatching("Not Found"));
             }
 
             [Fact]
@@ -71,8 +54,6 @@ namespace GitHubAPI.IntegrationTests
             }
         }
 
-
-        [TestFixture]
         public class when_retrieving_issues_authenticated : GetIssuesTestsBase
         {
             public override void Because()
@@ -82,18 +63,12 @@ namespace GitHubAPI.IntegrationTests
                 Response = Github.GetIssues<List<Issue>>();
             }
 
-
             [Fact]
             public void then_response_data_with_model_should_contain_some_issues()
             {
                 Response.Data.Should().NotBeEmpty();
             }
-
-
-            
         }
-
- 
 
         public abstract class CreateIssueTestsBase : GitHubAPI.IntegrationTests.Ext.TestsSpecBase
         {
@@ -115,8 +90,6 @@ namespace GitHubAPI.IntegrationTests
             }
         }
 
-
-        [TestFixture]
         public class when_creating_issues_unauthenticated : CreateIssueTestsBase
         {
             public override void Because()
@@ -143,11 +116,8 @@ namespace GitHubAPI.IntegrationTests
                 //Note this will fail unless the JsonObject in SimpleJson has define dynamic set
                 NUnit.Framework.Assert.That(Response.Dynamic().message, NUnit.Framework.Is.StringMatching("Not Found"));
             }
-
         }
 
-
-        [TestFixture]
         public class when_creating_issues_authenticated_to_nonexistant_repo : CreateIssueTestsBase
         {
             public override void Because()
@@ -176,7 +146,6 @@ namespace GitHubAPI.IntegrationTests
                 //TODO: why can't i do response.Dynamic().message?
                 NUnit.Framework.Assert.That(Response.Dynamic()["message"], NUnit.Framework.Is.StringMatching("Not Found"));
             }
-
         }
 
         [TestFixture]
@@ -213,7 +182,6 @@ namespace GitHubAPI.IntegrationTests
 
         }
 
-
         [TestFixture]
         public class when_creating_issues_authenticated_to_authorized_repo : CreateIssueTestsBase
         {
@@ -234,7 +202,6 @@ namespace GitHubAPI.IntegrationTests
                 //TODO: what should we check for
 
             }
-
         }
 
         public abstract class EditIssueTestsBase : GitHubAPI.IntegrationTests.Ext.TestsSpecBase
@@ -259,8 +226,6 @@ namespace GitHubAPI.IntegrationTests
             }
         }
 
-
-        [TestFixture]
         public class when_editing_issues_authenticated_to_existent_issue : EditIssueTestsBase
         {
             public override void Because()
@@ -281,10 +246,6 @@ namespace GitHubAPI.IntegrationTests
             {
                 //TODO: add changes to EditIssue call and then check here
             }
-
         }
-
     }
-  
- 
 }

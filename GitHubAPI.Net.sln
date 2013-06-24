@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubAPI", "csharp-github-api\GitHubAPI.csproj", "{AC8795CC-BDFF-4D37-85EE-E17A7D5A8A59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubAPI.Tests.NUnit", "csharp-github-api.Tests\GitHubAPI.Tests.NUnit.csproj", "{16450E56-7802-4E7B-9F01-6A4824175B15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubAPI.Tests", "csharp-github-api.Tests\GitHubAPI.Tests.csproj", "{16450E56-7802-4E7B-9F01-6A4824175B15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubAPI.IntegrationTests", "csharp-github-api.IntegrationTests\GitHubAPI.IntegrationTests.csproj", "{77E78A72-17B3-436F-8F26-B2910F3101DE}"
 EndProject

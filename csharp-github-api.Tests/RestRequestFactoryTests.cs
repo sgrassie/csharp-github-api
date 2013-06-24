@@ -1,30 +1,17 @@
-﻿#if NUNIT
-using NUnit.Framework;
-#else
-using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
-using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using Is = NUnit.Framework.Is;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#endif
-
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using FluentAssertions;
-using RestSharp;
-using GitHubAPI.Resource;
-
-namespace GitHubAPI.Tests
+﻿namespace GitHubAPI.Tests
 {
+    using NUnit.Framework;
+    using System.Collections.Generic;
+    using System.Net;
+    using FluentAssertions;
+    using RestSharp;
+    using GitHubAPI.Resource;
+
     [TestFixture]
     public class RestRequestFactoryTests
     {
         private RestClient _client;
-        private IRestRequestFactory requestFactory = new RestRequestFactory();
+        private readonly IRestRequestFactory requestFactory = new RestRequestFactory();
 
         [TestFixtureSetUp]
         public void Setup()

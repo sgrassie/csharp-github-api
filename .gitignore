@@ -150,5 +150,5 @@ $RECYCLE.BIN/
 
 
 #Ignore settings
-csharp-github-api.IntegrationTests.dll.config
+GitHubAPI.IntegrationTests.dll.config
 App.config

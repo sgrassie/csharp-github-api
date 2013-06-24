@@ -1,23 +1,11 @@
-﻿#if NUNIT
-using NUnit.Framework;
-#else
-using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
-using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#endif
-
-using FluentAssertions;
-using RestSharp;
-using System;
-using System.Linq;
-using System.Text;
-using GitHubAPI.Core;
+﻿using GitHubAPI.IntegrationTests.Ext;
 
 namespace GitHubAPI.IntegrationTests
 {
+    using NUnit.Framework;
+    using FluentAssertions;
+    using GitHubAPI.Core;
+
     public class HeaderProviderTests
     {
         public abstract class HeaderProviderTestsBase : GitHubAPI.IntegrationTests.Ext.TinySpec
@@ -30,7 +18,6 @@ namespace GitHubAPI.IntegrationTests
             }
         }
 
-        [TestFixture]
         public class when_new_object_instance_instantiated : HeaderProviderTestsBase
         {
             public override void Because()
@@ -38,8 +25,7 @@ namespace GitHubAPI.IntegrationTests
             }
 
             [Fact]
-            //VSTest Ignore doesn't allow comments..maybe we could derive one that does and have it in scope?
-            [Ignore] //"Not sure what default headers to provide yet."
+            [Ignore("Not sure what default headers to provide yet.")]
             public void should_provide_default_headers()
             {
                 var headers = HeaderProvider.Headers;

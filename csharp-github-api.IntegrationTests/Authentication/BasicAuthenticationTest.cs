@@ -1,21 +1,10 @@
-﻿#if NUNIT
-using NUnit.Framework;
-#else
-using TestFixture = Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute;
-using Test = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-using TestFixtureSetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using SetUp = Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#endif
-
-
-using System.Configuration;
-
-using RestSharp;
-using StructureMap;
-
-namespace GitHubAPI.IntegrationTests.Authentication
+﻿namespace GitHubAPI.IntegrationTests.Authentication
 {
+    using NUnit.Framework;
+    using System.Configuration;
+
+    using RestSharp;
+
     [TestFixture]
     public class BasicAuthenticationTest
     {
@@ -47,7 +36,7 @@ namespace GitHubAPI.IntegrationTests.Authentication
 
             var response = client.Execute(_restRequest);
 
-            NUnit.Framework.Assert.That(response.Content, NUnit.Framework.Is.StringContaining("total_private_repos"));
+            Assert.That(response.Content, Is.StringContaining("total_private_repos"));
         }
     }
 }
