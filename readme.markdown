@@ -1,3 +1,5 @@
+# No long maintained! Please see https://github.com/octokit/octokit.net
+
 # csharp-github-api - A CSharp library to access the GitHub API 
 ## [http://temporalcohesion.co.uk][1]
 
